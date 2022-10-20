@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,18 +12,19 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
-    }
+    public function register(): void { }
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        // Prevent lazy loading, but only when the app is not in production.
+        Model::preventLazyLoading(!$this->app->isProduction());
+
+        // Prevent accessing missing attributes
+        Model::preventsAccessingMissingAttributes();
     }
 }
