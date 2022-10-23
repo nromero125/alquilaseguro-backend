@@ -12,7 +12,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-
     public function login(Request $request)
     {
         $request->validate([
@@ -22,23 +21,23 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Email o contraseña incorrectos.'],
             ]);
         }
 
-        if($user->status === 0) {
+        if ($user->status === 0) {
             return response()->json(['message' => 'Usuario inactivo, por favor contacte al administrador.'], 401);
         }
 
         return response()->json(['token' => $user->createToken($request->email)->plainTextToken, 'user' => $user]);
     }
 
-
     public function logout(Request $request)
     {
         $request->user('api')->currentAccessToken()->delete();
+
         return response()->json(['message' => 'Desconectado correctamente.']);
     }
 
@@ -55,6 +54,7 @@ class AuthController extends Controller
             ]);
 
             $user->sendPasswordResetNotification($token);
+
             return response()->json([
                 'message' => 'Correo de reseteo de contraseña enviado.',
                 'success' => true,
@@ -65,6 +65,5 @@ class AuthController extends Controller
             'message' => 'No se ha encontrado un usuario con esa dirección de correo.',
             'success' => false,
         ]);
-
     }
 }

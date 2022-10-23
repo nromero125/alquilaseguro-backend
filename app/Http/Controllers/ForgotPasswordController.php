@@ -16,7 +16,7 @@ class ForgotPasswordController extends Controller
     {
         $input = $request->only('email');
         $validator = Validator::make($input, [
-            'email' => "required|email|exists:users",
+            'email' => 'required|email|exists:users',
         ]);
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()->all()], 422);
@@ -32,7 +32,8 @@ class ForgotPasswordController extends Controller
         $user = User::where('email', $request->email)->first();
         $user->notify(new SendResetToken($token));
 
-        $response = ['data' => '', 'message' => "Se ha enviado un correo con los datos para restablecer tu contraseña."];
+        $response = ['data' => '', 'message' => 'Se ha enviado un correo con los datos para restablecer tu contraseña.'];
+
         return response($response, 200);
     }
 }
