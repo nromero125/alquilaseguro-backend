@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         User::factory()->admin()->create(['email' => 'admin@alquilaseguro.com', 'password' => bcrypt('password')]);
         User::factory()->insurer()->create(['email' => 'insurer@alquilaseguro.com', 'password' => bcrypt('password')]);
