@@ -1,4 +1,4 @@
-FROM nromero125/php7.3-dokku:php8.1
+FROM nromero125/php7.3-dokku:php8.1-amd64
 #Memory Limit
 #RUN sed -i "s/memory_limit = .*/memory_limit = 1024M/" /etc/php/8.1/cli/php.ini
 #RUN apt-get -y install php8.1-curl php8.1-xml php-mbstring php-xml php-curl php-gd php8.1-gd php-zip php8.1-zip php-mysql
