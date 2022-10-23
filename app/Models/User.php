@@ -43,6 +43,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'user_type' => UserTypes::class,
-        'status' => 'boolean'
+        'status' => 'boolean',
     ];
 }

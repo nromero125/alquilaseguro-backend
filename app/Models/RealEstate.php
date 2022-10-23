@@ -25,6 +25,6 @@ class RealEstate extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
     ];
 }

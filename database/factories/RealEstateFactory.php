@@ -19,7 +19,7 @@ class RealEstateFactory extends Factory
     {
         return [
             'name' => fake()->company(),
-            'status' => true
+            'status' => true,
         ];
     }
 }
