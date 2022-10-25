@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('address');
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
