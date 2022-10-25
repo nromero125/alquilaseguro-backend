@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\UserTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,7 +41,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array<string, mixed>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -62,5 +63,13 @@ class User extends Authenticatable
     public function owner(): HasOne
     {
         return $this->hasOne(Owner::class, 'user_id', 'id');
+    }
+
+    /**
+     * Relation between an user and its claims
+     */
+    public function claims(): HasMany
+    {
+        return $this->hasMany(Claim::class, 'user_id', 'id');
     }
 }

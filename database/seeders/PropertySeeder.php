@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Property;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PropertySeeder extends Seeder
@@ -13,9 +12,10 @@ class PropertySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Property::factory()
+            ->hasClaims(5)
             ->count(20)
             ->create();
     }

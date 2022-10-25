@@ -28,7 +28,7 @@ class BrokerFactory extends Factory
             'address' => fake()->address(),
             'bank_name' => fake()->companySuffix(),
             'bank_account' => fake()->phoneNumber(),
-            'real_estate_id' => RealEstate::factory()
+            'real_estate_id' => RealEstate::factory(),
         ];
     }
 }

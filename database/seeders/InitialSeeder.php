@@ -6,7 +6,6 @@ use App\Models\Owner;
 use App\Models\Payment;
 use App\Models\Property;
 use App\Models\Tenant;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class InitialSeeder extends Seeder
