@@ -18,6 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('phone_number', 20)->nullable();
             $table->boolean('status')->default(true);
+            $table->string('identification');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('address');
             $table->timestamps();
             $table->softDeletes();
         });

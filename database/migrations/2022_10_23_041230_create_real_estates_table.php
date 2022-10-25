@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('name', 255);
             $table->boolean('status')->default(true);
             $table->timestamps();
+            $table->string('address');
+            $table->string('name');
+            $table->string('email');
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account')->nullable();
             $table->softDeletes();
         });
     }
