@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('broker_id');
             $table->unsignedBigInteger('tenant_id');
-            $table->unsignedBigInteger('real_estates_id');
+            $table->unsignedBigInteger('real_estate_id');
             $table->dateTime('payment_due_date');
             $table->text('description');
             $table->string('code');

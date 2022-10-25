@@ -18,4 +18,14 @@ class Tenant extends Model
         'bank_account',
         'user_id'];
 
+
+    public function property()
+    {
+        return $this->hasOne(Property::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

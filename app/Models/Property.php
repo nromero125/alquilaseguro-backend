@@ -12,7 +12,7 @@ class Property extends Model
         'owner_id',
         'broker_id',
         'tenant_id',
-        'real_estates_id',
+        'real_estate_id',
         'payment_due_date',
         'description',
         'code',

@@ -24,7 +24,7 @@ class PropertyFactory extends Factory
             'owner_id' => Owner::factory(),
             'broker_id' => Broker::factory(),
             'tenant_id' => Tenant::factory(),
-            'real_estates_id' => RealEstate::factory(),
+            'real_estate_id' => RealEstate::factory(),
             'payment_due_date' => fake()->dateTimeThisYear,
             'description' => fake()->sentence(),
             'code' => fake()->randomDigitNotNull,

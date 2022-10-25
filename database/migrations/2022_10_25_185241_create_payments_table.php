@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('paid_at');
             $table->boolean('is_late')->default(false);
             $table->tinyInteger('status');
+            $table->unsignedBigInteger('tenant_id');
             $table->timestamps();
         });
     }

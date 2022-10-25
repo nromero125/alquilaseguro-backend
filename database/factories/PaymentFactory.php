@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +24,7 @@ class PaymentFactory extends Factory
             'paid_at' => fake()->dateTimeThisYear, 
             'is_late' => fake()->boolean(), 
             'status' => fake()->numberBetween(1,3), 
+            'tenant_id' => Tenant::factory()
         ];
     }
 }
