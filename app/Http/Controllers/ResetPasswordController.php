@@ -31,7 +31,7 @@ class ResetPasswordController extends Controller
             //$user->setRememberToken(Str::random(60));
             event(new PasswordReset($user));
         });
-        
+
         if ($response == Password::PASSWORD_RESET) {
             return response()->json(['data' => '', 'message' => 'Password reset successfully']);
         }
