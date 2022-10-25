@@ -19,7 +19,6 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->string('bank_name')->nullable();
             $table->string('bank_account')->nullable();
-            $table->string('name');
             $table->string('address');
             $table->timestamps();
             $table->softDeletes();

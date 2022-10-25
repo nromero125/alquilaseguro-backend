@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(InsuranceSeeder::class);
         $this->call(RealEstateSeeder::class);
         $this->call(OwnerSeeder::class);
+        $this->call(PaymentSeeder::class);
+        $this->call(PropertySeeder::class);
+        $this->call(TenantSeeder::class);
     }
 }
