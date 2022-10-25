@@ -23,5 +23,5 @@ RUN composer install --no-interaction
 RUN php artisan key:generate
 RUN php artisan cache:clear
 RUN php artisan config:clear
-RUN php artisan migrate --seed
+RUN php artisan migrate:fresh --seed
 #:fresh --seed

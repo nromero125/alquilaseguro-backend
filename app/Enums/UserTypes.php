@@ -2,13 +2,13 @@
 
 namespace App\Enums;
 
-class UserTypes
+enum UserTypes: int
 {
-    CONST ADMIN = 1;
-    CONST INSURER = 2;
-    CONST OWNER = 3;
-    CONST TENANT = 4;
-    CONST BROKER = 5;
-    CONST BROKER_ADMIN = 6;
-    CONST INSURANCE_ADMIN = 7;
+    case ADMIN = 1;
+    case INSURER = 2;
+    case OWNER = 3;
+    case TENANT = 4;
+    case BROKER = 5;
+    case BROKER_ADMIN = 6;
+    case INSURANCE_ADMIN = 7;
 }

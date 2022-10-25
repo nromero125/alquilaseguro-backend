@@ -12,7 +12,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register(): void { }
+    public function register(): void
+    {
+    }
 
     /**
      * Bootstrap any application services.
@@ -22,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Prevent lazy loading, but only when the app is not in production.
-        Model::preventLazyLoading(!$this->app->isProduction());
+        Model::preventLazyLoading(! $this->app->isProduction());
 
         // Prevent accessing missing attributes
         Model::preventsAccessingMissingAttributes();
