@@ -20,7 +20,7 @@ class Broker extends Model
         'real_estate_id',
         'user_id',
         'phone_number',
-        'status'
+        'status',
     ];
 
     /**

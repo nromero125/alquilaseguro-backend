@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\UserTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,4 +47,20 @@ class User extends Authenticatable
         'user_type' => UserTypes::class,
         'status' => 'boolean',
     ];
+
+    /**
+     * Relation between an user and its broker data
+     */
+    public function broker(): HasOne
+    {
+        return $this->hasOne(Broker::class, 'user_id', 'id');
+    }
+
+    /**
+     * Relation between an user and its owner data
+     */
+    public function owner(): HasOne
+    {
+        return $this->hasOne(Owner::class, 'user_id', 'id');
+    }
 }

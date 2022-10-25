@@ -11,13 +11,13 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('brokers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("real_estate_id")->references("id")->on("real_estates");
-            $table->foreignId("user_id")->references("id")->on("users");
-            $table->string("phone_number", 20);
+            $table->foreignId('real_estate_id')->references('id')->on('real_estates');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('phone_number', 20)->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
@@ -29,7 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('brokers');
     }

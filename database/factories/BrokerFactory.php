@@ -20,7 +20,7 @@ class BrokerFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'phone_number' => fake()->phoneNumber()
+            'phone_number' => fake()->phoneNumber(),
         ];
     }
 }
