@@ -14,6 +14,9 @@ class RealEstateSeeder extends Seeder
      */
     public function run(): void
     {
-        RealEstate::factory()->count(5)->create();
+        RealEstate::factory()
+            ->count(5)
+            ->hasBrokers(2)
+            ->create();
     }
 }

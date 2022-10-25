@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('real_estates', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255)->unique();
+            $table->string('name', 255);
             $table->boolean('status')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

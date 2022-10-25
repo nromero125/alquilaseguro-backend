@@ -23,6 +23,7 @@ return new class extends Migration
             $table->tinyInteger('user_type');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
