@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\TenantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,8 @@ Route::post('password/reset', [ResetPasswordController::class, 'sendResetRespons
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/forgot-password', [AuthController::class, 'sendResetPassword']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/tenant/payments', [TenantController::class, 'getMyPayments'])->name('tenant.payments');
+    Route::post('/tenant/payments/create', [TenantController::class, 'createPayment'])->name('tenant.payments.create');
+});

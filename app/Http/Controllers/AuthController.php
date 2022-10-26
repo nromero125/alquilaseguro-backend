@@ -19,7 +19,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->with('owner', 'broker', 'tenant')->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
@@ -27,7 +27,7 @@ class AuthController extends Controller
             ]);
         }
 
-        if ($user->status === 0) {
+        if ($user->status == false) {
             return response()->json(['message' => 'Usuario inactivo, por favor contacte al administrador.'], 401);
         }
 
