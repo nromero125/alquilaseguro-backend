@@ -19,7 +19,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->with('owner', 'broker', 'tenant')->first();
+        $user = User::where('email', $request->email)->with('owner', 'broker', 'tenant.property')->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
