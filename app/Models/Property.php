@@ -55,4 +55,9 @@ class Property extends Model
     {
         return $this->belongsTo(Tenant::class);
     }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

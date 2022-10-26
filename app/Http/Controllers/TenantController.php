@@ -89,7 +89,7 @@ class TenantController extends Controller
 
     public function getMyPayments()
     {
-        return Payment::where('tenant_id', auth()->user('api')->tenant->id)->paginate(15);
+        return Payment::where('tenant_id', auth()->user('api')->tenant->id)->orderBy('id', 'desc')->paginate(15);
     }
 
     public function createPayment(PaymentValidation $request)

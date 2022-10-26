@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Broker extends Model
@@ -46,5 +47,10 @@ class Broker extends Model
     public function realEstate(): BelongsTo
     {
         return $this->belongsTo(RealEstate::class, 'real_estate_id', 'id');
+    }
+
+    public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 }
