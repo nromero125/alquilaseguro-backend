@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('property_id');
             $table->dateTime('paid_at');
             $table->boolean('is_late')->default(false);
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('tenant_id');
             $table->timestamps();
         });

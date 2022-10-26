@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentTypes;
+use App\Http\Requests\PaymentValidation;
+use App\Models\Payment;
 use App\Models\Tenant;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TenantController extends Controller
@@ -81,5 +85,23 @@ class TenantController extends Controller
     public function destroy(Tenant $tenant)
     {
         //
+    }
+
+    public function getMyPayments()
+    {
+        return Payment::where('tenant_id', auth()->user('api')->tenant->id)->paginate(15);
+    }
+
+    public function createPayment(PaymentValidation $request)
+    {
+        $data = $request->all();
+        $data['payment_type'] = PaymentTypes::PROPERTY_PAYMENT;
+        $data['tenant_id'] = auth()->user('api')->tenant->id;
+        $payment = Payment::create($data);
+        if ($request->hasFile('voucher') && $request->file('voucher')->isValid()) {
+            $filename = md5($request->file('voucher')->getClientOriginalName()) . '.' . $request->file('voucher')->getClientOriginalExtension();
+            $payment->addMediaFromRequest('voucher')->usingFileName($filename)->toMediaCollection('voucher', 's3');
+        }
+        return response()->json(['success' => true, 'payment' => $payment]);
     }
 }

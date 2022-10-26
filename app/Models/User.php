@@ -72,4 +72,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Claim::class, 'user_id', 'id');
     }
+
+    /**
+     * Relation between an user and its claims
+     */
+    public function tenant(): HasOne
+    {
+        return $this->hasOne(Tenant::class, 'user_id', 'id');
+    }
 }
