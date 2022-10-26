@@ -11,6 +11,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "spatie/laravel-medialibrary": "^10.0.0",
         "vyuldashev/laravel-openapi": "^1.8"
     },
     "require-dev": {
@@ -60,7 +61,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "platform-check": false
     },
     "minimum-stability": "dev",
     "prefer-stable": true

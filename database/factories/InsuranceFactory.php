@@ -20,6 +20,8 @@ class InsuranceFactory extends Factory
         return [
             'name' => fake()->company(),
             'status' => true,
+            'name' => fake()->company,
+            'address' => fake()->address(),
         ];
     }
 }

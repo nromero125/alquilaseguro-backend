@@ -20,7 +20,13 @@ class OwnerFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'phone_number' => fake()->phoneNumber()
+            'phone_number' => fake()->phoneNumber(),
+            'identification' => fake()->creditCardNumber(),
+            'firstname' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
+            'address' => fake()->address(),
+            'bank_name' => fake()->companySuffix(),
+            'bank_account' => fake()->phoneNumber(),
         ];
     }
 }
