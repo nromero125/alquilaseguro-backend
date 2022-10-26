@@ -19,7 +19,7 @@ class TenantFactory extends Factory
     {
         return [
             'phone_number' => fake()->phoneNumber(),
-            'status' => fake()->numberBetween(1,3),
+            'status' => fake()->numberBetween(1, 3),
             'identification' => fake()->creditCardNumber(),
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
@@ -28,6 +28,5 @@ class TenantFactory extends Factory
             'bank_account' => fake()->phoneNumber(),
             'user_id' => User::factory(),
         ];
-
     }
 }

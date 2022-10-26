@@ -4,12 +4,13 @@ namespace Database\Factories;
 
 use App\Models\Broker;
 use App\Models\Owner;
+use App\Models\Property;
 use App\Models\RealEstate;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Property>
+ * @extends Factory<Property>
  */
 class PropertyFactory extends Factory
 {
@@ -18,7 +19,7 @@ class PropertyFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'owner_id' => Owner::factory(),
@@ -29,8 +30,8 @@ class PropertyFactory extends Factory
             'description' => fake()->sentence(),
             'code' => fake()->randomDigitNotNull,
             'address' => fake()->address(),
-            'status' => fake()->numberBetween(1,3),
-            'monthly_payment' => fake()->numberBetween(30000, 100000), 
+            'status' => fake()->numberBetween(1, 3),
+            'monthly_payment' => fake()->numberBetween(30000, 100000),
         ];
     }
 }

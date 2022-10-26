@@ -18,13 +18,13 @@ class PaymentFactory extends Factory
     public function definition()
     {
         return [
-            'amount' => fake()->numberBetween(30000, 100000), 
-            'payment_type' => fake()->numberBetween(1,3), 
-            'property_id' => 1, 
-            'paid_at' => fake()->dateTimeThisYear, 
-            'is_late' => fake()->boolean(), 
-            'status' => fake()->numberBetween(1,3), 
-            'tenant_id' => Tenant::factory()
+            'amount' => fake()->numberBetween(30000, 100000),
+            'payment_type' => fake()->numberBetween(1, 3),
+            'property_id' => 1,
+            'paid_at' => fake()->dateTimeThisYear,
+            'is_late' => fake()->boolean(),
+            'status' => fake()->numberBetween(1, 3),
+            'tenant_id' => Tenant::factory(),
         ];
     }
 }
