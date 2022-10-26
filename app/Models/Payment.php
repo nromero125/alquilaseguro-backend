@@ -35,8 +35,8 @@ class Payment extends Model implements HasMedia
      */
     public function getVoucherUrlAttribute()
     {
-        return $this->getFirstMediaUrl('voucher', 'thumb')
-        ? $this->getFirstMediaUrl('voucher', 'thumb')
+        return $this->getFirstMediaUrl('evidence', 'thumb')
+        ? $this->getFirstMediaUrl('evidence', 'thumb')
         : null;
     }
 }
