@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Broker;
+use App\Models\Claim;
 use App\Models\Owner;
 use App\Models\Payment;
 use App\Models\Property;
@@ -22,6 +23,7 @@ class InitialSeeder extends Seeder
         $owner = Owner::factory()->create(['firstname' => 'Owner 1', 'user_id' => 3]);
         $broker = Broker::factory()->create(['firstname' => 'Broker 1', 'user_id' => 5]);
         $property = Property::factory()->create(['name' => 'Propiedad 1', 'tenant_id' => $tenant->id, 'owner_id' => $owner->id, 'broker_id' => $broker->id]);
+        Claim::factory()->count(10)->create(['user_id' => $tenant->user_id, 'property_id' => $property->id]);
         Payment::factory()->count(10)->create(['property_id' => $property->id, 'tenant_id' => $tenant->id]);
     }
 }
