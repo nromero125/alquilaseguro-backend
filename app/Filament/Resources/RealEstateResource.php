@@ -3,7 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RealEstateResource\Pages;
+use App\Models\Bank;
 use App\Models\RealEstate;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -37,6 +39,9 @@ class RealEstateResource extends Resource
                 Textarea::make('address')
                     ->columnSpan('full')
                     ->required(),
+                Select::make('bank_name')
+                    ->options(Bank::query()->pluck("name", 'name'))
+                    ->searchable()
             ]);
     }
 
