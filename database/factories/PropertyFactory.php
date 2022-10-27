@@ -32,7 +32,7 @@ class PropertyFactory extends Factory
             'address' => fake()->address(),
             'status' => fake()->numberBetween(1, 3),
             'monthly_payment' => fake()->numberBetween(30000, 100000),
-            'name' => fake()->company()
+            'name' => fake()->company(),
         ];
     }
 }

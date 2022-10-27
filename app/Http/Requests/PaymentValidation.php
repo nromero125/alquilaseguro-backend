@@ -25,10 +25,10 @@ class PaymentValidation extends FormRequest
     public function rules()
     {
         return [
-            'amount' => 'required',  
-            'property_id' => 'required', 
+            'amount' => 'required',
+            'property_id' => 'required',
             'paid_at' => 'required',
-            'voucher' => 'mimes:jpeg,jpg,png,pdf|sometimes|nullable|max:10000'
+            'voucher' => 'mimes:jpeg,jpg,png,pdf|sometimes|nullable|max:10000',
         ];
     }
 }
