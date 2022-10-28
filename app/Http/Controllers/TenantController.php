@@ -6,7 +6,6 @@ use App\Enums\PaymentTypes;
 use App\Http\Requests\PaymentValidation;
 use App\Models\Payment;
 use App\Models\Tenant;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TenantController extends Controller
@@ -94,7 +93,7 @@ class TenantController extends Controller
 
     public function createPayment(PaymentValidation $request)
     {
-        if(!auth()->user('api')->tenant){
+        if (! auth()->user('api')->tenant) {
             return response()->json(['message' => 'Ha ocurrido un error, contacte al administrador.'], 403);
         }
         $data = $request->all();
@@ -102,9 +101,10 @@ class TenantController extends Controller
         $data['tenant_id'] = auth()->user('api')->tenant->id;
         $payment = Payment::create($data);
         if ($request->hasFile('voucher') && $request->file('voucher')->isValid()) {
-            $filename = md5($request->file('voucher')->getClientOriginalName()) . '.' . $request->file('voucher')->getClientOriginalExtension();
+            $filename = md5($request->file('voucher')->getClientOriginalName()).'.'.$request->file('voucher')->getClientOriginalExtension();
             $payment->addMediaFromRequest('voucher')->usingFileName($filename)->toMediaCollection('voucher', 's3');
         }
+
         return response()->json(['success' => true, 'payment' => $payment]);
     }
 }

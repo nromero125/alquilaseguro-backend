@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\UserTypes;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -79,5 +80,10 @@ class User extends Authenticatable
     public function tenant(): HasOne
     {
         return $this->hasOne(Tenant::class, 'user_id', 'id');
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@alquilaseguro.com');
     }
 }

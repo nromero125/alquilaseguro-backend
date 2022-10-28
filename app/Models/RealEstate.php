@@ -19,6 +19,10 @@ class RealEstate extends Model
     protected $fillable = [
         'name',
         'status',
+        'address',
+        'bank_account',
+        'bank_name',
+        'email'
     ];
 
     /**

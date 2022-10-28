@@ -10,12 +10,12 @@ class ClaimController extends Controller
 {
     public function getMyClaims()
     {
-        return Claim::where('user_id', auth()->user('api')->id)->orderBy('id','desc')->paginate(15);
+        return Claim::where('user_id', auth()->user('api')->id)->orderBy('id', 'desc')->paginate(15);
     }
 
     public function brokerGetClaims()
     {
-        return Claim::whereIn('property_id', auth()->user('api')->broker->properties->pluck('id'))->orderBy('id','desc')->paginate(15);
+        return Claim::whereIn('property_id', auth()->user('api')->broker->properties->pluck('id'))->orderBy('id', 'desc')->paginate(15);
     }
 
     public function store(ClaimValidation $request)
@@ -25,10 +25,11 @@ class ClaimController extends Controller
         $data['user_id'] = auth()->user('api')->id;
         $claim = Claim::create($data);
         if ($request->hasFile('evidence') && $request->file('evidence')[0]->isValid()) {
-            $claim->addMultipleMediaFromRequest(['evidence'])->each(function($fileAdder){
+            $claim->addMultipleMediaFromRequest(['evidence'])->each(function ($fileAdder) {
                 $fileAdder->toMediaCollection('evidence', 's3');
             });
         }
+
         return response()->json(['success' => true, 'claim' => $claim]);
     }
 }
