@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentSeeder::class);
         $this->call(PropertySeeder::class);
         $this->call(TenantSeeder::class);
+        $this->call(BankSeeder::class);
     }
 }
