@@ -33,7 +33,7 @@ class BrokerResource extends Resource
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('lastname')
+                TextInput::make('lastname   ')
                     ->required()
                     ->maxLength(255),
             ]);
