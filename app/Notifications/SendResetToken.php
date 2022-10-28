@@ -44,7 +44,7 @@ class SendResetToken extends Notification
         return (new MailMessage)
             ->from('no-reply@alquilaseguro.com.do', 'Alquila Seguro')
             ->subject('Recupera tu contraseña')
-            ->greeting('Recupera tu contraseña de Vallges App')
+            ->greeting('Recupera tu contraseña de Alquila Seguro')
             ->line('Hola '.$notifiable->name.', tu código para resetear tu contraseña del sistema es: '.$this->token);
     }
 
