@@ -8,6 +8,7 @@ use App\Models\RealEstate;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -15,6 +16,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Collection;
 
 class RealEstateResource extends Resource
 {
@@ -41,7 +43,10 @@ class RealEstateResource extends Resource
                     ->required(),
                 Select::make('bank_name')
                     ->options(Bank::query()->pluck("name", 'name'))
-                    ->searchable()
+                    ->searchable(),
+                TextInput::make('bank_account')
+                    ->maxLength(255),
+                Toggle::make('status')
             ]);
     }
 
@@ -60,7 +65,10 @@ class RealEstateResource extends Resource
                 DeleteAction::make(),
             ])
             ->bulkActions([
-                DeleteBulkAction::make(),
+                DeleteBulkAction::make('delete')
+                    ->action(fn (Collection $records) => $records->each->delete())
+                    ->deselectRecordsAfterCompletion()
+                    ->requiresConfirmation(),
             ]);
     }
 
