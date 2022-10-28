@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Prevent accessing missing attributes
         Model::preventsAccessingMissingAttributes();
+        $this->app['request']->server->set('HTTPS','on');
+        URL::forceScheme('https');
     }
 }
