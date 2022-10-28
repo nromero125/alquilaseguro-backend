@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BrokerResource\Pages;
+use App\Models\Bank;
 use App\Models\Broker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -33,8 +34,19 @@ class BrokerResource extends Resource
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('lastname   ')
+                TextInput::make('lastname')
                     ->required()
+                    ->maxLength(255),
+                TextInput::make('identification')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('address')
+                    ->required()
+                    ->maxLength(255),
+                Select::make('bank_name')
+                    ->options(Bank::query()->pluck("name", 'name'))
+                    ->searchable(),
+                TextInput::make('bank_account')
                     ->maxLength(255),
             ]);
     }
