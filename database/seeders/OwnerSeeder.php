@@ -16,7 +16,7 @@ class OwnerSeeder extends Seeder
     public function run(): void
     {
         $banks = Bank::query()
-            ->pluck("name")
+            ->pluck('name')
             ->random(1);
 
         $bank = $banks[0];
@@ -24,7 +24,7 @@ class OwnerSeeder extends Seeder
         Owner::factory()
             ->count(5)
             ->create([
-                'bank_name' => $bank
+                'bank_name' => $bank,
             ]);
     }
 }
