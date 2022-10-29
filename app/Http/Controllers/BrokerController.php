@@ -12,7 +12,7 @@ class BrokerController extends Controller
             return response()->json(['message' => 'Ha ocurrido un error, contacte al administrador.'], 403);
         }
 
-        return Property::whereHas('broker', function ($q) {
+        return Property::with('tenant', 'owner')->whereHas('broker', function ($q) {
             $q->where('broker_id', auth()->user('api')->broker->id);
         })->orderBy('id', 'desc')->paginate(15);
     }

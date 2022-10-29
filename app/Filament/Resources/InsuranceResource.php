@@ -38,11 +38,11 @@ class InsuranceResource extends Resource
                     ->email()
                     ->maxLength(255),
                 Select::make('bank_name')
-                    ->options(Bank::query()->pluck("name", 'name'))
+                    ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->maxLength(255),
-                Toggle::make('status')
+                Toggle::make('status'),
             ]);
     }
 
@@ -52,7 +52,7 @@ class InsuranceResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->actions([
                 EditAction::make(),

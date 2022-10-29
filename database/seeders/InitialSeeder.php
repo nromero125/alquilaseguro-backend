@@ -21,7 +21,7 @@ class InitialSeeder extends Seeder
     public function run(): void
     {
         $banks = Bank::query()
-            ->pluck("name")
+            ->pluck('name')
             ->random(1);
 
         $bank = $banks[0];
@@ -29,20 +29,20 @@ class InitialSeeder extends Seeder
         $tenant = Tenant::factory()
             ->create([
                 'firstname' => 'Inquilino1',
-                'user_id' => 4
+                'user_id' => 4,
             ]);
 
         $owner = Owner::factory()
             ->create([
                 'firstname' => 'Owner 1',
-                'user_id' => 3
+                'user_id' => 3,
             ]);
 
         $broker = Broker::factory()
             ->create([
                 'firstname' => 'Broker 1',
                 'user_id' => 5,
-                'bank_name' => $bank
+                'bank_name' => $bank,
             ]);
 
         $property = Property::factory()
@@ -50,21 +50,21 @@ class InitialSeeder extends Seeder
                 'name' => 'Propiedad 1',
                 'tenant_id' => $tenant->id,
                 'owner_id' => $owner->id,
-                'broker_id' => $broker->id
+                'broker_id' => $broker->id,
             ]);
 
         Claim::factory()
             ->count(10)
             ->create([
                 'user_id' => $tenant->user_id,
-                'property_id' => $property->id
+                'property_id' => $property->id,
             ]);
 
         Payment::factory()
             ->count(10)
             ->create([
                 'property_id' => $property->id,
-                'tenant_id' => $tenant->id
+                'tenant_id' => $tenant->id,
             ]);
     }
 }

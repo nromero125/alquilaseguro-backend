@@ -64,7 +64,7 @@ class BankSeeder extends Seeder
             'Banco Popular',
         ];
 
-        $data = array_map(function($bank) {
+        $data = array_map(function ($bank) {
             return ['name' => $bank];
         }, $banks);
 

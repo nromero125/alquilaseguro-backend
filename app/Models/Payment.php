@@ -39,4 +39,14 @@ class Payment extends Model implements HasMedia
         ? $this->getFirstMediaUrl('evidence', 'thumb')
         : null;
     }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function paidProperty()
+    {
+        return $this->belongsTo(Property::class);
+    }
 }
