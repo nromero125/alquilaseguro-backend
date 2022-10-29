@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bank;
 use App\Models\Owner;
 use Illuminate\Database\Seeder;
 
@@ -14,8 +15,16 @@ class OwnerSeeder extends Seeder
      */
     public function run(): void
     {
+        $banks = Bank::query()
+            ->pluck("name")
+            ->random(1);
+
+        $bank = $banks[0];
+
         Owner::factory()
             ->count(5)
-            ->create();
+            ->create([
+                'bank_name' => $bank
+            ]);
     }
 }
