@@ -42,7 +42,7 @@ class OwnerResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Select::make('bank_name')
-                    ->options(Bank::query()->pluck("name", 'name'))
+                    ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->maxLength(255),
@@ -67,7 +67,7 @@ class OwnerResource extends Resource
             ])
             ->actions([
                 EditAction::make(),
-                DeleteAction::make()
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 DeleteBulkAction::make('delete')

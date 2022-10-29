@@ -22,7 +22,7 @@ class RealEstate extends Model
         'address',
         'bank_account',
         'bank_name',
-        'email'
+        'email',
     ];
 
     /**

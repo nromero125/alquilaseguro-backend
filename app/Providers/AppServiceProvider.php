@@ -29,7 +29,11 @@ class AppServiceProvider extends ServiceProvider
 
         // Prevent accessing missing attributes
         Model::preventsAccessingMissingAttributes();
-        $this->app['request']->server->set('HTTPS','on');
-        URL::forceScheme('https');
+
+        // Enable HTTPS in Production environments
+        if ($this->app->isProduction()) {
+            $this->app['request']->server->set('HTTPS', 'on');
+            URL::forceScheme('https');
+        }
     }
 }
