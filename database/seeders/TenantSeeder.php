@@ -12,7 +12,7 @@ class TenantSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Tenant::factory()
             ->count(5)
