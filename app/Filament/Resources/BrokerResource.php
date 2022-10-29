@@ -7,12 +7,14 @@ use App\Models\Bank;
 use App\Models\Broker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 
 class BrokerResource extends Resource
@@ -48,6 +50,8 @@ class BrokerResource extends Resource
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->maxLength(255),
+                Toggle::make('status')
+                    ->required(),
             ]);
     }
 
@@ -55,7 +59,15 @@ class BrokerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('firstname')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('lastname')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('realEstate.name')
+                    ->sortable()
+                    ->searchable()
             ])
             ->actions([
                 EditAction::make(),

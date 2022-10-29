@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\BrokerResource\Pages;
 
 use App\Filament\Resources\BrokerResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditBroker extends EditRecord
@@ -13,7 +13,7 @@ class EditBroker extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }
