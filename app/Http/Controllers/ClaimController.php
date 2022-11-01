@@ -32,4 +32,9 @@ class ClaimController extends Controller
 
         return response()->json(['success' => true, 'claim' => $claim]);
     }
+
+    public function show(Claim $claim)
+    {
+        return $claim->load('user', 'property');
+    }
 }
