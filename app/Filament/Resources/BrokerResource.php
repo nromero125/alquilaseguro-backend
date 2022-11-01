@@ -65,6 +65,9 @@ class BrokerResource extends Resource
                 TextColumn::make('lastname')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('identification')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('realEstate.name')
                     ->sortable()
                     ->searchable(),
