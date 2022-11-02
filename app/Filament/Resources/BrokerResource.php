@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -16,6 +17,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class BrokerResource extends Resource
 {
@@ -27,18 +29,29 @@ class BrokerResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('real_estate_id')
-                    ->required()
-                    ->searchable()
-                    ->relationship('realEstate', 'name'),
-                TextInput::make('phone_number')
-                    ->tel(),
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
+                Fieldset::make('Account Information')
+                    ->relationship('user')
+                    ->schema([
+                        TextInput::make('email')
+                            ->required(),
+                        TextInput::make('password')
+                            ->password()
+                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                            ->dehydrated(fn ($state) => filled($state))
+                            ->required(fn (string $context): bool => $context === "create"),
+                    ]),
+                Select::make('real_estate_id')
+                    ->required()
+                    ->searchable()
+                    ->relationship('realEstate', 'name'),
+                TextInput::make('phone_number')
+                    ->tel(),
                 TextInput::make('identification')
                     ->required()
                     ->maxLength(255),
