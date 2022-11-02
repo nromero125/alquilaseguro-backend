@@ -74,7 +74,7 @@ class PaymentResource extends Resource
                 TextColumn::make('property.name')
                     ->sortable()
                     ->searchable(),
-                    SpatieMediaLibraryImageColumn::make('voucher')->conversion('thumb'),
+                    SpatieMediaLibraryImageColumn::make('voucher')->collection('voucher')->conversion('thumb'),
 
 
 
