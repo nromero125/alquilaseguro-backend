@@ -29,7 +29,7 @@ class ClaimValidation extends FormRequest
             'description' => 'required|string',
             'amount_to_claim' => 'required|string',
             //'evidence' => 'mimes:jpeg,jpg,png,pdf|sometimes|nullable|max:10000',
-            'evidence' => 'max:10',
+            'evidence' => 'required',
             'evidence.*' => ['image', 'max:10000'],
         ];
     }
