@@ -3,9 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PropertyResource\Pages;
-use App\Filament\Resources\PropertyResource\RelationManagers;
 use App\Models\Property;
-use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -13,15 +12,12 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\DatePicker;
+
 class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
@@ -49,11 +45,11 @@ class PropertyResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('realState', 'name'),
-                    DatePicker::make('payment_due_date')->required(),
-                    TextInput::make('monthly_payment')->required()->numeric(),
-                    TextInput::make('code')->required()->maxLength(20),
-                    Textarea::make('description'),
-                    Toggle::make('status')->required()
+                DatePicker::make('payment_due_date')->required(),
+                TextInput::make('monthly_payment')->required()->numeric(),
+                TextInput::make('code')->required()->maxLength(20),
+                Textarea::make('description'),
+                Toggle::make('status')->required(),
             ]);
     }
 
@@ -78,7 +74,7 @@ class PropertyResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                
+
             ])
             ->actions([
                 EditAction::make(),
@@ -91,14 +87,14 @@ class PropertyResource extends Resource
                     ->requiresConfirmation(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -106,5 +102,5 @@ class PropertyResource extends Resource
             'create' => Pages\CreateProperty::route('/create'),
             'edit' => Pages\EditProperty::route('/{record}/edit'),
         ];
-    }    
+    }
 }

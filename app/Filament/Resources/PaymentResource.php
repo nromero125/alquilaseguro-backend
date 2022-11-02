@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PaymentResource\Pages;
-use App\Filament\Resources\PaymentResource\RelationManagers;
 use App\Models\Payment;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -15,12 +13,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\IconColumn;
-
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class PaymentResource extends Resource
 {
@@ -48,14 +43,14 @@ class PaymentResource extends Resource
                         3 => 'Pago de aseguradora',
                     ])
                     ->required()
-                    ->searchable(),                    
-                    SpatieMediaLibraryFileUpload::make('voucher')->collection('voucher')->conversionsDisk('s3'),
-                    DatePicker::make('paid_at')->required(),
-                    Toggle::make('is_late')
-                    ->required(),
-                    Toggle::make('status')
-                    ->required(),
-                    
+                    ->searchable(),
+                SpatieMediaLibraryFileUpload::make('voucher')->collection('voucher')->conversionsDisk('s3'),
+                DatePicker::make('paid_at')->required(),
+                Toggle::make('is_late')
+                ->required(),
+                Toggle::make('status')
+                ->required(),
+
             ]);
     }
 
@@ -69,7 +64,7 @@ class PaymentResource extends Resource
                 TextColumn::make('paid_at')
                     ->sortable()
                     ->searchable(),
-                    IconColumn::make('is_late')
+                IconColumn::make('is_late')
                 ->boolean()
                 ->falseIcon('')
                 ->trueColor('danger')
@@ -77,10 +72,7 @@ class PaymentResource extends Resource
                 TextColumn::make('property.name')
                     ->sortable()
                     ->searchable(),
-                    SpatieMediaLibraryImageColumn::make('voucher')->collection('voucher')->conversion('thumb'),
-
-
-
+                SpatieMediaLibraryImageColumn::make('voucher')->collection('voucher')->conversion('thumb'),
 
             ])
             ->filters([
@@ -93,14 +85,14 @@ class PaymentResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -108,5 +100,5 @@ class PaymentResource extends Resource
             'create' => Pages\CreatePayment::route('/create'),
             'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
-    }    
+    }
 }
