@@ -27,14 +27,14 @@ class OwnerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('phone_number')
-                    ->tel(),
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('phone_number')
+                    ->tel(),
                 TextInput::make('identification')
                     ->required()
                     ->maxLength(255),
@@ -61,9 +61,9 @@ class OwnerResource extends Resource
                 TextColumn::make('lastname')
                     ->sortable()
                     ->searchable(),
-            ])
-            ->filters([
-                //
+                TextColumn::make('user.email')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->actions([
                 EditAction::make(),

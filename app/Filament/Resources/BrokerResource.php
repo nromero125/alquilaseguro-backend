@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
-use Filament\Forms\Components\Fieldset;
+use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -35,17 +35,19 @@ class BrokerResource extends Resource
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
-                Fieldset::make('Account Information')
-                    ->relationship('user')
-                    ->schema([
-                        TextInput::make('email')
-                            ->required(),
-                        TextInput::make('password')
-                            ->password()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->required(fn (string $context): bool => $context === "create"),
-                    ]),
+                TextInput::make('email')
+                    ->required()
+                    ->email()
+                    ->unique(
+                        table: User::class,
+                        column: 'email',
+                        ignoreRecord: true
+                    ),
+                TextInput::make('password')
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
                 Select::make('real_estate_id')
                     ->required()
                     ->searchable()
@@ -64,7 +66,8 @@ class BrokerResource extends Resource
                 TextInput::make('bank_account')
                     ->maxLength(255),
                 Toggle::make('status')
-                    ->required(),
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -76,6 +79,9 @@ class BrokerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('lastname')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('user.email')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
