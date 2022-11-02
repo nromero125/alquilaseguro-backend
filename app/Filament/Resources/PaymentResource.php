@@ -19,6 +19,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\IconColumn;
 
 
 class PaymentResource extends Resource
@@ -68,9 +69,11 @@ class PaymentResource extends Resource
                 TextColumn::make('paid_at')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('is_late')
-                    ->sortable()
-                    ->searchable(),
+                    IconColumn::make('is_late')
+                ->boolean()
+                ->falseIcon('')
+                ->trueColor('danger')
+                ->trueIcon('heroicon-o-x-circle'),
                 TextColumn::make('property.name')
                     ->sortable()
                     ->searchable(),
