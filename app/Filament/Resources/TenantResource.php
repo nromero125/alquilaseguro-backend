@@ -75,7 +75,7 @@ class TenantResource extends Resource
                     ->searchable(),
                 TextColumn::make('user.email')
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->actions([
                 EditAction::make(),
