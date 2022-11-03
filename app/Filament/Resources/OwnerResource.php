@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class OwnerResource extends Resource
 {
@@ -33,6 +34,14 @@ class OwnerResource extends Resource
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->email(),
+                TextInput::make('password')
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
                 TextInput::make('phone_number')
                     ->tel(),
                 TextInput::make('identification')

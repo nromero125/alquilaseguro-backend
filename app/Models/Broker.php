@@ -28,7 +28,7 @@ class Broker extends Model
         'identification',
         'address',
         'bank_name',
-        'bank_account'
+        'bank_account',
     ];
 
     /**

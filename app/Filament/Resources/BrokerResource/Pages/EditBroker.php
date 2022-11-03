@@ -38,7 +38,9 @@ class EditBroker extends EditRecord
             'status' => $data['status'],
         ];
 
-        if (!empty($data['password'])) $userData['password'] = $data['password'];
+        if (! empty($data['password'])) {
+            $userData['password'] = $data['password'];
+        }
 
         $user->update($userData);
 
