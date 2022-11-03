@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.0",
         "spatie/laravel-medialibrary": "^10.0.0",
+        "stijnvanouplines/blade-country-flags": "^1.0",
         "vyuldashev/laravel-openapi": "^1.8"
     },
     "require-dev": {
