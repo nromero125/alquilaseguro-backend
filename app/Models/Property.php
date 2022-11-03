@@ -22,7 +22,7 @@ class Property extends Model
         'address',
         'status',
         'monthly_payment',
-        'name'
+        'name',
     ];
 
     /**

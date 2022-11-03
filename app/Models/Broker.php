@@ -22,6 +22,13 @@ class Broker extends Model
         'user_id',
         'phone_number',
         'status',
+        'firstname',
+        'lastname',
+        'phone_number',
+        'identification',
+        'address',
+        'bank_name',
+        'bank_account',
     ];
 
     /**

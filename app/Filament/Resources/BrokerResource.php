@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class BrokerResource extends Resource
 {
@@ -27,18 +28,26 @@ class BrokerResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('real_estate_id')
-                    ->required()
-                    ->searchable()
-                    ->relationship('realEstate', 'name'),
-                TextInput::make('phone_number')
-                    ->tel(),
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->email(),
+                TextInput::make('password')
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
+                Select::make('real_estate_id')
+                    ->required()
+                    ->searchable()
+                    ->relationship('realEstate', 'name'),
+                TextInput::make('phone_number')
+                    ->tel(),
                 TextInput::make('identification')
                     ->required()
                     ->maxLength(255),
@@ -51,7 +60,8 @@ class BrokerResource extends Resource
                 TextInput::make('bank_account')
                     ->maxLength(255),
                 Toggle::make('status')
-                    ->required(),
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -63,6 +73,9 @@ class BrokerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('lastname')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('user.email')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
