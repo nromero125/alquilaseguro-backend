@@ -3,22 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClaimResource\Pages;
-use App\Filament\Resources\ClaimResource\RelationManagers;
 use App\Models\Claim;
-use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClaimResource extends Resource
 {
@@ -41,18 +35,17 @@ class ClaimResource extends Resource
                     ->relationship('user', 'name'),
                 Textarea::make('description')
                     ->required(),
-                    SpatieMediaLibraryFileUpload::make('evidence')->multiple()->collection('evidence')->conversionsDisk('s3'),
-                    Select::make('status')
-                    ->options([
-                        1 => 'Activa',
-                        2 => 'Nueva',
-                        3 => 'En progreso',
-                        4 => 'Completada',
-                    ])
-                    ->required()
-                    ->searchable(),
-                    
-                    
+                SpatieMediaLibraryFileUpload::make('evidence')->multiple()->collection('evidence')->conversionsDisk('s3'),
+                Select::make('status')
+                ->options([
+                    1 => 'Activa',
+                    2 => 'Nueva',
+                    3 => 'En progreso',
+                    4 => 'Completada',
+                ])
+                ->required()
+                ->searchable(),
+
             ]);
     }
 
@@ -80,14 +73,14 @@ class ClaimResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -95,5 +88,5 @@ class ClaimResource extends Resource
             'create' => Pages\CreateClaim::route('/create'),
             'edit' => Pages\EditClaim::route('/{record}/edit'),
         ];
-    }    
+    }
 }
