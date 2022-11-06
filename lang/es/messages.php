@@ -18,4 +18,6 @@ return [
     'user' => 'Usuario',
     'description' => "Descripción",
     'evidence' => 'Evidencia',
+    'insurance' => 'Aseguradora',
+    'name' => 'Nombre',
 ];

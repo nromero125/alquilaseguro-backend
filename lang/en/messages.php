@@ -18,4 +18,6 @@ return [
     'user' => 'User',
     'description' => "Description",
     'evidence' => 'Evidence',
+    'insurance' => 'Insurance',
+    'name' => 'Name',
 ];

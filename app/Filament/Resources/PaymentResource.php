@@ -71,9 +71,10 @@ class PaymentResource extends Resource
                     ->searchable(),
                 IconColumn::make('is_late')
                     ->boolean()
-                    ->falseIcon('')
-                    ->trueColor('danger')
-                    ->trueIcon('heroicon-o-x-circle'),
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
                 TextColumn::make('property.name')
                     ->sortable()
                     ->searchable(),

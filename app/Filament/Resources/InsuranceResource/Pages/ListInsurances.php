@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\InsuranceResource\Pages;
 
 use App\Filament\Resources\InsuranceResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListInsurances extends ListRecords
@@ -13,7 +13,9 @@ class ListInsurances extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label(trans('messages.create', ['item' => trans('messages.insurance')]))
+                ->icon('heroicon-o-plus'),
         ];
     }
 }
