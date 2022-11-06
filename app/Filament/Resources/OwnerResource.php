@@ -30,34 +30,44 @@ class OwnerResource extends Resource
         return $form
             ->schema([
                 TextInput::make('firstname')
+                    ->label(trans('messages.firstName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
+                    ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
                     ->email(),
                 TextInput::make('password')
+                    ->label(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 TextInput::make('phone_number')
+                    ->label(trans('messages.phoneNumber'))
                     ->tel(),
                 TextInput::make('identification')
+                    ->label(trans('messages.identification'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('address')
+                    ->label(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
                 Select::make('bank_name')
+                    ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
                 Toggle::make('status')
-                    ->required(),
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true),
             ]);
     }
 
