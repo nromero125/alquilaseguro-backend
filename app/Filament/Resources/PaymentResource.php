@@ -12,7 +12,6 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -64,9 +63,11 @@ class PaymentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('amount')
+                    ->label(trans('messages.amount'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('paid_at')
+                    ->label(trans('messages.paidAt'))
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('is_late')
@@ -85,9 +86,7 @@ class PaymentResource extends Resource
             ->actions([
                 EditAction::make(),
             ])
-            ->bulkActions([
-                DeleteBulkAction::make(),
-            ]);
+            ->bulkActions([]);
     }
 
     public static function getPages(): array

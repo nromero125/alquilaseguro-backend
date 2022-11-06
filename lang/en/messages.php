@@ -22,4 +22,7 @@ return [
     'name' => 'Name',
     'owner' => 'Owner',
     'password' => 'Password',
+    'amount' => 'Amount',
+    'payment' => 'Payment',
+    'paidAt' => "Paid at",
 ];

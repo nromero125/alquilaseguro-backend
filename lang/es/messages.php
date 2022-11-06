@@ -22,4 +22,7 @@ return [
     'name' => 'Nombre',
     'owner' => "Dueño",
     'password' => 'Contraseña',
+    'amount' => 'Monto',
+    'payment' => 'Pago',
+    'paidAt' => "Fecha de Pago",
 ];
