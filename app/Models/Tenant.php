@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -11,7 +12,8 @@ class Tenant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['phone_number',
+    protected $fillable = [
+        'phone_number',
         'status',
         'identification',
         'firstname',
@@ -25,6 +27,11 @@ class Tenant extends Model
     public function property(): HasOne
     {
         return $this->hasOne(Property::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function payments(): HasMany

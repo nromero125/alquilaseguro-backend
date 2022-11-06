@@ -27,14 +27,22 @@ class TenantResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('phone_number')
-                    ->tel(),
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->email(),
+                TextInput::make('password')
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
+                TextInput::make('phone_number')
+                    ->tel(),
                 TextInput::make('identification')
                     ->required()
                     ->maxLength(255),
@@ -62,6 +70,9 @@ class TenantResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('user.email')
                     ->sortable()
                     ->searchable(),
             ])

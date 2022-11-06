@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class BrokerResource extends Resource
 {
@@ -27,14 +28,6 @@ class BrokerResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('real_estate_id')
-                    ->label(trans('messages.realEstate'))
-                    ->required()
-                    ->searchable()
-                    ->relationship('realEstate', 'name'),
-                TextInput::make('phone_number')
-                    ->label(trans('messages.phoneNumber'))
-                    ->tel(),
                 TextInput::make('firstname')
                     ->label(trans('messages.firstName'))
                     ->required()
@@ -43,6 +36,20 @@ class BrokerResource extends Resource
                     ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->email(),
+                TextInput::make('password')
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
+                Select::make('real_estate_id')
+                    ->required()
+                    ->searchable()
+                    ->relationship('realEstate', 'name'),
+                TextInput::make('phone_number')
+                    ->tel(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
                     ->required()
@@ -60,7 +67,8 @@ class BrokerResource extends Resource
                     ->maxLength(255),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
-                    ->required(),
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -74,6 +82,9 @@ class BrokerResource extends Resource
                     ->searchable(),
                 TextColumn::make('lastname')
                     ->label(trans('messages.lastName'))
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('user.email')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')

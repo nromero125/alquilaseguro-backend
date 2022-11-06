@@ -17,6 +17,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class OwnerResource extends Resource
 {
@@ -28,14 +29,22 @@ class OwnerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('phone_number')
-                    ->tel(),
                 TextInput::make('firstname')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->email(),
+                TextInput::make('password')
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
+                TextInput::make('phone_number')
+                    ->tel(),
                 TextInput::make('identification')
                     ->required()
                     ->maxLength(255),
@@ -62,6 +71,9 @@ class OwnerResource extends Resource
                     ->searchable(),
                 TextColumn::make('lastname')
                     ->label(trans('messages.lastName'))
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('user.email')
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('status')
