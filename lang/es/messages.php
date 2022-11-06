@@ -20,4 +20,5 @@ return [
     'evidence' => 'Evidencia',
     'insurance' => 'Aseguradora',
     'name' => 'Nombre',
+    'owner' => "Dueño"
 ];

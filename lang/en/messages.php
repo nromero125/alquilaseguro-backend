@@ -20,4 +20,5 @@ return [
     'evidence' => 'Evidence',
     'insurance' => 'Insurance',
     'name' => 'Name',
+    'owner' => 'Owner'
 ];
