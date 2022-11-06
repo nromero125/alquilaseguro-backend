@@ -65,9 +65,6 @@ class TenantResource extends Resource
                     ->sortable()
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
@@ -78,13 +75,6 @@ class TenantResource extends Resource
                     ->deselectRecordsAfterCompletion()
                     ->requiresConfirmation(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array
