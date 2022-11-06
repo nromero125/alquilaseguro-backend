@@ -28,29 +28,38 @@ class BrokerResource extends Resource
         return $form
             ->schema([
                 Select::make('real_estate_id')
+                    ->label(trans('messages.realEstate'))
                     ->required()
                     ->searchable()
                     ->relationship('realEstate', 'name'),
                 TextInput::make('phone_number')
+                    ->label(trans('messages.phoneNumber'))
                     ->tel(),
                 TextInput::make('firstname')
+                    ->label(trans('messages.firstName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
+                    ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('identification')
+                    ->label(trans('messages.identification'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('address')
+                    ->label(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
                 Select::make('bank_name')
+                    ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
                 Toggle::make('status')
+                    ->label(trans('messages.status'))
                     ->required(),
             ]);
     }
@@ -60,15 +69,19 @@ class BrokerResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('firstname')
+                    ->label(trans('messages.firstName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('lastname')
+                    ->label(trans('messages.lastName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
+                    ->label(trans('messages.identification'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('realEstate.name')
+                    ->label(trans('messages.realEstate'))
                     ->sortable()
                     ->searchable(),
             ])
