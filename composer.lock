@@ -172,16 +172,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.7",
+            "version": "3.240.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "afad16e102229de8da15f07cc48436955811ef7f"
+                "reference": "4ab7d004ca11298bf400f3291f144d820fb97cd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/afad16e102229de8da15f07cc48436955811ef7f",
-                "reference": "afad16e102229de8da15f07cc48436955811ef7f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4ab7d004ca11298bf400f3291f144d820fb97cd6",
+                "reference": "4ab7d004ca11298bf400f3291f144d820fb97cd6",
                 "shasum": ""
             },
             "require": {
@@ -260,9 +260,86 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.11"
             },
-            "time": "2022-11-01T18:23:34+00:00"
+            "time": "2022-11-07T19:23:11+00:00"
+        },
+        {
+            "name": "bezhansalleh/filament-language-switch",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bezhanSalleh/filament-language-switch.git",
+                "reference": "264132225dc2d150c3f2fd7062f2a3117c4e50bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bezhanSalleh/filament-language-switch/zipball/264132225dc2d150c3f2fd7062f2a3117c4e50bb",
+                "reference": "264132225dc2d150c3f2fd7062f2a3117c4e50bb",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0",
+                "php": "^8.0|^8.1",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BezhanSalleh\\FilamentLanguageSwitch\\FilamentLanguageSwitchServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BezhanSalleh\\FilamentLanguageSwitch\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bezhan Salleh",
+                    "email": "bezhan_salleh@yahoo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Zero config Language Switch(Changer/Localizer) plugin for filamentphp admin",
+            "homepage": "https://github.com/bezhansalleh/filament-language-switch",
+            "keywords": [
+                "bezhanSalleh",
+                "filament-language-changer",
+                "filament-language-switch",
+                "filament-locale-changer",
+                "filament-localizer",
+                "filament-plugin",
+                "filamentphp",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/bezhanSalleh/filament-language-switch/issues",
+                "source": "https://github.com/bezhanSalleh/filament-language-switch/tree/1.0.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/bezhanSalleh",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-29T00:07:03+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -1286,7 +1363,6 @@
         },
         {
             "name": "filament/filament",
-<<<<<<< HEAD
             "version": "v2.16.41",
             "source": {
                 "type": "git",
@@ -1297,18 +1373,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/admin/zipball/5dd4e8d60596dbe7e4227edfd3d1482c11126f59",
                 "reference": "5dd4e8d60596dbe7e4227edfd3d1482c11126f59",
-=======
-            "version": "v2.16.37",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/admin.git",
-                "reference": "79878c970960776bb252a9a938088308d851aa90"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/admin/zipball/79878c970960776bb252a9a938088308d851aa90",
-                "reference": "79878c970960776bb252a9a938088308d851aa90",
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
                 "shasum": ""
             },
             "require": {
@@ -1358,7 +1422,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
             "time": "2022-11-05T01:21:24+00:00"
         },
         {
@@ -1373,22 +1436,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/forms/zipball/5cbabd7b3f46701840e4ca579ef6232b9985705e",
                 "reference": "5cbabd7b3f46701840e4ca579ef6232b9985705e",
-=======
-            "time": "2022-10-30T20:32:25+00:00"
-        },
-        {
-            "name": "filament/forms",
-            "version": "v2.16.37",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/forms.git",
-                "reference": "4a2e2bb32c74b050b3e3ee504f93043259ee888c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/4a2e2bb32c74b050b3e3ee504f93043259ee888c",
-                "reference": "4a2e2bb32c74b050b3e3ee504f93043259ee888c",
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
                 "shasum": ""
             },
             "require": {
@@ -1433,19 +1480,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
             "time": "2022-11-05T11:16:15+00:00"
         },
         {
             "name": "filament/notifications",
             "version": "v2.16.41",
-=======
-            "time": "2022-10-30T20:32:38+00:00"
-        },
-        {
-            "name": "filament/notifications",
-            "version": "v2.16.37",
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -1532,7 +1571,6 @@
         },
         {
             "name": "filament/support",
-<<<<<<< HEAD
             "version": "v2.16.41",
             "source": {
                 "type": "git",
@@ -1543,18 +1581,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/support/zipball/548ab60c617568ecea13ff8ea3cce21a5961afb1",
                 "reference": "548ab60c617568ecea13ff8ea3cce21a5961afb1",
-=======
-            "version": "v2.16.37",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/support.git",
-                "reference": "aa9da96484a9610a84b346b3984a89468e6ee31e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/aa9da96484a9610a84b346b3984a89468e6ee31e",
-                "reference": "aa9da96484a9610a84b346b3984a89468e6ee31e",
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
                 "shasum": ""
             },
             "require": {
@@ -1591,7 +1617,6 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
             "time": "2022-11-03T14:40:22+00:00"
         },
         {
@@ -1606,22 +1631,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filamentphp/tables/zipball/e5580dcd6141ae91f07173b5138b138b7b6f38db",
                 "reference": "e5580dcd6141ae91f07173b5138b138b7b6f38db",
-=======
-            "time": "2022-10-30T20:32:26+00:00"
-        },
-        {
-            "name": "filament/tables",
-            "version": "v2.16.37",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filamentphp/tables.git",
-                "reference": "4f28c35794c78a8301ada9831fa70bcde0e936c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/4f28c35794c78a8301ada9831fa70bcde0e936c4",
-                "reference": "4f28c35794c78a8301ada9831fa70bcde0e936c4",
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
                 "shasum": ""
             },
             "require": {
@@ -1664,11 +1673,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-<<<<<<< HEAD
             "time": "2022-11-05T11:16:13+00:00"
-=======
-            "time": "2022-10-30T20:32:26+00:00"
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2738,7 +2743,6 @@
         },
         {
             "name": "league/commonmark",
-<<<<<<< HEAD
             "version": "2.3.7",
             "source": {
                 "type": "git",
@@ -2749,18 +2753,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/a36bd2be4f5387c0f3a8792a0d76b7d68865abbf",
                 "reference": "a36bd2be4f5387c0f3a8792a0d76b7d68865abbf",
-=======
-            "version": "2.3.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "857afc47ce113454bd629037213378ba3219dd40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/857afc47ce113454bd629037213378ba3219dd40",
-                "reference": "857afc47ce113454bd629037213378ba3219dd40",
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
                 "shasum": ""
             },
             "require": {
@@ -2853,11 +2845,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2022-11-03T17:29:46+00:00"
-=======
-            "time": "2022-10-30T16:45:38+00:00"
->>>>>>> 06ac937c2347c865ad6667511118bf5215ab4735
         },
         {
             "name": "league/config",
@@ -4779,16 +4767,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.8",
+            "version": "v0.11.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e"
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/f455acf3645262ae389b10e9beba0c358aa6994e",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778",
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778",
                 "shasum": ""
             },
             "require": {
@@ -4849,9 +4837,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.8"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.9"
             },
-            "time": "2022-07-28T14:25:11+00:00"
+            "time": "2022-11-06T15:29:46+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
