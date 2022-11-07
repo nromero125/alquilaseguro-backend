@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\PaymentTypes;
 use App\Filament\Resources\PaymentResource\Pages;
 use App\Models\Payment;
 use Filament\Forms\Components\DatePicker;
@@ -25,36 +26,47 @@ class PaymentResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $paymentTypes = array_map(
+            fn ($item) => trans("paymentTypes.$item"),
+            array_flip(PaymentTypes::options())
+        );
+
         return $form
             ->schema([
                 TextInput::make('amount')
+                    ->label(trans('messages.amount'))
+                    ->placeholder('0.00')
                     ->required()
                     ->numeric(),
                 Select::make('property_id')
+                    ->label(trans('messages.property'))
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
                 Select::make('tenant_id')
+                    ->label(trans('messages.tenant'))
                     ->required()
                     ->searchable()
                     ->relationship('tenant', 'firstname'),
                 Select::make('payment_type')
-                    ->options([
-                        1 => 'Pago de propiedad',
-                        2 => 'Pago a broker',
-                        3 => 'Pago de aseguradora',
-                    ])
+                    ->label(trans('messages.paymentType'))
+                    ->options($paymentTypes)
                     ->required()
                     ->searchable(),
                 SpatieMediaLibraryFileUpload::make('voucher')
                     ->collection('voucher')
                     ->conversionsDisk('s3'),
                 DatePicker::make('paid_at')
+                    ->label(trans('messages.paidAt'))
                     ->required(),
                 Toggle::make('is_late')
-                    ->required(),
+                    ->label(trans('messages.isLate'))
+                    ->required()
+                    ->default(false),
                 Toggle::make('status')
-                    ->required(),
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -71,12 +83,14 @@ class PaymentResource extends Resource
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('is_late')
+                    ->label(trans('messages.isLate'))
                     ->boolean()
                     ->falseColor('danger')
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
                 TextColumn::make('property.name')
+                    ->label(trans('messages.property'))
                     ->sortable()
                     ->searchable(),
                 SpatieMediaLibraryImageColumn::make('voucher')

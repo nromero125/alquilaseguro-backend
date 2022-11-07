@@ -25,4 +25,7 @@ return [
     'amount' => 'Monto',
     'payment' => 'Pago',
     'paidAt' => "Fecha de Pago",
+    'isLate' => 'Pago a tiempo',
+    'tenant' => 'Inquilino',
+    'paymentType' => 'Tipo de pago'
 ];

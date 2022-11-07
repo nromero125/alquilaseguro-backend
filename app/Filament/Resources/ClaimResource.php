@@ -23,9 +23,10 @@ class ClaimResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $claimStatuses = array_map(function ($item) {
-            return trans("claimStatus.$item");
-        }, array_flip(ClaimStatus::options()));
+        $claimStatuses = array_map(
+            fn ($item) => trans("claimStatus.$item"),
+            array_flip(ClaimStatus::options())
+        );
 
         return $form
             ->schema([

@@ -25,4 +25,7 @@ return [
     'amount' => 'Amount',
     'payment' => 'Payment',
     'paidAt' => "Paid at",
+    'isLate' => 'Is late',
+    'tenant' => 'Tenant',
+    'paymentType' => 'Payment Type',
 ];
