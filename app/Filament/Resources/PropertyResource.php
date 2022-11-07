@@ -28,8 +28,12 @@ class PropertyResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required()->maxLength(255),
+                TextInput::make('name')
+                    ->label(trans('messages.name'))
+                    ->required()
+                    ->maxLength(255),
                 Select::make('owner_id')
+                    ->label(trans('messages.owner'))
                     ->required()
                     ->searchable()
                     ->relationship('owner', 'firstname'),
@@ -38,18 +42,33 @@ class PropertyResource extends Resource
                     ->searchable()
                     ->relationship('broker', 'firstname'),
                 Select::make('tenant_id')
+                    ->label(trans('messages.tenant'))
                     ->required()
                     ->searchable()
                     ->relationship('tenant', 'firstname'),
                 Select::make('real_estate_id')
+                    ->label(trans('messages.realEstate'))
                     ->required()
                     ->searchable()
                     ->relationship('realState', 'name'),
-                DatePicker::make('payment_due_date')->required(),
-                TextInput::make('monthly_payment')->required()->numeric(),
-                TextInput::make('code')->required()->maxLength(20),
-                Textarea::make('description'),
-                Toggle::make('status')->required(),
+                DatePicker::make('payment_due_date')
+                    ->label(trans('messages.paymentDueDate'))
+                    ->required(),
+                TextInput::make('monthly_payment')
+                    ->label(trans('messages.monthlyPayment'))
+                    ->placeholder("0.00")
+                    ->required()
+                    ->numeric(),
+                TextInput::make('code')
+                    ->label(trans('messages.code'))
+                    ->required()
+                    ->maxLength(20),
+                Textarea::make('description')
+                    ->label(trans('messages.description')),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -58,23 +77,25 @@ class PropertyResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(trans('messages.name'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('code')
+                    ->label(trans('messages.code'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('owner.firstname')
+                    ->label(trans('messages.firstName'))
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('tenant.firstname')
+                TextColumn::make('tenant.lastname')
+                    ->label(trans('messages.lastName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('monthly_payment')
+                    ->label(trans('messages.monthlyPayment'))
                     ->sortable()
                     ->searchable(),
-            ])
-            ->filters([
-
             ])
             ->actions([
                 EditAction::make(),
@@ -86,13 +107,6 @@ class PropertyResource extends Resource
                     ->deselectRecordsAfterCompletion()
                     ->requiresConfirmation(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

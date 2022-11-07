@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\PropertyResource\Pages;
 
 use App\Filament\Resources\PropertyResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListProperties extends ListRecords
@@ -13,7 +13,9 @@ class ListProperties extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label(trans('messages.create', ['item' => trans('messages.property')]))
+                ->icon('heroicon-o-plus'),
         ];
     }
 }
