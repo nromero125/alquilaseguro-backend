@@ -15,6 +15,7 @@ use Filament\Resources\Table;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -96,6 +97,13 @@ class PropertyResource extends Resource
                     ->label(trans('messages.monthlyPayment'))
                     ->sortable()
                     ->searchable(),
+                IconColumn::make('status')
+                    ->label(trans('messages.status'))
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),

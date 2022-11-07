@@ -15,6 +15,7 @@ use Filament\Resources\Table;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -29,8 +30,9 @@ class RealEstateResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label(trans('messages.name'))
                     ->required()
-                    ->placeholder('Name...')
+                    ->placeholder(trans('messages.name')."...")
                     ->unique()
                     ->maxLength(255),
                 TextInput::make('email')
@@ -39,14 +41,19 @@ class RealEstateResource extends Resource
                     ->email()
                     ->maxLength(255),
                 Textarea::make('address')
+                    ->label(trans('messages.address'))
                     ->columnSpan('full')
                     ->required(),
                 Select::make('bank_name')
+                    ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
-                Toggle::make('status'),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->default(true),
             ]);
     }
 
@@ -55,10 +62,19 @@ class RealEstateResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(trans('messages.name'))
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->sortable(),
+                TextColumn::make('email')
+                    ->sortable()
+                    ->searchable(),
+                IconColumn::make('status')
+                    ->label(trans('messages.status'))
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),
