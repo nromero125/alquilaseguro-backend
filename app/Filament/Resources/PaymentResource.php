@@ -12,7 +12,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -27,7 +27,9 @@ class PaymentResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('amount')->required()->numeric(),
+                TextInput::make('amount')
+                    ->required()
+                    ->numeric(),
                 Select::make('property_id')
                     ->required()
                     ->searchable()
@@ -44,13 +46,15 @@ class PaymentResource extends Resource
                     ])
                     ->required()
                     ->searchable(),
-                SpatieMediaLibraryFileUpload::make('voucher')->collection('voucher')->conversionsDisk('s3'),
-                DatePicker::make('paid_at')->required(),
+                SpatieMediaLibraryFileUpload::make('voucher')
+                    ->collection('voucher')
+                    ->conversionsDisk('s3'),
+                DatePicker::make('paid_at')
+                    ->required(),
                 Toggle::make('is_late')
-                ->required(),
+                    ->required(),
                 Toggle::make('status')
-                ->required(),
-
+                    ->required(),
             ]);
     }
 
@@ -59,38 +63,30 @@ class PaymentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('amount')
+                    ->label(trans('messages.amount'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('paid_at')
+                    ->label(trans('messages.paidAt'))
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('is_late')
-                ->boolean()
-                ->falseIcon('')
-                ->trueColor('danger')
-                ->trueIcon('heroicon-o-x-circle'),
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
                 TextColumn::make('property.name')
                     ->sortable()
                     ->searchable(),
-                SpatieMediaLibraryImageColumn::make('voucher')->collection('voucher')->conversion('thumb'),
-
-            ])
-            ->filters([
-                //
+                SpatieMediaLibraryImageColumn::make('voucher')
+                    ->collection('voucher')
+                    ->conversion('thumb'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
+            ->bulkActions([]);
     }
 
     public static function getPages(): array

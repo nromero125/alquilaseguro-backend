@@ -2,10 +2,14 @@
 
 namespace App\Enums;
 
+use ArchTech\Enums\Options;
+
 enum ClaimStatus: int
 {
-    case ACTIVE = 1;
-    case NEW = 2;
-    case IN_PROGRESS = 3;
-    case COMPLETED = 4;
+    use Options;
+
+    case Active = 1;
+    case New = 2;
+    case In_progress = 3;
+    case Completed = 4;
 }

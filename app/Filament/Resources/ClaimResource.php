@@ -2,23 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ClaimStatus;
 use App\Filament\Resources\ClaimResource\Pages;
-use App\Filament\Resources\ClaimResource\RelationManagers;
 use App\Models\Claim;
-use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClaimResource extends Resource
 {
@@ -28,31 +23,39 @@ class ClaimResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $claimStatuses = array_map(function ($item) {
+            return trans("claimStatus.$item");
+        }, array_flip(ClaimStatus::options()));
+
         return $form
             ->schema([
-                TextInput::make('amount_to_claim')->required()->numeric(),
+                TextInput::make('amount_to_claim')
+                    ->label(trans('messages.amountToClaim'))
+                    ->required()
+                    ->numeric(),
                 Select::make('property_id')
+                    ->label(trans('messages.property'))
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
                 Select::make('user_id')
+                    ->label(trans('messages.user'))
                     ->required()
                     ->searchable()
                     ->relationship('user', 'name'),
                 Textarea::make('description')
+                    ->label(trans('messages.description'))
                     ->required(),
-                    SpatieMediaLibraryFileUpload::make('evidence')->multiple()->collection('evidence')->conversionsDisk('s3'),
-                    Select::make('status')
-                    ->options([
-                        1 => 'Activa',
-                        2 => 'Nueva',
-                        3 => 'En progreso',
-                        4 => 'Completada',
-                    ])
+                SpatieMediaLibraryFileUpload::make('evidence')
+                    ->label(trans('messages.evidence'))
+                    ->multiple()
+                    ->collection('evidence')
+                    ->conversionsDisk('s3'),
+                Select::make('status')
+                    ->label(trans('messages.status'))
+                    ->options($claimStatuses)
                     ->required()
                     ->searchable(),
-                    
-                    
             ]);
     }
 
@@ -61,33 +64,24 @@ class ClaimResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('amount_to_claim')
+                    ->label(trans('messages.amountToClaim'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('property.name')
+                    ->label(trans('messages.property'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
+                    ->label(trans('messages.user'))
                     ->sortable()
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+            ->bulkActions([]);
     }
-    
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-    
+
     public static function getPages(): array
     {
         return [
@@ -95,5 +89,5 @@ class ClaimResource extends Resource
             'create' => Pages\CreateClaim::route('/create'),
             'edit' => Pages\EditClaim::route('/{record}/edit'),
         ];
-    }    
+    }
 }

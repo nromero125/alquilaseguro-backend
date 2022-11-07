@@ -16,7 +16,6 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Hash;
 
 class TenantResource extends Resource
 {
@@ -87,13 +86,6 @@ class TenantResource extends Resource
                     ->deselectRecordsAfterCompletion()
                     ->requiresConfirmation(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

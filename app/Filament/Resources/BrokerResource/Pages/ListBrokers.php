@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\BrokerResource\Pages;
 
 use App\Filament\Resources\BrokerResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListBrokers extends ListRecords
@@ -13,7 +13,9 @@ class ListBrokers extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label(trans('messages.create', ['item' => trans('messages.broker')]))
+                ->icon('heroicon-o-plus'),
         ];
     }
 }
