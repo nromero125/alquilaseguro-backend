@@ -21,7 +21,7 @@ class ClaimController extends Controller
     public function store(ClaimValidation $request)
     {
         $data = $request->all();
-        $data['status'] = ClaimStatus::IN_PROGRESS;
+        $data['status'] = ClaimStatus::In_progress;
         $data['user_id'] = auth()->user('api')->id;
         $claim = Claim::create($data);
         if ($request->hasFile('evidence') && $request->file('evidence')[0]->isValid()) {

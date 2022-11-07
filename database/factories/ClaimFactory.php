@@ -23,7 +23,7 @@ class ClaimFactory extends Factory
         return [
             'user_id' => User::factory(),
             'property_id' => Property::factory(),
-            'status' => ClaimStatus::NEW,
+            'status' => ClaimStatus::New,
             'description' => fake()->text(),
             'amount_to_claim' => fake()->randomFloat(nbMaxDecimals: 2, max: 10000),
         ];
