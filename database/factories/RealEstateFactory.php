@@ -22,6 +22,9 @@ class RealEstateFactory extends Factory
             'status' => true,
             'address' => fake()->address(),
             'email' => fake()->email(),
+            'rnc' => fake()->e164PhoneNumber(),
+            'contact_person' => fake()->name(),
+            'contact_phone' => fake()->phoneNumber(),
         ];
     }
 }

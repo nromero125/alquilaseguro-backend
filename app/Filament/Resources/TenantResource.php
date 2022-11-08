@@ -16,6 +16,8 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class TenantResource extends Resource
 {
@@ -56,6 +58,10 @@ class TenantResource extends Resource
                     ->maxLength(255),
                 Toggle::make('status')
                     ->required(),
+                    SpatieMediaLibraryFileUpload::make('documents')
+                    ->collection('documents')
+                    ->multiple()
+                    ->conversionsDisk('s3'),
             ]);
     }
 

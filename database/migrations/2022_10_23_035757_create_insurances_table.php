@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('name', 255);
             $table->boolean('status')->default(true);
             $table->string('bank_name')->nullable();
+            $table->string('rnc')->nullable();
+            $table->string('email');
+            $table->string('contact_person')->nullable();
+            $table->string('contact_phone')->nullable();
             $table->string('bank_account')->nullable();
             $table->string('address');
             $table->timestamps();

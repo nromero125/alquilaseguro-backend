@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('password/forgot-password', [ForgotPasswordController::class, 'sendResetLinkResponse'])->name('password.sent');
 Route::post('password/reset', [ResetPasswordController::class, 'sendResetResponse'])->name('password.reset');
 
-Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'login'])->name('api.login');
 Route::post('/auth/forgot-password', [AuthController::class, 'sendResetPassword']);
 
 Route::middleware(['auth:sanctum'])->group(function () {

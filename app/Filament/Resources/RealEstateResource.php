@@ -17,7 +17,8 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 class RealEstateResource extends Resource
 {
     protected static ?string $model = RealEstate::class;
@@ -31,12 +32,12 @@ class RealEstateResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->placeholder('Name...')
-                    ->unique()
                     ->maxLength(255),
-                TextInput::make('email')
-                    ->required()
-                    ->placeholder('email')
-                    ->email()
+                TextInput::make('contact_person')
+                    ->placeholder('Contact person')
+                    ->maxLength(255),
+                TextInput::make('contact_phone')
+                    ->placeholder('Contact phone')
                     ->maxLength(255),
                 Textarea::make('address')
                     ->columnSpan('full')
@@ -46,6 +47,9 @@ class RealEstateResource extends Resource
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->maxLength(255),
+                    SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('logo')
+                    ->conversionsDisk('s3'),
                 Toggle::make('status'),
             ]);
     }
@@ -54,7 +58,13 @@ class RealEstateResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('logo')
+                    ->collection('logo')
+                    ->conversion('thumb'),
                 TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('rnc')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')

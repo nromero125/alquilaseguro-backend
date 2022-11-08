@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Tenant extends Model
+class Tenant extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'phone_number',
@@ -22,6 +24,8 @@ class Tenant extends Model
         'bank_name',
         'bank_account',
         'user_id',
+        'contract_start_date',
+        'contract_end_date'
     ];
 
     public function property(): HasOne

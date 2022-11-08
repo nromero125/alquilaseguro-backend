@@ -20,6 +20,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('address');
             $table->string('email');
+            $table->string('rnc')->nullable();
+            $table->string('contact_person')->nullable();
+            $table->string('contact_phone')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('bank_account')->nullable();
             $table->softDeletes();

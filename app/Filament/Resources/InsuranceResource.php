@@ -16,7 +16,9 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class InsuranceResource extends Resource
 {
@@ -32,12 +34,17 @@ class InsuranceResource extends Resource
                     ->label(trans('messages.name'))
                     ->required()
                     ->placeholder(trans('messages.name'))
-                    ->unique()
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
                     ->placeholder('email')
                     ->email()
+                    ->maxLength(255),
+                    TextInput::make('contact_person')
+                    ->placeholder('Contact person')
+                    ->maxLength(255),
+                TextInput::make('contact_phone')
+                    ->placeholder('Contact phone')
                     ->maxLength(255),
                 Select::make('bank_name')
                     ->label(trans('messages.bankName'))
@@ -49,6 +56,9 @@ class InsuranceResource extends Resource
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->default(true),
+                    SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('logo')
+                    ->conversionsDisk('s3'),
             ]);
     }
 
@@ -56,8 +66,14 @@ class InsuranceResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('logo')
+                    ->collection('logo')
+                    ->conversion('thumb'),
                 TextColumn::make('name')
                     ->label(trans('messages.name'))
+                    ->sortable()
+                    ->searchable(),
+                    TextColumn::make('rnc')
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('status')

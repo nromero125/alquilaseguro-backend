@@ -17,6 +17,8 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class PropertyResource extends Resource
 {
@@ -50,6 +52,10 @@ class PropertyResource extends Resource
                 TextInput::make('code')->required()->maxLength(20),
                 Textarea::make('description'),
                 Toggle::make('status')->required(),
+                SpatieMediaLibraryFileUpload::make('documents')
+                    ->collection('documents')
+                    ->multiple()
+                    ->conversionsDisk('s3'),
             ]);
     }
 
