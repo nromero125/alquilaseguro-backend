@@ -14,10 +14,12 @@ use Filament\Resources\Table;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Illuminate\Support\Facades\Hash;
 
 class TenantResource extends Resource
 {
@@ -30,34 +32,44 @@ class TenantResource extends Resource
         return $form
             ->schema([
                 TextInput::make('firstname')
+                    ->label(trans('messages.firstName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
+                    ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
                     ->email(),
                 TextInput::make('password')
+                    ->label(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 TextInput::make('phone_number')
+                    ->label(trans('messages.phoneNumber'))
                     ->tel(),
                 TextInput::make('identification')
+                    ->label(trans('messages.identification'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('address')
+                    ->label(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
                 Select::make('bank_name')
+                    ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
-                Toggle::make('status')
-                    ->required(),
+                    Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true),
                     SpatieMediaLibraryFileUpload::make('documents')
                     ->collection('documents')
                     ->multiple()
@@ -70,17 +82,28 @@ class TenantResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('firstname')
+                    ->label(trans('messages.firstName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('lastname')
+                    ->label(trans('messages.lastName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
+                    ->label(trans('messages.identification'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')
+                    ->label(trans('messages.user'))
                     ->sortable()
                     ->searchable(),
+                IconColumn::make('status')
+                    ->label(trans('messages.status'))
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),
