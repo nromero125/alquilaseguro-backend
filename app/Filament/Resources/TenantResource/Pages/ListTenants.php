@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\TenantResource\Pages;
 
 use App\Filament\Resources\TenantResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListTenants extends ListRecords
@@ -13,7 +13,9 @@ class ListTenants extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label(trans('messages.create', ['item' => trans('messages.tenant')]))
+                ->icon('heroicon-o-plus'),
         ];
     }
 }
