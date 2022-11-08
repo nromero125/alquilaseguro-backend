@@ -39,12 +39,12 @@ class PaymentResource extends Resource
                     ->required()
                     ->numeric(),
                 Select::make('property_id')
-                    ->label(trans('messages.property'))
+                    ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
                 Select::make('tenant_id')
-                    ->label(trans('messages.tenant'))
+                    ->label(trans_choice('messages.tenant', 1))
                     ->required()
                     ->searchable()
                     ->relationship('tenant', 'firstname'),
@@ -90,7 +90,7 @@ class PaymentResource extends Resource
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
                 TextColumn::make('property.name')
-                    ->label(trans('messages.property'))
+                    ->label(trans_choice('messages.property', 1))
                     ->sortable()
                     ->searchable(),
                 SpatieMediaLibraryImageColumn::make('voucher')

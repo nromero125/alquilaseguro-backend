@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'broker' => 'Broker',
+    'broker' => 'Broker|Brokers',
     'create' => 'Create :item',
-    'realEstate' => 'Real Estate',
+    'realEstate' => 'Real Estate|Real Estates',
     'identification' => 'Identification',
     'firstName' => 'First Name',
     'lastName' => 'Last Name',
@@ -14,7 +14,7 @@ return [
     'status' => 'Status',
     'claim' => 'Claim',
     'amountToClaim' => 'Amount to claim',
-    'property' => 'Property',
+    'property' => 'Property|Properties',
     'user' => 'User',
     'description' => 'Description',
     'evidence' => 'Evidence',
@@ -23,12 +23,14 @@ return [
     'owner' => 'Owner',
     'password' => 'Password',
     'amount' => 'Amount',
-    'payment' => 'Payment',
+    'payment' => 'Payment|Payments',
     'paidAt' => 'Paid at',
     'isLate' => 'Is late',
-    'tenant' => 'Tenant',
+    'tenant' => 'Tenant|Tenants',
     'paymentType' => 'Payment Type',
     'code' => 'Code',
     'monthlyPayment' => 'Monthly Payment',
-    'paymentDueDate' => 'Payment due date'
+    'paymentDueDate' => 'Payment due date',
+    'registeredProperties' => "Registered properties",
+    'registeredItem' => "Registered :item",
 ];

@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'broker' => 'Corredor',
+    'broker' => 'Broker|Brokers',
     'create' => 'Crear :item',
-    'realEstate' => 'Inmobiliaria',
+    'realEstate' => 'Inmobiliaria|Inmobiliarias',
     'identification' => 'Identificación',
     'firstName' => 'Nombre (s)',
     'lastName' => 'Apellido (s)',
@@ -14,7 +14,7 @@ return [
     'status' => 'Estado',
     'claim' => 'Reclamación',
     'amountToClaim' => 'Monto a Reclamar',
-    'property' => 'Propiedad',
+    'property' => 'Propiedad|Propiedades',
     'user' => 'Usuario',
     'description' => 'Descripción',
     'evidence' => 'Evidencia',
@@ -23,12 +23,13 @@ return [
     'owner' => 'Dueño',
     'password' => 'Contraseña',
     'amount' => 'Monto',
-    'payment' => 'Pago',
+    'payment' => 'Pago|Pagos',
     'paidAt' => 'Fecha de Pago',
     'isLate' => 'Pago a tiempo',
-    'tenant' => 'Inquilino',
+    'tenant' => 'Inquilino|Inquilinos',
     'paymentType' => 'Tipo de pago',
     'code' => 'Código',
     'monthlyPayment' => 'Pago Mensual',
-    'paymentDueDate' => 'Fecha de vencimiento del pago'
+    'paymentDueDate' => 'Fecha de vencimiento del pago',
+    'registeredItem' => ":item registrad@s",
 ];

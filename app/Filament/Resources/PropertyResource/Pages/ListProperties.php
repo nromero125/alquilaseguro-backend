@@ -14,7 +14,7 @@ class ListProperties extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label(trans('messages.create', ['item' => trans('messages.property')]))
+                ->label(trans('messages.create', ['item' => trans_choice('messages.property', 1)]))
                 ->icon('heroicon-o-plus'),
         ];
     }

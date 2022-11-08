@@ -33,10 +33,11 @@ class ClaimResource extends Resource
             ->schema([
                 TextInput::make('amount_to_claim')
                     ->label(trans('messages.amountToClaim'))
+                    ->placeholder("0.00")
                     ->required()
                     ->numeric(),
                 Select::make('property_id')
-                    ->label(trans('messages.property'))
+                    ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
@@ -70,7 +71,7 @@ class ClaimResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('property.name')
-                    ->label(trans('messages.property'))
+                    ->label(trans_choice('messages.property', 1))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')

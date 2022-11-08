@@ -14,7 +14,7 @@ class ListBrokers extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label(trans('messages.create', ['item' => trans('messages.broker')]))
+                ->label(trans('messages.create', ['item' => trans_choice('messages.broker', 1)]))
                 ->icon('heroicon-o-plus'),
         ];
     }

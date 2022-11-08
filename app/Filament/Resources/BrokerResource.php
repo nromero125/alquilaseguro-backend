@@ -41,15 +41,18 @@ class BrokerResource extends Resource
                     ->required()
                     ->email(),
                 TextInput::make('password')
+                    ->label(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 Select::make('real_estate_id')
+                    ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
                     ->relationship('realEstate', 'name'),
                 TextInput::make('phone_number')
+                    ->label(trans('messages.phoneNumber'))
                     ->tel(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
@@ -86,6 +89,7 @@ class BrokerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')
+                    ->label(trans('messages.user'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
@@ -93,7 +97,7 @@ class BrokerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('realEstate.name')
-                    ->label(trans('messages.realEstate'))
+                    ->label(trans_choice('messages.realEstate', 1))
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('status')

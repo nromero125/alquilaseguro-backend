@@ -43,12 +43,12 @@ class PropertyResource extends Resource
                     ->searchable()
                     ->relationship('broker', 'firstname'),
                 Select::make('tenant_id')
-                    ->label(trans('messages.tenant'))
+                    ->label(trans_choice('messages.tenant', 1))
                     ->required()
                     ->searchable()
                     ->relationship('tenant', 'firstname'),
                 Select::make('real_estate_id')
-                    ->label(trans('messages.realEstate'))
+                    ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
                     ->relationship('realState', 'name'),
