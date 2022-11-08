@@ -14,6 +14,7 @@ use Filament\Resources\Table;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
@@ -40,15 +41,18 @@ class BrokerResource extends Resource
                     ->required()
                     ->email(),
                 TextInput::make('password')
+                    ->label(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 Select::make('real_estate_id')
+                    ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
                     ->relationship('realEstate', 'name'),
                 TextInput::make('phone_number')
+                    ->label(trans('messages.phoneNumber'))
                     ->tel(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
@@ -85,6 +89,7 @@ class BrokerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')
+                    ->label(trans('messages.user'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identification')
@@ -92,9 +97,16 @@ class BrokerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('realEstate.name')
-                    ->label(trans('messages.realEstate'))
+                    ->label(trans_choice('messages.realEstate', 1))
                     ->sortable()
                     ->searchable(),
+                IconColumn::make('status')
+                    ->label(trans('messages.status'))
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),

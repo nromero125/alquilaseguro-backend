@@ -13,6 +13,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class ClaimResource extends Resource
@@ -23,18 +24,20 @@ class ClaimResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $claimStatuses = array_map(function ($item) {
-            return trans("claimStatus.$item");
-        }, array_flip(ClaimStatus::options()));
+        $claimStatuses = array_map(
+            fn ($item) => trans("claimStatus.$item"),
+            array_flip(ClaimStatus::options())
+        );
 
         return $form
             ->schema([
                 TextInput::make('amount_to_claim')
                     ->label(trans('messages.amountToClaim'))
+                    ->placeholder("0.00")
                     ->required()
                     ->numeric(),
                 Select::make('property_id')
-                    ->label(trans('messages.property'))
+                    ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
@@ -68,13 +71,20 @@ class ClaimResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('property.name')
-                    ->label(trans('messages.property'))
+                    ->label(trans_choice('messages.property', 1))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
                     ->label(trans('messages.user'))
                     ->sortable()
                     ->searchable(),
+                IconColumn::make('status')
+                    ->label(trans('messages.status'))
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),

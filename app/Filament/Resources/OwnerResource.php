@@ -90,6 +90,7 @@ class OwnerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')
+                    ->label(trans('messages.user'))
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('status')

@@ -14,12 +14,18 @@ class StatsOverview extends BaseWidget
 {
     protected function getCards(): array
     {
+        $properties = Property::count();
+        $tenants = Tenant::count();
+        $brokers = Broker::count();
+        $realEstates = RealEstate::count();
+        $payments = Payment::count();
+
         return [
-            Card::make('Propiedades registradas', Property::count()),
-            Card::make('Inquilinos registrados', Tenant::count()),
-            Card::make('Brokers registrados', Broker::count()),
-            Card::make('Inmobiliarias registradas', RealEstate::count()),
-            Card::make('Pagos registrados', Payment::count()),
+            Card::make(trans('messages.registeredItem', ['item' => trans_choice('messages.property', $properties)]), $properties),
+            Card::make(trans('messages.registeredItem', ['item' => trans_choice('messages.tenant', $tenants)]), $tenants),
+            Card::make(trans('messages.registeredItem', ['item' => trans_choice('messages.broker', $brokers)]), $brokers),
+            Card::make(trans('messages.registeredItem', ['item' => trans_choice('messages.realEstate', $realEstates)]), $realEstates),
+            Card::make(trans('messages.registeredItem', ['item' => trans_choice('messages.payment', $payments)]), $payments),
         ];
     }
 }
