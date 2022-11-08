@@ -22,6 +22,7 @@ class Property extends Model
         'address',
         'status',
         'monthly_payment',
+        'name',
     ];
 
     /**
@@ -49,7 +50,15 @@ class Property extends Model
     }
 
     /**
-     * Relation between a property and its owner
+     * Relation between a realState and its property
+     */
+    public function realState(): BelongsTo
+    {
+        return $this->belongsTo(RealEstate::class);
+    }
+
+    /**
+     * Relation between a property and its tenant
      */
     public function tenant(): BelongsTo
     {

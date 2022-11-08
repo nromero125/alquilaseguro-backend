@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\OwnerResource\Pages;
 
 use App\Filament\Resources\OwnerResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListOwners extends ListRecords
@@ -13,7 +13,9 @@ class ListOwners extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label(trans('messages.create', ['item' => trans('messages.owner')]))
+                ->icon('heroicon-o-plus'),
         ];
     }
 }

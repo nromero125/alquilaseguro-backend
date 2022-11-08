@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Http\Request;
@@ -38,4 +39,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/broker/properties/{id}', [BrokerController::class, 'showProperty'])->name('broker.show-property');
     Route::get('/broker/claims', [ClaimController::class, 'brokerGetClaims'])->name('broker.get-claims');
     Route::post('/claims', [ClaimController::class, 'store'])->name('claims.store');
+    Route::get('/claims/{claim}', [ClaimController::class, 'show'])->name('claims.show');
+    Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
 });

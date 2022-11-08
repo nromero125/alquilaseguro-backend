@@ -46,7 +46,7 @@ class PropertyController extends Controller
      */
     public function show(Property $property)
     {
-        //
+        return $property->load('claims', 'broker', 'owner', 'tenant', 'payments');
     }
 
     /**

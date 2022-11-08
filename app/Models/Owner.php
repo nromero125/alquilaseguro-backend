@@ -20,6 +20,12 @@ class Owner extends Model
         'user_id',
         'phone_number',
         'status',
+        'identification',
+        'firstname',
+        'lastname',
+        'address',
+        'bank_name',
+        'bank_account',
     ];
 
     /**
