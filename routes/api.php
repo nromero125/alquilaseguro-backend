@@ -29,6 +29,7 @@ Route::post('password/forgot-password', [ForgotPasswordController::class, 'sendR
 Route::post('password/reset', [ResetPasswordController::class, 'sendResetResponse'])->name('password.reset');
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('api.login');
+Route::post('/auth/logout', [AuthController::class, 'logout'])->name('api.logout');
 Route::post('/auth/forgot-password', [AuthController::class, 'sendResetPassword']);
 
 Route::middleware(['auth:sanctum'])->group(function () {

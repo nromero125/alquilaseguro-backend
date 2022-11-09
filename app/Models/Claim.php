@@ -25,6 +25,7 @@ class Claim extends Model implements HasMedia
         'property_id',
         'description',
         'amount_to_claim',
+        'insurance_id'
     ];
 
     /**
@@ -71,5 +72,10 @@ class Claim extends Model implements HasMedia
     public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class);
+    }
+
+    public function insurance()
+    {
+        return $this->belongsTo(Insurance::class);
     }
 }

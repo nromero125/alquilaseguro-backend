@@ -41,6 +41,10 @@ class ClaimResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
+                Select::make('insurance_id')
+                    ->required()
+                    ->searchable()
+                    ->relationship('insurance', 'name'),
                 Select::make('user_id')
                     ->label(trans('messages.user'))
                     ->required()
