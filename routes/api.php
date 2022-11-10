@@ -7,6 +7,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TenantController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/claims', [ClaimController::class, 'store'])->name('claims.store');
     Route::get('/claims/{claim}', [ClaimController::class, 'show'])->name('claims.show');
     Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
+    Route::post('/users/broker', [UserController::class, 'createBroker'])->name('users.broker');
+    Route::post('/users/insurer', [UserController::class, 'createInsurer'])->name('users.insurer');
+    Route::put('/users/broker/{broker}', [UserController::class, 'updateBrokerUser'])->name('users.broker.update');
+    Route::put('/users/insurer/{insurer}', [UserController::class, 'updateInsurerUser'])->name('users.insurer.update');
+    Route::get('/users', [UserController::class, 'getUsers'])->name('users.get');
 });
