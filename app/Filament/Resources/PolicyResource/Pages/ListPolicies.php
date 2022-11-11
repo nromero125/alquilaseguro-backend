@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\PolicyResource\Pages;
 
 use App\Filament\Resources\PolicyResource;
-use Filament\Pages\Actions;
+use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPolicies extends ListRecords
@@ -13,7 +13,14 @@ class ListPolicies extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label(trans('messages.create', ['item' => trans_choice('messages.policy', 1)]))
+                ->icon('heroicon-o-plus'),
         ];
+    }
+
+    protected function getTitle(): string
+    {
+        return trans_choice('messages.policy', 2);
     }
 }

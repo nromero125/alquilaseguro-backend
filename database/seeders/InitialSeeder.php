@@ -50,7 +50,7 @@ class InitialSeeder extends Seeder
             ->create([
                 'firstname' => 'Insurer',
                 'user_id' => 2,
-                'insurance_id' => 1
+                'insurance_id' => 1,
             ]);
 
         $brokerAdmin = Broker::factory()
@@ -64,7 +64,7 @@ class InitialSeeder extends Seeder
             ->create([
                 'firstname' => 'Insurance Admin',
                 'user_id' => 7,
-                'insurance_id' => 1
+                'insurance_id' => 1,
             ]);
 
         $property = Property::factory()

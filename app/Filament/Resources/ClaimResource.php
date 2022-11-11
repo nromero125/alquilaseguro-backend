@@ -22,6 +22,11 @@ class ClaimResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.claim', 2);
+    }
+
     public static function form(Form $form): Form
     {
         $claimStatuses = array_map(
@@ -33,7 +38,7 @@ class ClaimResource extends Resource
             ->schema([
                 TextInput::make('amount_to_claim')
                     ->label(trans('messages.amountToClaim'))
-                    ->placeholder("0.00")
+                    ->placeholder('0.00')
                     ->required()
                     ->numeric(),
                 Select::make('property_id')

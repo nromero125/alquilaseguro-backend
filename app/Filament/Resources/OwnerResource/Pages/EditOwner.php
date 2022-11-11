@@ -19,6 +19,11 @@ class EditOwner extends EditRecord
         ];
     }
 
+    protected function getTitle(): string
+    {
+        return trans('messages.edit', ['item' => trans_choice('messages.owner', 1)]);
+    }
+
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $user = User::find($data['user_id']);

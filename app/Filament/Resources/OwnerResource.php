@@ -6,6 +6,7 @@ use App\Filament\Resources\OwnerResource\Pages;
 use App\Models\Bank;
 use App\Models\Owner;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -17,8 +18,6 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Support\Facades\Hash;
 
 class OwnerResource extends Resource
@@ -26,6 +25,11 @@ class OwnerResource extends Resource
     protected static ?string $model = Owner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.owner', 2);
+    }
 
     public static function form(Form $form): Form
     {
@@ -70,7 +74,8 @@ class OwnerResource extends Resource
                     ->label(trans('messages.status'))
                     ->required()
                     ->default(true),
-                    SpatieMediaLibraryFileUpload::make('documents')
+                SpatieMediaLibraryFileUpload::make('documents')
+                    ->label(trans_choice('messages.document', 2))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),

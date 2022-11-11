@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RealEstateResource\Pages;
 use App\Models\Bank;
 use App\Models\RealEstate;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -16,15 +18,20 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+
 class RealEstateResource extends Resource
 {
     protected static ?string $model = RealEstate::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
+
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.realEstate', 2);
+    }
 
     public static function form(Form $form): Form
     {
@@ -33,14 +40,16 @@ class RealEstateResource extends Resource
                 TextInput::make('name')
                     ->label(trans('messages.name'))
                     ->required()
-                    ->placeholder(trans('messages.name')."...")
+                    ->placeholder(trans('messages.name').'...')
                     ->unique()
                     ->maxLength(255),
                 TextInput::make('contact_person')
-                    ->placeholder('Contact person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
                     ->maxLength(255),
                 TextInput::make('contact_phone')
-                    ->placeholder('Contact phone')
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
                     ->maxLength(255),
                 Textarea::make('address')
                     ->label(trans('messages.address'))
@@ -53,7 +62,7 @@ class RealEstateResource extends Resource
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
-                    SpatieMediaLibraryFileUpload::make('logo')
+                SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
                 Toggle::make('status')
@@ -76,7 +85,8 @@ class RealEstateResource extends Resource
                 TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
-                    TextColumn::make('rnc')
+                TextColumn::make('rnc')
+                    ->label('RNC')
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('status')

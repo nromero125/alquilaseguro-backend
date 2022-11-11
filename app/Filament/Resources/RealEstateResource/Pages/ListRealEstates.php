@@ -18,4 +18,9 @@ class ListRealEstates extends ListRecords
                 ->icon('heroicon-o-plus'),
         ];
     }
+
+    protected function getTitle(): string
+    {
+        return trans_choice('messages.realEstate', 2);
+    }
 }

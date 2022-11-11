@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Policy extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name', 'description', 'validity', 'insurance_id'
-    ];
 
+    protected $fillable = [
+        'name', 'description', 'validity', 'insurance_id',
+    ];
 
     public function insurance()
     {

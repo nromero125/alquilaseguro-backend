@@ -6,6 +6,7 @@ use App\Filament\Resources\PropertyResource\Pages;
 use App\Models\Property;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -18,14 +19,17 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.property', 2);
+    }
 
     public static function form(Form $form): Form
     {
@@ -36,7 +40,7 @@ class PropertyResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Select::make('owner_id')
-                    ->label(trans('messages.owner'))
+                    ->label(trans_choice('messages.owner', 1))
                     ->required()
                     ->searchable()
                     ->relationship('owner', 'firstname'),
@@ -54,12 +58,12 @@ class PropertyResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('realState', 'name'),
-                    DatePicker::make('payment_due_date')
-                    ->label(trans('messages.paymentDueDate'))
-                    ->required(),
+                DatePicker::make('payment_due_date')
+                ->label(trans('messages.paymentDueDate'))
+                ->required(),
                 TextInput::make('monthly_payment')
                     ->label(trans('messages.monthlyPayment'))
-                    ->placeholder("0.00")
+                    ->placeholder('0.00')
                     ->required()
                     ->numeric(),
                 TextInput::make('code')
@@ -73,6 +77,7 @@ class PropertyResource extends Resource
                     ->required()
                     ->default(true),
                 SpatieMediaLibraryFileUpload::make('documents')
+                    ->label(trans_choice('messages.document', 2))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),

@@ -25,7 +25,7 @@ class Tenant extends Model implements HasMedia
         'bank_account',
         'user_id',
         'contract_start_date',
-        'contract_end_date'
+        'contract_end_date',
     ];
 
     public function property(): HasOne

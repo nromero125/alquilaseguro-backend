@@ -13,4 +13,9 @@ class EditClaim extends EditRecord
     {
         return [];
     }
+
+    protected function getTitle(): string
+    {
+        return trans('messages.edit', ['item' => trans_choice('messages.claim', 1)]);
+    }
 }

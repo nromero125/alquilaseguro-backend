@@ -57,4 +57,9 @@ class EditTenant extends EditRecord
 
         return $record;
     }
+
+    protected function getTitle(): string
+    {
+        return trans('messages.edit', ['item' => trans_choice('messages.tenant', 1)]);
+    }
 }

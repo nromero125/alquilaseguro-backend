@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Enums\UserTypes;
-use App\Models\Broker;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BrokerUpdateValidation extends FormRequest
@@ -19,6 +18,7 @@ class BrokerUpdateValidation extends FormRequest
             return false;
         }
         $broker = $this->route('broker');
+
         return auth()->user('api')->broker->real_estate_id == $broker->real_estate_id && auth()->user('api')->user_type == UserTypes::BROKER_ADMIN;
     }
 

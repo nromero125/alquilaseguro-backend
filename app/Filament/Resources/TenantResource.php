@@ -6,6 +6,7 @@ use App\Filament\Resources\TenantResource\Pages;
 use App\Models\Bank;
 use App\Models\Tenant;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -17,8 +18,6 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Support\Facades\Hash;
 
 class TenantResource extends Resource
@@ -26,6 +25,11 @@ class TenantResource extends Resource
     protected static ?string $model = Tenant::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.tenant', 2);
+    }
 
     public static function form(Form $form): Form
     {
@@ -66,11 +70,12 @@ class TenantResource extends Resource
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
-                    Toggle::make('status')
+                Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()
                     ->default(true),
-                    SpatieMediaLibraryFileUpload::make('documents')
+                SpatieMediaLibraryFileUpload::make('documents')
+                    ->label(trans_choice('messages.document', 2))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),
