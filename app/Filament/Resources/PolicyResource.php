@@ -10,8 +10,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Collection;
 
 class PolicyResource extends Resource
 {
@@ -19,21 +21,30 @@ class PolicyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.policy', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
-                ->placeholder('Nombre de la poliza')
-                ->required(),
+                    ->label(trans('messages.name'))
+                    ->placeholder(trans('messages.name'))
+                    ->required(),
                 Textarea::make('description')
-                ->placeholder('Descripcion')
-                ->required(),
+                    ->label(trans('messages.description'))
+                    ->placeholder(trans('messages.description'))
+                    ->required(),
                 TextInput::make('validity')
-                ->placeholder('Validez')
-                ->numeric()
-                ->required(),
+                    ->label(trans('messages.validity'))
+                    ->placeholder(trans('messages.validity'))
+                    ->numeric()
+                    ->required(),
                 Select::make('insurance_id')
+                    ->label(trans_choice('messages.insurance', 1))
                     ->required()
                     ->searchable()
                     ->relationship('insurance', 'name'),
@@ -49,28 +60,23 @@ class PolicyResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('validity')
+                    ->label(trans('messages.validity'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('insurance.name')
+                    ->label(trans_choice('messages.insurance',1))
                     ->sortable()
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                DeleteBulkAction::make('delete')
+                    ->action(fn (Collection $records) => $records->each->delete())
+                    ->deselectRecordsAfterCompletion()
+                    ->requiresConfirmation()
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

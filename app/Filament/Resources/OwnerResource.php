@@ -26,6 +26,11 @@ class OwnerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.owner', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form

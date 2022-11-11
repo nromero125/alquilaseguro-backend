@@ -14,8 +14,13 @@ class ListClaim extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label(trans('messages.create', ['item' => trans('messages.claim')]))
+                ->label(trans('messages.create', ['item' => trans_choice('messages.claim', 1)]))
                 ->icon('heroicon-o-plus'),
         ];
+    }
+
+    protected function getTitle(): string
+    {
+        return trans_choice('messages.claim', 2);
     }
 }

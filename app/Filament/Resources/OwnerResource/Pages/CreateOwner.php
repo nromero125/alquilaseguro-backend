@@ -12,6 +12,11 @@ class CreateOwner extends CreateRecord
 {
     protected static string $resource = OwnerResource::class;
 
+    protected function getTitle(): string
+    {
+        return trans('messages.create', ['item' => trans_choice('messages.owner', 1)]);
+    }
+
     protected function handleRecordCreation(array $data): Owner
     {
         $user = User::create([

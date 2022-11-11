@@ -24,6 +24,11 @@ class PaymentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.payment', 2);
+    }
+
     public static function form(Form $form): Form
     {
         $paymentTypes = array_map(

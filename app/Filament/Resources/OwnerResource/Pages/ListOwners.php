@@ -14,8 +14,13 @@ class ListOwners extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label(trans('messages.create', ['item' => trans('messages.owner')]))
+                ->label(trans('messages.create', ['item' => trans_choice('messages.owner', 1)]))
                 ->icon('heroicon-o-plus'),
         ];
+    }
+
+    protected function getTitle(): string
+    {
+        return trans_choice('messages.owner', 2);
     }
 }
