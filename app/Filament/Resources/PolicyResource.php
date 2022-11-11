@@ -42,6 +42,8 @@ class PolicyResource extends Resource
                     ->label(trans('messages.validity'))
                     ->placeholder(trans('messages.validity'))
                     ->numeric()
+                    ->minValue(1)
+                    ->maxValue(12)
                     ->required(),
                 Select::make('insurance_id')
                     ->label(trans_choice('messages.insurance', 1))

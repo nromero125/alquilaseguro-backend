@@ -35,4 +35,7 @@ return [
     'registeredItem' => ':item registrad@s',
     'policy' => 'Poliza|Polizas',
     'validity' => 'Validez',
+    'document' => 'Documento|Documentos',
+    'contactPerson' => 'Persona de Contacto',
+    'contactPhone' => 'Teléfono de Contacto',
 ];

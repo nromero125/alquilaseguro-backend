@@ -36,4 +36,7 @@ return [
     'registeredItem' => 'Registered :item',
     'policy' => 'Policy|Policies',
     'validity' => 'Validity',
+    'document' => 'Document|Documents',
+    'contactPerson' => 'Contact Person',
+    'contactPhone' => 'Contact Phone',
 ];

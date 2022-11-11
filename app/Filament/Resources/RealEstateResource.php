@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RealEstateResource\Pages;
 use App\Models\Bank;
 use App\Models\RealEstate;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
@@ -27,6 +28,11 @@ class RealEstateResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.realEstate', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -38,10 +44,12 @@ class RealEstateResource extends Resource
                     ->unique()
                     ->maxLength(255),
                 TextInput::make('contact_person')
-                    ->placeholder('Contact person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
                     ->maxLength(255),
                 TextInput::make('contact_phone')
-                    ->placeholder('Contact phone')
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
                     ->maxLength(255),
                 Textarea::make('address')
                     ->label(trans('messages.address'))
@@ -55,8 +63,8 @@ class RealEstateResource extends Resource
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
                 SpatieMediaLibraryFileUpload::make('logo')
-                ->collection('logo')
-                ->conversionsDisk('s3'),
+                    ->collection('logo')
+                    ->conversionsDisk('s3'),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->default(true),
@@ -78,8 +86,9 @@ class RealEstateResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('rnc')
-                ->sortable()
-                ->searchable(),
+                    ->label('RNC')
+                    ->sortable()
+                    ->searchable(),
                 IconColumn::make('status')
                     ->label(trans('messages.status'))
                     ->boolean()

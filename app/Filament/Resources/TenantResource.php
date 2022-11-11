@@ -26,6 +26,11 @@ class TenantResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.tenant', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -66,13 +71,14 @@ class TenantResource extends Resource
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
                 Toggle::make('status')
-                ->label(trans('messages.status'))
-                ->required()
-                ->default(true),
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true),
                 SpatieMediaLibraryFileUpload::make('documents')
-                ->collection('documents')
-                ->multiple()
-                ->conversionsDisk('s3'),
+                    ->label(trans_choice('messages.document', 2))
+                    ->collection('documents')
+                    ->multiple()
+                    ->conversionsDisk('s3'),
             ]);
     }
 

@@ -26,6 +26,11 @@ class PropertyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.property', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -35,7 +40,7 @@ class PropertyResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Select::make('owner_id')
-                    ->label(trans('messages.owner'))
+                    ->label(trans_choice('messages.owner', 1))
                     ->required()
                     ->searchable()
                     ->relationship('owner', 'firstname'),
@@ -72,6 +77,7 @@ class PropertyResource extends Resource
                     ->required()
                     ->default(true),
                 SpatieMediaLibraryFileUpload::make('documents')
+                    ->label(trans_choice('messages.document', 2))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),

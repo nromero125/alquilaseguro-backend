@@ -75,9 +75,10 @@ class OwnerResource extends Resource
                     ->required()
                     ->default(true),
                 SpatieMediaLibraryFileUpload::make('documents')
-                ->collection('documents')
-                ->multiple()
-                ->conversionsDisk('s3'),
+                    ->label(trans_choice('messages.document', 2))
+                    ->collection('documents')
+                    ->multiple()
+                    ->conversionsDisk('s3'),
             ]);
     }
 
