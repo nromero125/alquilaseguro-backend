@@ -61,7 +61,6 @@ class UserController extends Controller
 
     public function updateBrokerUser(BrokerUpdateValidation $request, Broker $broker)
     {
-        
         $broker->update($request->except(['email', 'password']));
         if ($request->has('password')) {
             User::where('id', $broker->user_id)->update(['password' => bcrypt($request->password)]);

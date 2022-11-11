@@ -30,7 +30,7 @@ class StoreBrokerValidation extends FormRequest
             'lastname' => 'required|string',
             'phone_number' => 'required',
             'identification' => 'required',
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6',
         ];
     }
 }

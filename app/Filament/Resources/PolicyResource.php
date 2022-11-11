@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PolicyResource\Pages;
-use App\Filament\Resources\PolicyResource\RelationManagers;
 use App\Models\Policy;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -14,8 +12,6 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PolicyResource extends Resource
 {
@@ -69,14 +65,14 @@ class PolicyResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -84,5 +80,5 @@ class PolicyResource extends Resource
             'create' => Pages\CreatePolicy::route('/create'),
             'edit' => Pages\EditPolicy::route('/{record}/edit'),
         ];
-    }    
+    }
 }

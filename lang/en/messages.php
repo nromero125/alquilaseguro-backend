@@ -31,6 +31,6 @@ return [
     'code' => 'Code',
     'monthlyPayment' => 'Monthly Payment',
     'paymentDueDate' => 'Payment due date',
-    'registeredProperties' => "Registered properties",
-    'registeredItem' => "Registered :item",
+    'registeredProperties' => 'Registered properties',
+    'registeredItem' => 'Registered :item',
 ];

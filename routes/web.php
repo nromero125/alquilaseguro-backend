@@ -17,7 +17,6 @@ Route::get('/', function () {
     return redirect(route('filament.pages.dashboard'));
 });
 
-
 Route::get('/login', function () {
     return redirect(route('filament.auth.login'))->name('login');
 });

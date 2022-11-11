@@ -18,6 +18,7 @@ class InsurerUpdateValidation extends FormRequest
             return false;
         }
         $insurer = $this->route('insurer');
+
         return auth()->user('api')->insurer->insurance_id == $insurer->insurance_id && auth()->user('api')->user_type == UserTypes::INSURANCE_ADMIN;
     }
 

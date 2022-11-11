@@ -33,7 +33,7 @@ class ClaimResource extends Resource
             ->schema([
                 TextInput::make('amount_to_claim')
                     ->label(trans('messages.amountToClaim'))
-                    ->placeholder("0.00")
+                    ->placeholder('0.00')
                     ->required()
                     ->numeric(),
                 Select::make('property_id')

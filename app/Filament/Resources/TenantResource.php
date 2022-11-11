@@ -6,6 +6,7 @@ use App\Filament\Resources\TenantResource\Pages;
 use App\Models\Bank;
 use App\Models\Tenant;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -17,8 +18,6 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Support\Facades\Hash;
 
 class TenantResource extends Resource
@@ -66,14 +65,14 @@ class TenantResource extends Resource
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
-                    Toggle::make('status')
-                    ->label(trans('messages.status'))
-                    ->required()
-                    ->default(true),
-                    SpatieMediaLibraryFileUpload::make('documents')
-                    ->collection('documents')
-                    ->multiple()
-                    ->conversionsDisk('s3'),
+                Toggle::make('status')
+                ->label(trans('messages.status'))
+                ->required()
+                ->default(true),
+                SpatieMediaLibraryFileUpload::make('documents')
+                ->collection('documents')
+                ->multiple()
+                ->conversionsDisk('s3'),
             ]);
     }
 

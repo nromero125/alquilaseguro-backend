@@ -31,5 +31,5 @@ return [
     'code' => 'Código',
     'monthlyPayment' => 'Pago Mensual',
     'paymentDueDate' => 'Fecha de vencimiento del pago',
-    'registeredItem' => ":item registrad@s",
+    'registeredItem' => ':item registrad@s',
 ];
