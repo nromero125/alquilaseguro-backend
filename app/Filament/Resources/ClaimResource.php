@@ -51,7 +51,7 @@ class ClaimResource extends Resource
                     ->searchable()
                     ->relationship('insurance', 'name'),
                 Select::make('user_id')
-                    ->label(trans('messages.user'))
+                    ->label(trans_choice('messages.user', 1))
                     ->required()
                     ->searchable()
                     ->relationship('user', 'name'),
@@ -84,7 +84,7 @@ class ClaimResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
-                    ->label(trans('messages.user'))
+                    ->label(trans_choice('messages.user', 1))
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('status')

@@ -32,7 +32,7 @@ class User extends Authenticatable implements FilamentUser
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var array<string>
      */
     protected $hidden = [
         'password',
@@ -87,8 +87,8 @@ class User extends Authenticatable implements FilamentUser
         return str_ends_with($this->email, '@alquilaseguro.com');
     }
 
-    public function insurer()
+    public function insurer(): HasOne
     {
-        return $this->hasOne(Insurer::class);
+        return $this->hasOne(Insurer::class, 'user_id', 'id');
     }
 }

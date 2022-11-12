@@ -16,7 +16,7 @@ return [
     'claim' => 'Reclamación|Reclamaciones',
     'amountToClaim' => 'Monto a Reclamar',
     'property' => 'Propiedad|Propiedades',
-    'user' => 'Usuario',
+    'user' => 'Usuario|Usuarios',
     'description' => 'Descripción',
     'evidence' => 'Evidencia',
     'insurance' => 'Aseguradora|Aseguradoras',
