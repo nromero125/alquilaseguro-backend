@@ -38,4 +38,6 @@ return [
     'document' => 'Documento|Documentos',
     'contactPerson' => 'Persona de Contacto',
     'contactPhone' => 'Teléfono de Contacto',
+    'contractEndDate' => 'Fecha vencimiento de contrato',
+    'contractStartDate' => 'Fecha inicio del contrato'
 ];

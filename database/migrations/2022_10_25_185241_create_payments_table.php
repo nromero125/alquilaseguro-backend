@@ -21,7 +21,9 @@ return new class extends Migration
             $table->dateTime('paid_at');
             $table->boolean('is_late')->default(false);
             $table->tinyInteger('status')->default(1);
-            $table->unsignedBigInteger('tenant_id');
+            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->unsignedBigInteger('broker_id')->nullable();
+            $table->unsignedBigInteger('insurance_id')->nullable();
             $table->timestamps();
         });
     }

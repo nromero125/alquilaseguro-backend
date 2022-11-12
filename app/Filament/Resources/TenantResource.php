@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TenantResource\Pages;
 use App\Models\Bank;
 use App\Models\Tenant;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -59,6 +60,12 @@ class TenantResource extends Resource
                     ->label(trans('messages.identification'))
                     ->required()
                     ->maxLength(255),
+                    DatePicker::make('contract_start_date')
+                    ->label(trans('messages.contractStartDate'))
+                    ->required(),
+                    DatePicker::make('contract_end_date')
+                    ->label(trans('messages.contractEndDate'))
+                    ->required(),
                 TextInput::make('address')
                     ->label(trans('messages.address'))
                     ->required()

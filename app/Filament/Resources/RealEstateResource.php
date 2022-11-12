@@ -41,7 +41,6 @@ class RealEstateResource extends Resource
                     ->label(trans('messages.name'))
                     ->required()
                     ->placeholder(trans('messages.name').'...')
-                    ->unique()
                     ->maxLength(255),
                 TextInput::make('contact_person')
                     ->label(trans('messages.contactPerson'))
@@ -51,6 +50,15 @@ class RealEstateResource extends Resource
                     ->label(trans('messages.contactPhone'))
                     ->placeholder(trans('messages.contactPhone'))
                     ->maxLength(255),
+                TextInput::make('rnc')
+                    ->label('RNC')
+                    ->placeholder('RNC')
+                    ->maxLength(15),
+                TextInput::make('email')
+                    ->label('Email')
+                    ->email()
+                    ->placeholder('Email')
+                    ->maxLength(15),
                 Textarea::make('address')
                     ->label(trans('messages.address'))
                     ->columnSpan('full')

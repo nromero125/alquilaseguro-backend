@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return redirect(route('filament.auth.login'))->name('login');
-});
+    return redirect(route('filament.auth.login'));
+})->name('login');

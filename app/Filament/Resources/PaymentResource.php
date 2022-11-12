@@ -69,7 +69,7 @@ class PaymentResource extends Resource
                     ->required()
                     ->default(false),
                 Toggle::make('status')
-                    ->label(trans('messages.status'))
+                    ->label('Verificado')
                     ->required()
                     ->default(true),
             ]);

@@ -39,4 +39,6 @@ return [
     'document' => 'Document|Documents',
     'contactPerson' => 'Contact Person',
     'contactPhone' => 'Contact Phone',
+    'contractEndDate' => 'Contract end date',
+    'contractStartDate' => 'Contract start date'
 ];

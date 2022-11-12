@@ -8,7 +8,7 @@ enum ClaimStatus: int
 {
     use Options;
 
-    case Active = 1;
+    case Declined = 1;
     case New = 2;
     case In_progress = 3;
     case Completed = 4;
