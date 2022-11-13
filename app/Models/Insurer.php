@@ -20,6 +20,17 @@ class Insurer extends Model
         'phone_number',
         'identification',
         'address',
+        'bank_name',
+        'bank_account',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'status' => 'boolean',
     ];
 
     public function insurance(): BelongsTo

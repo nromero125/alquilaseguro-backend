@@ -3,14 +3,21 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\InsurerResource\Pages;
+use App\Models\Bank;
 use App\Models\Insurer;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class InsurerResource extends Resource
 {
@@ -18,11 +25,59 @@ class InsurerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.insurer', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('firstname')
+                    ->label(trans('messages.firstName'))
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('lastname')
+                    ->label(trans('messages.lastName'))
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->email(),
+                TextInput::make('password')
+                    ->label(trans('messages.password'))
+                    ->password()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create'),
+                Select::make('insurance_id')
+                    ->label(trans_choice('messages.insurer', 1))
+                    ->required()
+                    ->searchable()
+                    ->relationship('insurance', 'name'),
+                TextInput::make('phone_number')
+                    ->label(trans('messages.phoneNumber'))
+                    ->tel(),
+                TextInput::make('identification')
+                    ->label(trans('messages.identification'))
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('address')
+                    ->label(trans('messages.address'))
+                    ->required()
+                    ->maxLength(255),
+                Select::make('bank_name')
+                    ->label(trans('messages.bankName'))
+                    ->options(Bank::query()->pluck('name', 'name'))
+                    ->searchable(),
+                TextInput::make('bank_account')
+                    ->label(trans('messages.bankAccount'))
+                    ->maxLength(255),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -30,13 +85,37 @@ class InsurerResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
-            ->filters([
-                //
+                TextColumn::make('firstname')
+                    ->label(trans('messages.firstName'))
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('lastname')
+                    ->label(trans('messages.lastName'))
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('user.email')
+                    ->label(trans_choice('messages.user', 1))
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('identification')
+                    ->label(trans('messages.identification'))
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('insurance.name')
+                    ->label(trans_choice('messages.insurer', 1))
+                    ->sortable()
+                    ->searchable(),
+                IconColumn::make('status')
+                    ->label(trans('messages.status'))
+                    ->boolean()
+                    ->falseColor('danger')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),
+                DeleteAction::make()
             ])
             ->bulkActions([
                 DeleteBulkAction::make('delete')
