@@ -25,6 +25,7 @@ class Property extends Model implements HasMedia
         'status',
         'monthly_payment',
         'name',
+        'policy_id',
     ];
 
     /**
@@ -54,7 +55,7 @@ class Property extends Model implements HasMedia
     /**
      * Relation between a realState and its property
      */
-    public function realState(): BelongsTo
+    public function realEstate(): BelongsTo
     {
         return $this->belongsTo(RealEstate::class);
     }
@@ -65,6 +66,13 @@ class Property extends Model implements HasMedia
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
+    }
+    /**
+     * Relation between a property and its policy
+     */
+    public function policy(): BelongsTo
+    {
+        return $this->belongsTo(Policy::class);
     }
 
     public function payments(): HasMany

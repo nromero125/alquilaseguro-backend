@@ -57,7 +57,12 @@ class PropertyResource extends Resource
                     ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('realState', 'name'),
+                    ->relationship('realEstate', 'name'),
+                Select::make('policy_id')
+                    ->label('Poliza')
+                    ->required()
+                    ->searchable()
+                    ->relationship('policy', 'name'),
                 DatePicker::make('payment_due_date')
                 ->label(trans('messages.paymentDueDate'))
                 ->required(),

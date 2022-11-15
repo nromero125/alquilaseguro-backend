@@ -52,6 +52,8 @@ class EditTenant extends EditRecord
             'address' => $data['address'],
             'bank_name' => $data['bank_name'],
             'bank_account' => $data['bank_account'],
+            'contract_start_date' => $data['contract_start_date'],
+            'contract_end_date' => $data['contract_end_date'],
             'status' => $data['status'],
         ]);
 

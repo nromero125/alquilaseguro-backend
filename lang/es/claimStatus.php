@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Active' => 'Activo',
+    'Declined' => 'Activo',
     'New' => 'Nuevo',
     'In_progress' => 'En Progreso',
     'Completed' => 'Completado',

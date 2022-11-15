@@ -45,6 +45,10 @@ class InsuranceResource extends Resource
                     ->placeholder('email')
                     ->email()
                     ->maxLength(255),
+                    TextInput::make('rnc')
+                    ->label('RNC')
+                    ->placeholder('RNC')
+                    ->maxLength(15),
                 TextInput::make('contact_person')
                 ->placeholder('Contact person')
                 ->maxLength(255),

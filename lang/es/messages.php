@@ -39,4 +39,6 @@ return [
     'contactPerson' => 'Persona de Contacto',
     'contactPhone' => 'Teléfono de Contacto',
     'insurer' => 'Asegurador|Aseguradores'
+    'contractEndDate' => 'Fecha vencimiento de contrato',
+    'contractStartDate' => 'Fecha inicio del contrato',
 ];
