@@ -25,7 +25,6 @@ class ClaimFactory extends Factory
             'user_id' => User::factory(),
             'property_id' => Property::factory(),
             'status' => ClaimStatus::New,
-            'insurance_id' => Insurance::factory(),
             'description' => fake()->text(),
             'amount_to_claim' => fake()->randomFloat(nbMaxDecimals: 2, max: 10000),
         ];
