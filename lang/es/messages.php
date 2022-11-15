@@ -16,7 +16,7 @@ return [
     'claim' => 'Reclamación|Reclamaciones',
     'amountToClaim' => 'Monto a Reclamar',
     'property' => 'Propiedad|Propiedades',
-    'user' => 'Usuario',
+    'user' => 'Usuario|Usuarios',
     'description' => 'Descripción',
     'evidence' => 'Evidencia',
     'insurance' => 'Aseguradora|Aseguradoras',
@@ -38,6 +38,7 @@ return [
     'document' => 'Documento|Documentos',
     'contactPerson' => 'Persona de Contacto',
     'contactPhone' => 'Teléfono de Contacto',
+    'insurer' => 'Asegurador|Aseguradores'
     'contractEndDate' => 'Fecha vencimiento de contrato',
-    'contractStartDate' => 'Fecha inicio del contrato'
+    'contractStartDate' => 'Fecha inicio del contrato',
 ];

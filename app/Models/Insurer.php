@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Insurer extends Model
 {
@@ -19,14 +20,25 @@ class Insurer extends Model
         'phone_number',
         'identification',
         'address',
+        'bank_name',
+        'bank_account',
     ];
 
-    public function insurance()
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function insurance(): BelongsTo
     {
         return $this->belongsTo(Insurance::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -11,4 +11,5 @@ enum UserTypes: int
     case BROKER = 5;
     case BROKER_ADMIN = 6;
     case INSURANCE_ADMIN = 7;
+    case USER = 8;
 }
