@@ -39,7 +39,7 @@ return [
     'document' => 'Document|Documents',
     'contactPerson' => 'Contact Person',
     'contactPhone' => 'Contact Phone',
-    'insurer' => 'Insurer|Insurers'
+    'insurer' => 'Insurer|Insurers',
     'contractEndDate' => 'Contract end date',
     'contractStartDate' => 'Contract start date',
 ];
