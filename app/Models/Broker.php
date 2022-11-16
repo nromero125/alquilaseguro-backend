@@ -60,4 +60,9 @@ class Broker extends Model
     {
         return $this->hasMany(Property::class);
     }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

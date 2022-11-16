@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TenantController;
@@ -48,4 +49,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/users/broker/{broker}', [UserController::class, 'updateBrokerUser'])->name('users.broker.update');
     Route::put('/users/insurer/{insurer}', [UserController::class, 'updateInsurerUser'])->name('users.insurer.update');
     Route::get('/users', [UserController::class, 'getUsers'])->name('users.get');
+    Route::get('/home', [HomeController::class, 'home'])->name('api.home');
 });
