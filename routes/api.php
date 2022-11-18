@@ -5,6 +5,7 @@ use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TenantController;
@@ -36,6 +37,8 @@ Route::post('/auth/forgot-password', [AuthController::class, 'sendResetPassword'
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/tenant/payments', [TenantController::class, 'getMyPayments'])->name('tenant.payments');
+    Route::get('/insurance/payments', [PaymentController::class, 'getInsurancePayments'])->name('insurance.payments');
+    Route::get('/broker/payments', [BrokerController::class, 'getMyPayments'])->name('broker.payments');
     Route::post('/tenant/payments/create', [TenantController::class, 'createPayment'])->name('tenant.payments.create');
     Route::get('/tenant/claims', [ClaimController::class, 'getMyClaims'])->name('tenant.claims');
     Route::get('/broker/properties', [BrokerController::class, 'getProperties'])->name('broker.properties');

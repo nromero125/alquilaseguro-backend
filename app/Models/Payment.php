@@ -12,7 +12,7 @@ class Payment extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['amount', 'payment_type', 'property_id', 'paid_at', 'is_late', 'status', 'tenant_id', 'broker_id'];
+    protected $fillable = ['amount', 'payment_type', 'property_id', 'paid_at', 'is_late', 'status', 'tenant_id', 'broker_id', 'insurance_id'];
 
     public function property(): BelongsTo
     {
