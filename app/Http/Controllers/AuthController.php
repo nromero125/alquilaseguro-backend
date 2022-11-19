@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypes;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,6 +30,10 @@ class AuthController extends Controller
 
         if ($user->status == false) {
             return response()->json(['message' => 'Usuario inactivo, por favor contacte al administrador.'], 401);
+        }
+
+        if($user->user_type == UserTypes::ADMIN) {
+            return response()->json(['message' => 'Usuario equivocado.'], 401);
         }
 
         return response()->json(['token' => $user->createToken($request->email)->plainTextToken, 'user' => $user]);

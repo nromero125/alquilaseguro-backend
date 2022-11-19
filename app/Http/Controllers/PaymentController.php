@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentTypes;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,12 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+
+    public function getInsurancePayments()
+    {
+        return Payment::where('insurance_id', auth()->user('api')->insurer->insurance_id)
+        ->where('payment_type', PaymentTypes::INSURANCE_PAYMENT)
+        ->paginate(15);
     }
 }

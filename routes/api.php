@@ -1,9 +1,12 @@
 <?php
 
+use App\Enums\UserTypes;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TenantController;
@@ -23,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    if(auth()->user('api')->user_type == UserTypes::TENANT){
+        return $request->user()->load('tenant.property');    
+    }
     return $request->user();
 });
 
@@ -35,6 +41,8 @@ Route::post('/auth/forgot-password', [AuthController::class, 'sendResetPassword'
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/tenant/payments', [TenantController::class, 'getMyPayments'])->name('tenant.payments');
+    Route::get('/insurance/payments', [PaymentController::class, 'getInsurancePayments'])->name('insurance.payments');
+    Route::get('/broker/payments', [BrokerController::class, 'getMyPayments'])->name('broker.payments');
     Route::post('/tenant/payments/create', [TenantController::class, 'createPayment'])->name('tenant.payments.create');
     Route::get('/tenant/claims', [ClaimController::class, 'getMyClaims'])->name('tenant.claims');
     Route::get('/broker/properties', [BrokerController::class, 'getProperties'])->name('broker.properties');
@@ -48,4 +56,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/users/broker/{broker}', [UserController::class, 'updateBrokerUser'])->name('users.broker.update');
     Route::put('/users/insurer/{insurer}', [UserController::class, 'updateInsurerUser'])->name('users.insurer.update');
     Route::get('/users', [UserController::class, 'getUsers'])->name('users.get');
+    Route::get('/home', [HomeController::class, 'home'])->name('api.home');
 });

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\PaymentTypes;
 use App\Models\Bank;
 use App\Models\Broker;
 use App\Models\Claim;
@@ -46,7 +47,7 @@ class InitialSeeder extends Seeder
                 'user_id' => 5,
                 'bank_name' => $bank,
             ]);
-            
+
         Insurance::factory()->create();
 
         $insurer = Insurer::factory()
@@ -91,5 +92,16 @@ class InitialSeeder extends Seeder
                 'property_id' => $property->id,
                 'tenant_id' => $tenant->id,
             ]);
+
+
+        Payment::factory()->count(5)->create([
+            'insurance_id' => 1,
+            'payment_type' => PaymentTypes::INSURANCE_PAYMENT 
+        ]);
+
+        Payment::factory()->count(5)->create([
+            'broker_id' => $broker->id,
+            'payment_type' => PaymentTypes::BROKER_PAYMENT 
+        ]);
     }
 }

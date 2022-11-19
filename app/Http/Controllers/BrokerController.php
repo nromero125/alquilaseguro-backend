@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentTypes;
+use App\Models\Payment;
 use App\Models\Property;
 
 class BrokerController extends Controller
@@ -30,5 +32,12 @@ class BrokerController extends Controller
         }
 
         return $property;
+    }
+
+    public function getMyPayments()
+    {
+        return Payment::where('broker_id', auth()->user('api')->broker->id)
+        ->where('payment_type', PaymentTypes::BROKER_PAYMENT)
+        ->paginate(15);
     }
 }
