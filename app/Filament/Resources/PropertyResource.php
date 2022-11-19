@@ -64,8 +64,8 @@ class PropertyResource extends Resource
                     ->searchable()
                     ->relationship('policy', 'name'),
                 DatePicker::make('payment_due_date')
-                ->label(trans('messages.paymentDueDate'))
-                ->required(),
+                    ->label(trans('messages.paymentDueDate'))
+                    ->required(),
                 TextInput::make('monthly_payment')
                     ->label(trans('messages.monthlyPayment'))
                     ->placeholder('0.00')
@@ -112,7 +112,8 @@ class PropertyResource extends Resource
                 TextColumn::make('monthly_payment')
                     ->label(trans('messages.monthlyPayment'))
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->money('DOP'),
                 IconColumn::make('status')
                     ->label(trans('messages.status'))
                     ->boolean()
