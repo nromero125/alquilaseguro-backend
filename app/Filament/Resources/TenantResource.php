@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TenantResource\Pages;
+use App\Filament\Resources\TenantResource\RelationManagers\PaymentsRelationManager;
 use App\Models\Bank;
 use App\Models\Tenant;
 use Filament\Forms\Components\DatePicker;
@@ -127,6 +128,13 @@ class TenantResource extends Resource
                     ->deselectRecordsAfterCompletion()
                     ->requiresConfirmation(),
             ]);
+    }
+
+    public static function getRelations() : array
+    {
+        return [
+            PaymentsRelationManager::class,  
+        ];
     }
 
     public static function getPages(): array
