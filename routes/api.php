@@ -26,9 +26,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    if(auth()->user('api')->user_type == UserTypes::TENANT){
-        return $request->user()->load('tenant.property');    
+    if (auth()->user('api')->user_type == UserTypes::TENANT) {
+        return $request->user()->load('tenant.property');
     }
+
     return $request->user();
 });
 

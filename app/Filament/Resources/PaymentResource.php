@@ -81,6 +81,7 @@ class PaymentResource extends Resource
             ->columns([
                 TextColumn::make('amount')
                     ->label(trans('messages.amount'))
+                    ->money("DOP")
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('paid_at')

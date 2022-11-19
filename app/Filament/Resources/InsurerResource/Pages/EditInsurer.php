@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\InsurerResource\Pages;
 
+use App\Enums\UserTypes;
 use App\Filament\Resources\InsurerResource;
 use App\Models\User;
 use Filament\Pages\Actions\DeleteAction;
@@ -29,6 +30,7 @@ class EditInsurer extends EditRecord
         $user = User::find($data['user_id']);
 
         $data['email'] = $user->email;
+        $data['is_admin'] = $user->user_type === UserTypes::INSURER_ADMIN;
 
         return $data;
     }
@@ -41,6 +43,7 @@ class EditInsurer extends EditRecord
             'name' => $data['firstname'].' '.$data['lastname'],
             'email' => $data['email'],
             'status' => $data['status'],
+            'user_type' => $data['is_admin'] ? UserTypes::INSURER_ADMIN : UserTypes::INSURER,
         ];
 
         if (! empty($data['password'])) {

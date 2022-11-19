@@ -84,7 +84,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessFilament(): bool
     {
-        return str_ends_with($this->email, '@alquilaseguro.com');
+        return $this->user_type === UserTypes::ADMIN;
     }
 
     public function insurer(): HasOne

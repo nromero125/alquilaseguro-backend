@@ -23,7 +23,7 @@ class CreateInsurer extends CreateRecord
             'name' => $data['firstname'].' '.$data['lastname'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'user_type' => UserTypes::INSURER,
+            'user_type' => $data['is_admin'] ? UserTypes::INSURER_ADMIN : UserTypes::INSURER,
             'status' => $data['status'],
         ]);
 
