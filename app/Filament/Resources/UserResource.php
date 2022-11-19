@@ -52,11 +52,11 @@ class UserResource extends Resource
                 TextInput::make('password_confirmation')
                     ->label(trans('messages.passwordConfirmation'))
                     ->password()
-                    ->required(fn (Closure $get): bool => !empty($get("password")))
+                    ->required(fn (Closure $get): bool => ! empty($get('password')))
                     ->hidden(fn (Closure $get): bool => empty($get('password'))),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
-                    ->default(true)
+                    ->default(true),
             ]);
     }
 

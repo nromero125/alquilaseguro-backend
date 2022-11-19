@@ -43,5 +43,5 @@ return [
     'contractStartDate' => 'Fecha inicio del contrato',
     'created_at' => 'Fecha de creación',
     'isAdmin' => 'Es usuario admin?',
-    'passwordConfirmation' => 'Confirmación de Contraseña'
+    'passwordConfirmation' => 'Confirmación de Contraseña',
 ];
