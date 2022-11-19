@@ -44,5 +44,5 @@ return [
     'contractStartDate' => 'Contract start date',
     'created_at' => 'Created at',
     'isAdmin' => 'Is admin user?',
+    'passwordConfirmation' => 'Password confirmation',
 ];
-

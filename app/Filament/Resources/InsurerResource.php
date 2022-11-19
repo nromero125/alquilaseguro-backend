@@ -97,6 +97,9 @@ class InsurerResource extends Resource
                     ->label(trans('messages.status'))
                     ->required()
                     ->default(true),
+                Toggle::make('is_admin')
+                    ->label(trans('messages.isAdmin'))
+                    ->default(false),
             ]);
     }
 
