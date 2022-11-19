@@ -103,12 +103,12 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's role should be INSURANCE_ADMIN.
+     * Indicate that the model's role should be INSURER_ADMIN.
      *
      * @return static
      */
     public function insuranceAdmin(): static
     {
-        return $this->state(fn () => ['user_type' => UserTypes::INSURANCE_ADMIN]);
+        return $this->state(fn () => ['user_type' => UserTypes::INSURER_ADMIN]);
     }
 }

@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
         User::factory()->tenant()->create(['email' => 'tenant@alquilaseguro.com']);
         User::factory()->broker()->create(['email' => 'broker@alquilaseguro.com']);
         User::factory()->brokerAdmin()->create(['email' => 'broker_admin@alquilaseguro.com']);
-        User::factory()->insuranceAdmin()->create(['email' => 'insurance_admin@alquilaseguro.com']);
+        User::factory()->insuranceAdmin()->create(['email' => 'INSURER_ADMIN@alquilaseguro.com']);
     }
 }

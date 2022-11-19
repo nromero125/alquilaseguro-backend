@@ -14,7 +14,7 @@ class StoreInsurerValidation extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user('api')->user_type == UserTypes::INSURANCE_ADMIN;
+        return auth()->user('api')->user_type == UserTypes::INSURER_ADMIN;
     }
 
     /**

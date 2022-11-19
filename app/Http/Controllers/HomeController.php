@@ -39,7 +39,7 @@ class HomeController extends Controller
             ]);
         }
 
-        if (auth()->user('api')->user_type == UserTypes::INSURER || auth()->user('api')->user_type == UserTypes::INSURANCE_ADMIN) {
+        if (auth()->user('api')->user_type == UserTypes::INSURER || auth()->user('api')->user_type == UserTypes::INSURER_ADMIN) {
             $insurance_id = auth()->user('api')->insurer->insurance_id;
 
             return response()->json([

@@ -81,7 +81,7 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        if (auth()->user('api')->user_type == UserTypes::INSURANCE_ADMIN) {
+        if (auth()->user('api')->user_type == UserTypes::INSURER_ADMIN) {
             return Insurer::with('user')->where('insurance_id', auth()->user('api')->insurer->insurance_id)->paginate(15);
         }
 
