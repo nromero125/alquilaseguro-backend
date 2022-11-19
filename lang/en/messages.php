@@ -45,3 +45,4 @@ return [
     'created_at' => 'Created at',
     'isAdmin' => 'Is admin user?',
 ];
+

@@ -20,6 +20,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Unique;
 
 class BrokerResource extends Resource
 {
@@ -44,7 +45,7 @@ class BrokerResource extends Resource
                     ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
-                TextInput::make('email')
+                TextInput::make('user.email')
                     ->required()
                     ->rules([
                         function (Closure $get) {

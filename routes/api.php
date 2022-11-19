@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserTypes;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ClaimController;
@@ -25,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    if(auth()->user('api')->user_type == UserTypes::TENANT){
+        return $request->user()->load('tenant.property');    
+    }
     return $request->user();
 });
 
