@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\UserTypes;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
