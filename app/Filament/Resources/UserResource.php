@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Closure;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -13,6 +16,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -29,7 +33,30 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('email')
+                    ->required()
+                    ->maxLength(255)
+                    ->email()
+                    ->unique(ignoreRecord: true),
+                TextInput::make('password')
+                    ->label(trans('messages.password'))
+                    ->password()
+                    ->reactive()
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->confirmed(),
+                TextInput::make('password_confirmation')
+                    ->label(trans('messages.passwordConfirmation'))
+                    ->password()
+                    ->required(fn (Closure $get): bool => !empty($get("password")))
+                    ->hidden(fn (Closure $get): bool => empty($get('password'))),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->default(true)
             ]);
     }
 
