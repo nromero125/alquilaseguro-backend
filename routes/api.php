@@ -56,5 +56,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/users/broker/{broker}', [UserController::class, 'updateBrokerUser'])->name('users.broker.update');
     Route::put('/users/insurer/{insurer}', [UserController::class, 'updateInsurerUser'])->name('users.insurer.update');
     Route::get('/users', [UserController::class, 'getUsers'])->name('users.get');
+    Route::post('/auth/update-password', [AuthController::class, 'updatePassword'])->name('profile.update-password');
     Route::get('/home', [HomeController::class, 'home'])->name('api.home');
 });

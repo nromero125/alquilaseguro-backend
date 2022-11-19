@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -70,5 +71,24 @@ class AuthController extends Controller
             'message' => 'No se ha encontrado un usuario con esa dirección de correo.',
             'success' => false,
         ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $input = $request->all();
+        $user = User::where('id', $request->user('api')->id)->first();
+
+        Validator::make($input, [
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'confirmed'],
+        ])->after(function ($validator) use ($user, $input) {
+            if (!Hash::check($input['current_password'], $user->password)) {
+                $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
+            }
+        })->validateWithBag('updatePassword');
+
+        $user->forceFill([
+            'password' => Hash::make($input['password']),
+        ])->save();
     }
 }
