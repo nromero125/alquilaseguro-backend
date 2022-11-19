@@ -38,5 +38,5 @@ return [
     'document' => 'Documento|Documentos',
     'contactPerson' => 'Persona de Contacto',
     'contactPhone' => 'Teléfono de Contacto',
-    'insurer' => 'Asegurador|Aseguradores'
+    'insurer' => 'Asegurador|Aseguradores',
 ];

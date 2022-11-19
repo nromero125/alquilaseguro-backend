@@ -66,7 +66,7 @@ class PolicyResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('insurance.name')
-                    ->label(trans_choice('messages.insurance',1))
+                    ->label(trans_choice('messages.insurance', 1))
                     ->sortable()
                     ->searchable(),
             ])
@@ -77,7 +77,7 @@ class PolicyResource extends Resource
                 DeleteBulkAction::make('delete')
                     ->action(fn (Collection $records) => $records->each->delete())
                     ->deselectRecordsAfterCompletion()
-                    ->requiresConfirmation()
+                    ->requiresConfirmation(),
             ]);
     }
 
