@@ -40,4 +40,6 @@ return [
     'contactPerson' => 'Contact Person',
     'contactPhone' => 'Contact Phone',
     'insurer' => 'Insurer|Insurers',
+    'contractEndDate' => 'Contract end date',
+    'contractStartDate' => 'Contract start date',
 ];

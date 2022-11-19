@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Bank;
 use App\Models\Broker;
 use App\Models\Claim;
+use App\Models\Insurance;
 use App\Models\Insurer;
 use App\Models\Owner;
 use App\Models\Payment;
@@ -45,6 +46,8 @@ class InitialSeeder extends Seeder
                 'user_id' => 5,
                 'bank_name' => $bank,
             ]);
+            
+        Insurance::factory()->create();
 
         $insurer = Insurer::factory()
             ->create([
