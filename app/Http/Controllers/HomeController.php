@@ -16,6 +16,7 @@ class HomeController extends Controller
         //Tenant
         if (auth()->user('api')->user_type == UserTypes::TENANT) {
             $late = Payment::where('tenant_id', auth()->user('api')->tenant)->where('is_late', true)->count();
+
             return response()->json([
                 'count_payments' => auth()->user('api')->tenant->payments->count(),
                 'count_late_payments' => $late,
@@ -40,6 +41,7 @@ class HomeController extends Controller
 
         if (auth()->user('api')->user_type == UserTypes::INSURER || auth()->user('api')->user_type == UserTypes::INSURANCE_ADMIN) {
             $insurance_id = auth()->user('api')->insurer->insurance_id;
+
             return response()->json([
                 'count_claims' => Claim::whereHas('property.policy', function ($q) use ($insurance_id) {
                     $q->where('insurance_id', $insurance_id);

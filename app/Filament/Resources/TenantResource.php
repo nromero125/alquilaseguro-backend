@@ -6,6 +6,8 @@ use App\Filament\Resources\TenantResource\Pages;
 use App\Filament\Resources\TenantResource\RelationManagers\PaymentsRelationManager;
 use App\Models\Bank;
 use App\Models\Tenant;
+use App\Models\User;
+use Closure;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -47,7 +49,24 @@ class TenantResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
-                    ->email(),
+                    ->email()
+                    ->rules([
+                        function (Closure $get) {
+                            $userId = $get('user_id');
+
+                            return function (string $attribute, $value, Closure $fail) use ($userId) {
+                                $emails = User::query()
+                                    ->select('email')
+                                    ->whereNot('id', $userId)
+                                    ->pluck('email')
+                                    ->toArray();
+
+                                if (in_array($value, $emails)) {
+                                    $fail(trans('validation.unique'));
+                                }
+                            };
+                        },
+                    ]),
                 TextInput::make('password')
                     ->label(trans('messages.password'))
                     ->password()
@@ -61,12 +80,12 @@ class TenantResource extends Resource
                     ->label(trans('messages.identification'))
                     ->required()
                     ->maxLength(255),
-                    DatePicker::make('contract_start_date')
-                    ->label(trans('messages.contractStartDate'))
-                    ->required(),
-                    DatePicker::make('contract_end_date')
-                    ->label(trans('messages.contractEndDate'))
-                    ->required(),
+                DatePicker::make('contract_start_date')
+                ->label(trans('messages.contractStartDate'))
+                ->required(),
+                DatePicker::make('contract_end_date')
+                ->label(trans('messages.contractEndDate'))
+                ->required(),
                 TextInput::make('address')
                     ->label(trans('messages.address'))
                     ->required()
@@ -130,10 +149,10 @@ class TenantResource extends Resource
             ]);
     }
 
-    public static function getRelations() : array
+    public static function getRelations(): array
     {
         return [
-            PaymentsRelationManager::class,  
+            PaymentsRelationManager::class,
         ];
     }
 

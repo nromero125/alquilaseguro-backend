@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Enums\ClaimStatus;
 use App\Models\Claim;
-use App\Models\Insurance;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;

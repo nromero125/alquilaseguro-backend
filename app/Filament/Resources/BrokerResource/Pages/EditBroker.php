@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BrokerResource\Pages;
 
+use App\Enums\UserTypes;
 use App\Filament\Resources\BrokerResource;
 use App\Models\User;
 use Filament\Pages\Actions\DeleteAction;
@@ -24,6 +25,7 @@ class EditBroker extends EditRecord
         $user = User::find($data['user_id']);
 
         $data['email'] = $user->email;
+        $data['is_admin'] = $user->user_type === UserTypes::BROKER_ADMIN;
 
         return $data;
     }
@@ -36,6 +38,7 @@ class EditBroker extends EditRecord
             'name' => $data['firstname'].' '.$data['lastname'],
             'email' => $data['email'],
             'status' => $data['status'],
+            'user_type' => $data['is_admin'] ? UserTypes::BROKER_ADMIN : UserTypes::BROKER,
         ];
 
         if (! empty($data['password'])) {

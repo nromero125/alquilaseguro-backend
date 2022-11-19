@@ -42,16 +42,17 @@ class InsuranceResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
+                    ->unique()
                     ->placeholder('email')
                     ->email()
                     ->maxLength(255),
-                    TextInput::make('rnc')
+                TextInput::make('rnc')
                     ->label('RNC')
                     ->placeholder('RNC')
                     ->maxLength(15),
                 TextInput::make('contact_person')
-                ->placeholder('Contact person')
-                ->maxLength(255),
+                    ->placeholder('Contact person')
+                    ->maxLength(255),
                 TextInput::make('contact_phone')
                     ->placeholder('Contact phone')
                     ->maxLength(255),
@@ -66,8 +67,8 @@ class InsuranceResource extends Resource
                     ->label(trans('messages.status'))
                     ->default(true),
                 SpatieMediaLibraryFileUpload::make('logo')
-                ->collection('logo')
-                ->conversionsDisk('s3'),
+                    ->collection('logo')
+                    ->conversionsDisk('s3'),
             ]);
     }
 
