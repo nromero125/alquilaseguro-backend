@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
+use App\Models\User;
+use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -18,6 +20,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Unique;
 
 class BrokerResource extends Resource
 {
@@ -42,7 +45,7 @@ class BrokerResource extends Resource
                     ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
-                TextInput::make('email')
+                TextInput::make('user.email')
                     ->required()
                     ->email(),
                 TextInput::make('password')

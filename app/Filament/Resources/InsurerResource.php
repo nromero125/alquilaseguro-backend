@@ -115,13 +115,13 @@ class InsurerResource extends Resource
             ])
             ->actions([
                 EditAction::make(),
-                DeleteAction::make()
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 DeleteBulkAction::make('delete')
                     ->action(fn (Collection $records) => $records->each->delete())
                     ->deselectRecordsAfterCompletion()
-                    ->requiresConfirmation()
+                    ->requiresConfirmation(),
             ]);
     }
 

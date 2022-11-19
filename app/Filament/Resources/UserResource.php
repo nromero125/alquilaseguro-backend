@@ -50,7 +50,7 @@ class UserResource extends Resource
                     ->falseColor('danger')
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
-                    ->trueIcon('heroicon-o-check-circle')
+                    ->trueIcon('heroicon-o-check-circle'),
             ])
             ->actions([
                 EditAction::make(),

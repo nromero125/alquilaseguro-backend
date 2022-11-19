@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\BrokerResource\Pages;
 
 use App\Filament\Resources\BrokerResource;
-use App\Models\Broker;
 use App\Models\User;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;

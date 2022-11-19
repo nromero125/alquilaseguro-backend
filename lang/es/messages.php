@@ -41,5 +41,5 @@ return [
     'insurer' => 'Asegurador|Aseguradores',
     'contractEndDate' => 'Fecha vencimiento de contrato',
     'contractStartDate' => 'Fecha inicio del contrato',
-    'created_at' => 'Fecha creación'
+    'created_at' => 'Fecha creación',
 ];
