@@ -18,7 +18,7 @@ class CreateBroker extends CreateRecord
             'name' => $data['firstname'].' '.$data['lastname'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'user_type' => UserTypes::BROKER,
+            'user_type' => $data['is_admin'] ? UserTypes::BROKER_ADMIN : UserTypes::BROKER,
             'status' => $data['status'],
         ]);
 

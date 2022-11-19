@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
+use App\Models\User;
+use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -44,6 +46,23 @@ class BrokerResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
+                    ->rules([
+                        function (Closure $get) {
+                            $userId = $get('user_id');
+
+                            return function (string $attribute, $value, Closure $fail) use ($userId) {
+                                $emails = User::query()
+                                    ->select('email')
+                                    ->whereNot('id', $userId)
+                                    ->pluck('email')
+                                    ->toArray();
+
+                                if (in_array($value, $emails)) {
+                                    $fail(trans('validation.unique'));
+                                }
+                            };
+                        },
+                    ])
                     ->email(),
                 TextInput::make('password')
                     ->label(trans('messages.password'))
@@ -76,8 +95,10 @@ class BrokerResource extends Resource
                     ->maxLength(255),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
-                    ->required()
                     ->default(true),
+                Toggle::make('is_admin')
+                    ->label(trans('messages.isAdmin'))
+                    ->default(false),
             ]);
     }
 

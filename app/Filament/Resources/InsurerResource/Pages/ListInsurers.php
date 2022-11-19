@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\InsurerResource\Pages;
 
 use App\Filament\Resources\InsurerResource;
-use Filament\Pages\Actions;
 use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 

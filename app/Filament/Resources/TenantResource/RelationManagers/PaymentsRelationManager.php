@@ -10,8 +10,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PaymentsRelationManager extends RelationManager
 {
@@ -45,10 +43,10 @@ class PaymentsRelationManager extends RelationManager
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
-                    TextColumn::make('created_at')
-                    ->label(trans('messages.created_at'))
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('created_at')
+                ->label(trans('messages.created_at'))
+                ->sortable()
+                ->searchable(),
                 TextColumn::make('property.name')
                     ->label(trans_choice('messages.property', 1))
                     ->sortable()
@@ -56,19 +54,19 @@ class PaymentsRelationManager extends RelationManager
                 SpatieMediaLibraryImageColumn::make('voucher')
                     ->collection('voucher')
                     ->conversion('thumb'),
-                
+
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-            
+
             ])
             ->actions([
-                
+
             ])
             ->bulkActions([
-                
+
             ]);
-    }    
+    }
 }

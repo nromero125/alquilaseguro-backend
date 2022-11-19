@@ -42,4 +42,6 @@ return [
     'insurer' => 'Insurer|Insurers',
     'contractEndDate' => 'Contract end date',
     'contractStartDate' => 'Contract start date',
+    'created_at' => 'Created at',
+    'isAdmin' => 'Is admin user?',
 ];

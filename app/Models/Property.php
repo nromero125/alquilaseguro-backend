@@ -67,6 +67,7 @@ class Property extends Model implements HasMedia
     {
         return $this->belongsTo(Tenant::class);
     }
+
     /**
      * Relation between a property and its policy
      */

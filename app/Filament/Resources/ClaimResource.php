@@ -13,9 +13,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class ClaimResource extends Resource
 {
@@ -84,20 +83,20 @@ class ClaimResource extends Resource
                     ->label(trans_choice('messages.user', 1))
                     ->sortable()
                     ->searchable(),
-                    BadgeColumn::make('status')
-                    ->enum([
-                        1 => 'Rechazada',
-                        2 => 'Nueva',
-                        3 => 'En progreso',
-                        4 => 'Completada',
-                    ])
-                    ->colors([
-                        'primary',
-                        'secondary' => 2,
-                        'warning' => 3,
-                        'success' => 4,
-                        'danger' => 1,  
-                    ])
+                BadgeColumn::make('status')
+                ->enum([
+                    1 => 'Rechazada',
+                    2 => 'Nueva',
+                    3 => 'En progreso',
+                    4 => 'Completada',
+                ])
+                ->colors([
+                    'primary',
+                    'secondary' => 2,
+                    'warning' => 3,
+                    'success' => 4,
+                    'danger' => 1,
+                ]),
             ])
             ->actions([
                 EditAction::make(),
