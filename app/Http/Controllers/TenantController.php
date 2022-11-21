@@ -96,6 +96,7 @@ class TenantController extends Controller
         $data = $request->validated();
         $data['payment_type'] = PaymentTypes::PROPERTY_PAYMENT;
         $data['tenant_id'] = auth()->user('api')->tenant->id;
+        $data['status'] = false;
         $payment = Payment::create($data);
 
         if ($request->hasFile('voucher') && $request->file('voucher')->isValid()) {

@@ -60,7 +60,7 @@ class PaymentResource extends Resource
                     ->searchable(),
                 SpatieMediaLibraryFileUpload::make('voucher')
                     ->collection('voucher')
-                    ->conversionsDisk('s3'),
+                    ->conversion('thumb'),
                 DatePicker::make('paid_at')
                     ->label(trans('messages.paidAt'))
                     ->required(),
@@ -81,7 +81,6 @@ class PaymentResource extends Resource
             ->columns([
                 TextColumn::make('amount')
                     ->label(trans('messages.amount'))
-                    ->money("DOP")
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('paid_at')
