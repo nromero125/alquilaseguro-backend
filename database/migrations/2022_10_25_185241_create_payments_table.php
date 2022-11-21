@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tenant_id')->nullable();
             $table->unsignedBigInteger('broker_id')->nullable();
             $table->unsignedBigInteger('insurance_id')->nullable();
+            $table->unsignedBigInteger('owner_id')->nullable();
             $table->timestamps();
         });
     }

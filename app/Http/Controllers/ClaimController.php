@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ClaimStatus;
+use App\Enums\UserTypes;
+use App\Http\Requests\ClaimUpdateValidation;
 use App\Http\Requests\ClaimValidation;
 use App\Models\Claim;
 
@@ -23,6 +25,10 @@ class ClaimController extends Controller
         $data = $request->all();
         $data['status'] = ClaimStatus::In_progress;
         $data['user_id'] = auth()->user('api')->id;
+        if(auth()->user('api')->user_type == UserTypes::TENANT){
+            $data['property_id'] = auth()->user('api')->tenant->property->id;
+        }
+        
         $claim = Claim::create($data);
         if ($request->hasFile('evidence') && $request->file('evidence')[0]->isValid()) {
             $claim->addMultipleMediaFromRequest(['evidence'])->each(function ($fileAdder) {
@@ -36,5 +42,16 @@ class ClaimController extends Controller
     public function show(Claim $claim)
     {
         return $claim->load('user', 'property');
+    }
+
+    public function index()
+    {
+        return Claim::where('insurance_id', auth()->user('api')->insurer->insurance_id)->paginate(15);
+    }
+
+    public function updateClaim(ClaimUpdateValidation $request, Claim $claim)
+    {
+        $claim->update($request->all());
+        return $claim;
     }
 }

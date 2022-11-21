@@ -84,6 +84,7 @@ class InitialSeeder extends Seeder
             ->create([
                 'user_id' => $tenant->user_id,
                 'property_id' => $property->id,
+                'insurance_id' => 1
             ]);
 
         Payment::factory()
@@ -96,12 +97,27 @@ class InitialSeeder extends Seeder
         Payment::factory()->count(5)->create([
             'insurance_id' => 1,
             'property_id' => null,
+            'owner_id' => null,
+            'broker_id' => null,
+            'tenant_id' => null,
             'payment_type' => PaymentTypes::INSURANCE_PAYMENT,
+        ]);
+
+        Payment::factory()->count(5)->create([
+            'owner_id' => $owner->id,
+            'property_id' => null,
+            'property_id' => null,
+            'broker_id' => null,
+            'tenant_id' => null,
+            'payment_type' => PaymentTypes::OWNER_PAYMENT,
         ]);
 
         Payment::factory()->count(5)->create([
             'broker_id' => $broker->id,
             'property_id' => null,
+            'property_id' => null,
+            'owner_id' => null,
+            'tenant_id' => null,
             'payment_type' => PaymentTypes::BROKER_PAYMENT,
         ]);
     }

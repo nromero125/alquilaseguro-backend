@@ -44,4 +44,5 @@ return [
     'created_at' => 'Fecha de creación',
     'isAdmin' => 'Es usuario admin?',
     'passwordConfirmation' => 'Confirmación de Contraseña',
+    'feeback' => 'Retroalimentación',
 ];

@@ -45,4 +45,5 @@ return [
     'created_at' => 'Created at',
     'isAdmin' => 'Is admin user?',
     'passwordConfirmation' => 'Password confirmation',
+    'feeback' => 'Feedback',
 ];

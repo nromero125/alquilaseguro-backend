@@ -12,7 +12,7 @@ class Payment extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['amount', 'payment_type', 'property_id', 'paid_at', 'is_late', 'status', 'tenant_id', 'broker_id', 'insurance_id'];
+    protected $fillable = ['amount', 'payment_type', 'property_id', 'paid_at', 'is_late', 'status', 'tenant_id', 'broker_id', 'insurance_id', 'owner_id'];
 
     public function property(): BelongsTo
     {
@@ -53,5 +53,16 @@ class Payment extends Model implements HasMedia
     public function broker()
     {
         return $this->belongsTo(Broker::class);
+    }
+
+
+    public function owner()
+    {
+        return $this->belongsTo(Owner::class);
+    }
+
+    public function insurance()
+    {
+        return $this->belongsTo(Insurance::class);
     }
 }

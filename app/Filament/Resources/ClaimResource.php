@@ -46,6 +46,11 @@ class ClaimResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name'),
+                Select::make('insurance_id')
+                    ->label(trans_choice('messages.insurance', 1))
+                    ->required()
+                    ->searchable()
+                    ->relationship('insurance', 'name'),
                 Select::make('user_id')
                     ->label(trans_choice('messages.user', 1))
                     ->required()
@@ -53,6 +58,9 @@ class ClaimResource extends Resource
                     ->relationship('user', 'name'),
                 Textarea::make('description')
                     ->label(trans('messages.description'))
+                    ->required(),
+                Textarea::make('feedback')
+                    ->label(trans('messages.feedback'))
                     ->required(),
                 SpatieMediaLibraryFileUpload::make('evidence')
                     ->label(trans('messages.evidence'))

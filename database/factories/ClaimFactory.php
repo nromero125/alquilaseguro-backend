@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\ClaimStatus;
 use App\Models\Claim;
+use App\Models\Insurance;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,8 +24,10 @@ class ClaimFactory extends Factory
         return [
             'user_id' => User::factory(),
             'property_id' => Property::factory(),
+            'insurance_id' => Insurance::factory(),
             'status' => ClaimStatus::New,
             'description' => fake()->text(),
+            'feedback' => fake()->text(),
             'amount_to_claim' => fake()->randomFloat(nbMaxDecimals: 2, max: 10000),
         ];
     }

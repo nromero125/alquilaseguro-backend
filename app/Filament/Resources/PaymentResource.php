@@ -53,6 +53,21 @@ class PaymentResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('tenant', 'firstname'),
+                Select::make('owner_id')
+                    ->label(trans_choice('messages.owner', 1))
+                    ->required()
+                    ->searchable()
+                    ->relationship('owner', 'firstname'),
+                Select::make('broker_id')
+                    ->label(trans_choice('messages.broker', 1))
+                    ->required()
+                    ->searchable()
+                    ->relationship('broker', 'firstname'),
+                Select::make('insurance_id')
+                    ->label(trans_choice('messages.insurance', 1))
+                    ->required()
+                    ->searchable()
+                    ->relationship('insurance', 'name'),
                 Select::make('payment_type')
                     ->label(trans('messages.paymentType'))
                     ->options($paymentTypes)

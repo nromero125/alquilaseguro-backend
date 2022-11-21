@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('property_id')->references('id')->on('properties');
+            $table->foreignId('insurance_id')->references('id')->on('insurances');
             $table->mediumText('description')->nullable();
+            $table->mediumText('feedback')->nullable();
             $table->tinyInteger('status');
             $table->decimal('amount_to_claim');
             $table->timestamps();
