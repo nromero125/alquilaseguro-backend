@@ -103,7 +103,7 @@ class RealEstateResource extends Resource
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

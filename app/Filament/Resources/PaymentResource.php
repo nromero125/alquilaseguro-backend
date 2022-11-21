@@ -102,7 +102,10 @@ class PaymentResource extends Resource
                 SpatieMediaLibraryImageColumn::make('voucher')
                     ->collection('voucher')
                     ->conversion('thumb'),
-            ])
+                TextColumn::make('created_at')
+                    ->date()
+                    ->sortable(),
+            ])->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
             ])

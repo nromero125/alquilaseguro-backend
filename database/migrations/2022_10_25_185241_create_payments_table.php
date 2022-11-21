@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->tinyInteger('payment_type');
             $table->decimal('amount');
-            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('property_id')->nullable();
             $table->dateTime('paid_at');
             $table->boolean('is_late')->default(false);
             $table->tinyInteger('status')->default(1);

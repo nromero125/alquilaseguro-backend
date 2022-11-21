@@ -95,11 +95,13 @@ class InitialSeeder extends Seeder
 
         Payment::factory()->count(5)->create([
             'insurance_id' => 1,
+            'property_id' => null,
             'payment_type' => PaymentTypes::INSURANCE_PAYMENT,
         ]);
 
         Payment::factory()->count(5)->create([
             'broker_id' => $broker->id,
+            'property_id' => null,
             'payment_type' => PaymentTypes::BROKER_PAYMENT,
         ]);
     }

@@ -3,10 +3,12 @@
 namespace App\Filament\Resources\TenantResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -24,6 +26,10 @@ class PaymentsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('amount')
                     ->required()
                     ->maxLength(255),
+                    Toggle::make('status')
+                    ->label('Verificado')
+                    ->required()
+                    ->default(true),
             ]);
     }
 
@@ -63,7 +69,7 @@ class PaymentsRelationManager extends RelationManager
 
             ])
             ->actions([
-
+                EditAction::make(),
             ])
             ->bulkActions([
 

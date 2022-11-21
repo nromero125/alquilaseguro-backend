@@ -97,7 +97,7 @@ class ClaimResource extends Resource
                     'success' => 4,
                     'danger' => 1,
                 ]),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
             ])

@@ -69,7 +69,7 @@ class PolicyResource extends Resource
                     ->label(trans_choice('messages.insurance', 1))
                     ->sortable()
                     ->searchable(),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
             ])
