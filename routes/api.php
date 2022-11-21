@@ -48,6 +48,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/owner/payments', [OwnerController::class, 'getMyPayments'])->name('owner.payments');
     Route::post('/tenant/payments/create', [TenantController::class, 'createPayment'])->name('tenant.payments.create');
     Route::get('/tenant/claims', [ClaimController::class, 'getMyClaims'])->name('tenant.claims');
+    Route::get('/owner/claims', [ClaimController::class, 'getMyClaims'])->name('owner.claims');
     Route::get('/broker/properties', [BrokerController::class, 'getProperties'])->name('broker.properties');
     Route::get('/broker/properties/{id}', [BrokerController::class, 'showProperty'])->name('broker.show-property');
     Route::get('/owner/properties', [OwnerController::class, 'getProperties'])->name('owner.properties');
