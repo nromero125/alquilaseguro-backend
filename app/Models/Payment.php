@@ -55,7 +55,6 @@ class Payment extends Model implements HasMedia
         return $this->belongsTo(Broker::class);
     }
 
-
     public function owner()
     {
         return $this->belongsTo(Owner::class);

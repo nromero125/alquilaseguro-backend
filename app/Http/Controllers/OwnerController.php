@@ -11,7 +11,6 @@ class OwnerController extends Controller
 {
     public function getProperties()
     {
-
         if (auth()->user('api')->user_type !== UserTypes::OWNER) {
             return response()->json(['message' => 'Ha ocurrido un error, contacte al administrador.'], 403);
         }
@@ -23,7 +22,6 @@ class OwnerController extends Controller
 
     public function getPropertiesWithoutPag()
     {
-
         if (auth()->user('api')->user_type !== UserTypes::OWNER) {
             return response()->json(['message' => 'Ha ocurrido un error, contacte al administrador.'], 403);
         }
@@ -37,7 +35,7 @@ class OwnerController extends Controller
     {
         $property = Property::with('tenant', 'owner', 'claims', 'payments', 'broker')->find($id);
 
-        if (!auth()->user('api')->owner) {
+        if (! auth()->user('api')->owner) {
             return response()->json(['message' => 'Ha ocurrido un error, contacte al administrador.'], 403);
         }
 

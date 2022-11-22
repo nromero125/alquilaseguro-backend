@@ -26,10 +26,10 @@ class PaymentsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('amount')
                     ->required()
                     ->maxLength(255),
-                    Toggle::make('status')
-                    ->label('Verificado')
-                    ->required()
-                    ->default(true),
+                Toggle::make('status')
+                ->label('Verificado')
+                ->required()
+                ->default(true),
             ]);
     }
 

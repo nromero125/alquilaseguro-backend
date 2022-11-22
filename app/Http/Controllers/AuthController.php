@@ -8,9 +8,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -82,7 +82,7 @@ class AuthController extends Controller
             'current_password' => ['required', 'string'],
             'password' => ['required', 'string', 'confirmed'],
         ])->after(function ($validator) use ($user, $input) {
-            if (!Hash::check($input['current_password'], $user->password)) {
+            if (! Hash::check($input['current_password'], $user->password)) {
                 $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
             }
         })->validateWithBag('updatePassword');

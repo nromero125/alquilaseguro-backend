@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\UserTypes;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
@@ -45,7 +44,7 @@ class BrokerResource extends Resource
                     ->label(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
-                TextInput::make('user.email')
+                TextInput::make('email')
                     ->required()
                     ->rules([
                         function (Closure $get) {
