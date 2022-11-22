@@ -16,7 +16,7 @@ class BrokerController extends Controller
 
         return Property::with('tenant', 'owner')->whereHas('broker', function ($q) {
             $q->where('broker_id', auth()->user('api')->broker->id);
-        })->orderBy('id', 'desc')->paginate(15);
+        })->orderBy('id', 'desc')->get();
     }
 
     public function showProperty($id)
@@ -38,6 +38,6 @@ class BrokerController extends Controller
     {
         return Payment::where('broker_id', auth()->user('api')->broker->id)
         ->where('payment_type', PaymentTypes::BROKER_PAYMENT)
-        ->paginate(15);
+        ->get();
     }
 }

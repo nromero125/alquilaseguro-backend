@@ -18,7 +18,7 @@ class OwnerController extends Controller
 
         return Property::with('tenant', 'owner', 'broker')->whereHas('owner', function ($q) {
             $q->where('owner_id', auth()->user('api')->owner->id);
-        })->orderBy('id', 'desc')->paginate(15);
+        })->orderBy('id', 'desc')->get();
     }
 
     public function getPropertiesWithoutPag()
@@ -52,6 +52,6 @@ class OwnerController extends Controller
     {
         return Payment::where('owner_id', auth()->user('api')->owner->id)
             ->where('payment_type', PaymentTypes::OWNER_PAYMENT)
-            ->paginate(15);
+            ->get();
     }
 }

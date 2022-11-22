@@ -84,7 +84,7 @@ class TenantController extends Controller
         return Payment::with('paidProperty', 'tenant')
             ->where('tenant_id', auth()->user('api')->tenant->id)
             ->orderBy('id', 'desc')
-            ->paginate(15);
+            ->get();
     }
 
     public function createPayment(PaymentValidation $request)

@@ -82,11 +82,11 @@ class UserController extends Controller
     public function getUsers()
     {
         if (auth()->user('api')->user_type == UserTypes::INSURER_ADMIN) {
-            return Insurer::with('user')->where('insurance_id', auth()->user('api')->insurer->insurance_id)->paginate(15);
+            return Insurer::with('user')->where('insurance_id', auth()->user('api')->insurer->insurance_id)->get();
         }
 
         if (auth()->user('api')->user_type == UserTypes::BROKER_ADMIN) {
-            return Broker::with('user')->where('real_estate_id', auth()->user('api')->broker->real_estate_id)->paginate(15);
+            return Broker::with('user')->where('real_estate_id', auth()->user('api')->broker->real_estate_id)->get();
         }
 
         return response()->json(['message' => 'No tienes permisos.', 'success' => false], 403);

@@ -13,12 +13,12 @@ class ClaimController extends Controller
 {
     public function getMyClaims()
     {
-        return Claim::with('user', 'property')->where('user_id', auth()->user('api')->id)->orderBy('id', 'desc')->paginate(15);
+        return Claim::with('user', 'property')->where('user_id', auth()->user('api')->id)->orderBy('id', 'desc')->get();
     }
 
     public function brokerGetClaims()
     {
-        return Claim::with('user', 'property')->whereIn('property_id', auth()->user('api')->broker->properties->pluck('id'))->orderBy('id', 'desc')->paginate(15);
+        return Claim::with('user', 'property')->whereIn('property_id', auth()->user('api')->broker->properties->pluck('id'))->orderBy('id', 'desc')->get();
     }
 
     public function store(ClaimValidation $request)
@@ -50,7 +50,7 @@ class ClaimController extends Controller
 
     public function index()
     {
-        return Claim::where('insurance_id', auth()->user('api')->insurer->insurance_id)->paginate(15);
+        return Claim::where('insurance_id', auth()->user('api')->insurer->insurance_id)->get();
     }
 
     public function updateClaim(ClaimUpdateValidation $request, Claim $claim)

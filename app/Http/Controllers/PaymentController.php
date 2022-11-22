@@ -88,6 +88,6 @@ class PaymentController extends Controller
     {
         return Payment::where('insurance_id', auth()->user('api')->insurer->insurance_id)
         ->where('payment_type', PaymentTypes::INSURANCE_PAYMENT)
-        ->paginate(15);
+        ->get();
     }
 }
