@@ -26,6 +26,7 @@ class Insurance extends Model implements HasMedia
         'address',
         'bank_account',
         'bank_name',
+        'email'
     ];
 
     /**
