@@ -47,34 +47,62 @@ class PaymentResource extends Resource
                 Select::make('payment_type')
                     ->label(trans('messages.paymentType'))
                     ->options($paymentTypes)
-                    ->reactive()
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->reactive(),
                 Select::make('property_id')
                     ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('property', 'name'),
+                    ->relationship('property', 'name')
+                    ->visible(function (Closure $get): bool {
+                        $paymentType = (int) $get('payment_type');
+
+                        return match ($paymentType) {
+                            PaymentTypes::OWNER_PAYMENT->value, PaymentTypes::PROPERTY_PAYMENT->value => true,
+                            default => false,
+                        };
+                    }),
                 Select::make('tenant_id')
                     ->label(trans_choice('messages.tenant', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('tenant', 'firstname'),
+                    ->relationship('tenant', 'firstname')
+                    ->visible(function (Closure $get): bool {
+                        $paymentType = (int) $get('payment_type');
+
+                        return ! empty($paymentType) && $paymentType === PaymentTypes::PROPERTY_PAYMENT->value;
+                    }),
                 Select::make('owner_id')
                     ->label(trans_choice('messages.owner', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('owner', 'firstname'),
+                    ->relationship('owner', 'firstname')
+                    ->visible(function (Closure $get): bool {
+                        $paymentType = (int) $get('payment_type');
+
+                        return ! empty($paymentType) && $paymentType === PaymentTypes::OWNER_PAYMENT->value;
+                    }),
                 Select::make('broker_id')
                     ->label(trans_choice('messages.broker', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('broker', 'firstname'),
+                    ->relationship('broker', 'firstname')
+                    ->visible(function (Closure $get): bool {
+                        $paymentType = (int) $get('payment_type');
+
+                        return ! empty($paymentType) && $paymentType === PaymentTypes::BROKER_PAYMENT->value;
+                    }),
                 Select::make('insurance_id')
                     ->label(trans_choice('messages.insurance', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('insurance', 'name'),
+                    ->relationship('insurance', 'name')
+                    ->visible(function (Closure $get): bool {
+                        $paymentType = (int) $get('payment_type');
+
+                        return ! empty($paymentType) && $paymentType === PaymentTypes::INSURANCE_PAYMENT->value;
+                    }),
                 SpatieMediaLibraryFileUpload::make('voucher')
                     ->collection('voucher')
                     ->conversion('thumb'),
