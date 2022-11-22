@@ -42,7 +42,7 @@ class InsuranceResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->placeholder('email')
                     ->email()
                     ->maxLength(255),

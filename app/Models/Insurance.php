@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,7 +27,7 @@ class Insurance extends Model implements HasMedia
         'address',
         'bank_account',
         'bank_name',
-        'email'
+        'email',
     ];
 
     /**
@@ -50,12 +51,12 @@ class Insurance extends Model implements HasMedia
     /**
      * Get the URL of the payment's voucher.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getLogoUrlAttribute()
+    public function logoUrl(): Attribute
     {
-        return $this->getFirstMediaUrl('logo', 'thumb')
-        ? $this->getFirstMediaUrl('logo', 'thumb')
-        : null;
+        return Attribute::make(
+            get: fn ($value) => $this->getFirstMediaUrl('logo', 'thumb') ?? null
+        );
     }
 }
