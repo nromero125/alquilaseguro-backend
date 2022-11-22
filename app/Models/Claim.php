@@ -26,6 +26,7 @@ class Claim extends Model implements HasMedia
         'description',
         'feedback',
         'amount_to_claim',
+        'insurance_id'
     ];
 
     /**
