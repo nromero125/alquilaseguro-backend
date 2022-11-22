@@ -10,6 +10,7 @@ use App\Models\Insurance;
 use App\Models\Insurer;
 use App\Models\Owner;
 use App\Models\Payment;
+use App\Models\Policy;
 use App\Models\Property;
 use App\Models\Tenant;
 use Illuminate\Database\Seeder;
@@ -70,6 +71,10 @@ class InitialSeeder extends Seeder
                 'user_id' => 7,
                 'insurance_id' => 1,
             ]);
+        
+        $policy = Policy::factory()->create([
+            'insurance_id' => 1
+        ]);
 
         $property = Property::factory()
             ->create([
@@ -77,6 +82,7 @@ class InitialSeeder extends Seeder
                 'tenant_id' => $tenant->id,
                 'owner_id' => $owner->id,
                 'broker_id' => $broker->id,
+                'policy_id' => $policy->id
             ]);
 
         Claim::factory()

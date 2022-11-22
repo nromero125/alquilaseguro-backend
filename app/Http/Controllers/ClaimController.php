@@ -25,6 +25,7 @@ class ClaimController extends Controller
         $data = $request->all();
         $data['status'] = ClaimStatus::In_progress;
         $data['user_id'] = auth()->user('api')->id;
+        $data['insurance_id'] = auth()->user('api')->policy->insurance_id;
         if(auth()->user('api')->user_type == UserTypes::TENANT){
             $data['property_id'] = auth()->user('api')->tenant->property->id;
         }
