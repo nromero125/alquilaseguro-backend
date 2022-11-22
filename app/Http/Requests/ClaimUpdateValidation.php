@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\UserTypes;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ClaimUpdateValidation extends FormRequest

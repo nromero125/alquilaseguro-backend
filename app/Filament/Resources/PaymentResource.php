@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\PaymentTypes;
 use App\Filament\Resources\PaymentResource\Pages;
 use App\Models\Payment;
+use Closure;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -32,7 +33,7 @@ class PaymentResource extends Resource
     public static function form(Form $form): Form
     {
         $paymentTypes = array_map(
-            fn ($item) => trans("paymentTypes.$item"),
+            fn (string $item): string => trans("paymentTypes.$item"),
             array_flip(PaymentTypes::options())
         );
 
@@ -43,6 +44,12 @@ class PaymentResource extends Resource
                     ->placeholder('0.00')
                     ->required()
                     ->numeric(),
+                Select::make('payment_type')
+                    ->label(trans('messages.paymentType'))
+                    ->options($paymentTypes)
+                    ->reactive()
+                    ->required()
+                    ->searchable(),
                 Select::make('property_id')
                     ->label(trans_choice('messages.property', 1))
                     ->required()
@@ -68,11 +75,6 @@ class PaymentResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('insurance', 'name'),
-                Select::make('payment_type')
-                    ->label(trans('messages.paymentType'))
-                    ->options($paymentTypes)
-                    ->required()
-                    ->searchable(),
                 SpatieMediaLibraryFileUpload::make('voucher')
                     ->collection('voucher')
                     ->conversion('thumb'),

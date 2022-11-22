@@ -71,12 +71,12 @@ class InitialSeeder extends Seeder
                 'user_id' => 7,
                 'insurance_id' => 1,
             ]);
-        
+
         $policy = Policy::create([
             'insurance_id' => 1,
-            'name' => "Seguro full", 
-            'description' => 'Poliza', 
-            'validity' => 24, 
+            'name' => 'Seguro full',
+            'description' => 'Poliza',
+            'validity' => 24,
         ]);
 
         $property = Property::factory()
@@ -85,7 +85,7 @@ class InitialSeeder extends Seeder
                 'tenant_id' => $tenant->id,
                 'owner_id' => $owner->id,
                 'broker_id' => $broker->id,
-                'policy_id' => $policy->id
+                'policy_id' => $policy->id,
             ]);
 
         Claim::factory()
@@ -93,7 +93,7 @@ class InitialSeeder extends Seeder
             ->create([
                 'user_id' => $tenant->user_id,
                 'property_id' => $property->id,
-                'insurance_id' => 1
+                'insurance_id' => 1,
             ]);
 
         Payment::factory()

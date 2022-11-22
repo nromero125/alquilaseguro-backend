@@ -29,10 +29,10 @@ class ClaimController extends Controller
         $data['status'] = ClaimStatus::In_progress;
         $data['user_id'] = auth()->user('api')->id;
         $data['insurance_id'] = $property->policy->insurance_id;
-        if(auth()->user('api')->user_type == UserTypes::TENANT){
+        if (auth()->user('api')->user_type == UserTypes::TENANT) {
             $data['property_id'] = auth()->user('api')->tenant->property->id;
         }
-        
+
         $claim = Claim::create($data);
         if ($request->hasFile('evidence') && $request->file('evidence')[0]->isValid()) {
             $claim->addMultipleMediaFromRequest(['evidence'])->each(function ($fileAdder) {
@@ -56,6 +56,7 @@ class ClaimController extends Controller
     public function updateClaim(ClaimUpdateValidation $request, Claim $claim)
     {
         $claim->update($request->all());
+
         return $claim;
     }
 }
