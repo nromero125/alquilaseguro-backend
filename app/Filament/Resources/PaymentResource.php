@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Enums\PaymentTypes;
 use App\Filament\Resources\PaymentResource\Pages;
 use App\Models\Payment;
-use Closure;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -47,7 +46,6 @@ class PaymentResource extends Resource
                 Select::make('payment_type')
                     ->label(trans('messages.paymentType'))
                     ->options($paymentTypes)
-                    ->reactive()
                     ->required()
                     ->searchable(),
                 Select::make('property_id')
