@@ -7,6 +7,7 @@ use App\Enums\UserTypes;
 use App\Http\Requests\ClaimUpdateValidation;
 use App\Http\Requests\ClaimValidation;
 use App\Models\Claim;
+use App\Models\Property;
 
 class ClaimController extends Controller
 {
@@ -23,9 +24,11 @@ class ClaimController extends Controller
     public function store(ClaimValidation $request)
     {
         $data = $request->all();
+        $property = Property::find($request->property_id);
+        $data['property_id'] = $property->id;
         $data['status'] = ClaimStatus::In_progress;
         $data['user_id'] = auth()->user('api')->id;
-        $data['insurance_id'] = auth()->user('api')->policy->insurance_id;
+        $data['insurance_id'] = $property->policy->insurance_id;
         if(auth()->user('api')->user_type == UserTypes::TENANT){
             $data['property_id'] = auth()->user('api')->tenant->property->id;
         }
