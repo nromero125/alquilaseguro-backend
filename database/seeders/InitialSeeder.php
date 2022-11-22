@@ -72,8 +72,11 @@ class InitialSeeder extends Seeder
                 'insurance_id' => 1,
             ]);
         
-        $policy = Policy::factory()->create([
-            'insurance_id' => 1
+        $policy = Policy::create([
+            'insurance_id' => 1,
+            'name' => "Seguro full", 
+            'description' => 'Poliza', 
+            'validity' => 24, 
         ]);
 
         $property = Property::factory()
