@@ -56,8 +56,7 @@ class RealEstateResource extends Resource
                 TextInput::make('email')
                     ->label('Email')
                     ->email()
-                    ->placeholder('Email')
-                    ->maxLength(15),
+                    ->placeholder('Email'),
                 Textarea::make('address')
                     ->label(trans('messages.address'))
                     ->columnSpan('full')
@@ -68,7 +67,7 @@ class RealEstateResource extends Resource
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
-                    ->maxLength(255),
+                    ->maxLength(20),
                 SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
