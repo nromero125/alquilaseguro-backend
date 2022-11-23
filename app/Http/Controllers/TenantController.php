@@ -103,10 +103,8 @@ class TenantController extends Controller
         $filename = md5($request->file('voucher')->getClientOriginalName()).'.'.$request->file('voucher')->getClientOriginalExtension();
         $payment->addMediaFromRequest('voucher')->usingFileName($filename)->toMediaCollection('voucher', 's3');
         } */
-        if ($request->hasFile('voucher') && $request->file('voucher')[0]->isValid()) {
-            $payment->addMultipleMediaFromRequest(['voucher'])->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection('voucher', 's3');
-            });
+        if ($request->hasFile('voucher') && $request->file('voucher')->isValid()) {
+            $payment->addMediaFromRequest('voucher')->toMediaCollection('voucher', env('FILESYSTEM_DISK'));
         }
 
         return response()->json(['success' => true, 'payment' => $payment]);

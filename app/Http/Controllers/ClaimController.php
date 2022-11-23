@@ -36,7 +36,7 @@ class ClaimController extends Controller
         $claim = Claim::create($data);
         if ($request->hasFile('evidence') && $request->file('evidence')[0]->isValid()) {
             $claim->addMultipleMediaFromRequest(['evidence'])->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection('evidence', 's3');
+                $fileAdder->toMediaCollection('evidence', env('FILESYSTEM_DISK'));
             });
         }
 
