@@ -24,6 +24,6 @@ RUN php artisan key:generate
 RUN php artisan cache:clear
 RUN php artisan config:clear
 RUN php artisan storage:link
-#RUN php artisan migrate:fresh --seed --force
-RUN php artisan migrate --force
+RUN php artisan migrate:fresh --seed --force
+#RUN php artisan migrate --force
 #:fresh --seed

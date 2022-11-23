@@ -22,9 +22,9 @@ return new class extends Migration
             $table->unsignedBigInteger('policy_id')->nullable();
             $table->string('name');
             $table->dateTime('payment_due_date');
-            $table->text('description');
-            $table->string('code');
-            $table->string('address');
+            $table->text('description')->nullable();
+            $table->string('code')->nullable();
+            $table->string('address')->nullable();
             $table->tinyInteger('status');
             $table->decimal('monthly_payment');
             $table->timestamps();

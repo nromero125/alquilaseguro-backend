@@ -75,10 +75,6 @@ class PropertyResource extends Resource
                     ->placeholder('0.00')
                     ->required()
                     ->numeric(),
-                TextInput::make('code')
-                    ->label(trans('messages.code'))
-                    ->required()
-                    ->maxLength(20),
                 Textarea::make('description')
                     ->label(trans('messages.description')),
                 Toggle::make('status')

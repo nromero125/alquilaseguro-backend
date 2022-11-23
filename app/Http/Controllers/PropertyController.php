@@ -16,26 +16,26 @@ class PropertyController extends Controller
     public function index()
     {
         if (auth()->user('api')->user_type == UserTypes::OWNER) {
-            return Property::where('owner_id', auth()->user('api')->owner->id)->orderBy('id', 'desc')->get();
+            return Property::with('tenant', 'broker', 'owner')->where('owner_id', auth()->user('api')->owner->id)->orderBy('id', 'desc')->get();
         }
 
         if (auth()->user('api')->user_type == UserTypes::TENANT) {
-            return Property::where('tenant_id', auth()->user('api')->tenant->id)->orderBy('id', 'desc')->get();
+            return Property::with('tenant', 'broker', 'owner')->where('tenant_id', auth()->user('api')->tenant->id)->orderBy('id', 'desc')->get();
         }
 
         if (auth()->user('api')->user_type == UserTypes::BROKER) {
-            return Property::where('broker_id', auth()->user('api')->broker->id)->orderBy('id', 'desc')->get();
+            return Property::with('tenant', 'broker', 'owner')->where('broker_id', auth()->user('api')->broker->id)->orderBy('id', 'desc')->get();
         }
 
         if (auth()->user('api')->user_type == UserTypes::BROKER_ADMIN) {
-            return Property::where('real_estate_id', auth()->user('api')->broker->real_estate_id)->orderBy('id', 'desc')->get();
+            return Property::with('tenant', 'broker', 'owner')->where('real_estate_id', auth()->user('api')->broker->real_estate_id)->orderBy('id', 'desc')->get();
         }
 
         if (auth()->user('api')->user_type == UserTypes::INSURER || auth()->user('api')->user_type == UserTypes::INSURER_ADMIN) {
             $insuranceId = auth()->user('api')->insurer->insurance_id;
             return Property::whereHas('policy', function ($q) use ($insuranceId) {
                 $q->where('insurance_id', $insuranceId);
-            })->with('policy')->orderBy('id', 'desc')->get();
+            })->with('policy', 'tenant', 'broker', 'owner')->orderBy('id', 'desc')->get();
         }
 
         return response()->json(['message' => 'are you lost?']);
