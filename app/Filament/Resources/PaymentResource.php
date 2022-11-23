@@ -135,10 +135,10 @@ class PaymentResource extends Resource
                 IconColumn::make('is_late')
                     ->label(trans('messages.isLate'))
                     ->boolean()
-                    ->falseColor('danger')
-                    ->falseIcon('heroicon-o-x-circle')
-                    ->trueColor('success')
-                    ->trueIcon('heroicon-o-check-circle'),
+                    ->falseColor('success')
+                    ->falseIcon('heroicon-o-check-circle')
+                    ->trueColor('danger')
+                    ->trueIcon('heroicon-o-x-circle'),
                 TextColumn::make('property.name')
                     ->label(trans_choice('messages.property', 1))
                     ->sortable()

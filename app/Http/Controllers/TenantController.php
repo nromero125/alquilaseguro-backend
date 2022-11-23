@@ -89,7 +89,7 @@ class TenantController extends Controller
 
     public function createPayment(PaymentValidation $request)
     {
-        if (! auth()->user('api')->tenant) {
+        if (!auth()->user('api')->tenant) {
             return response()->json(['message' => 'Ha ocurrido un error, contacte al administrador.'], 403);
         }
 
@@ -99,9 +99,14 @@ class TenantController extends Controller
         $data['status'] = false;
         $payment = Payment::create($data);
 
-        if ($request->hasFile('voucher') && $request->file('voucher')->isValid()) {
-            $filename = md5($request->file('voucher')->getClientOriginalName()).'.'.$request->file('voucher')->getClientOriginalExtension();
-            $payment->addMediaFromRequest('voucher')->usingFileName($filename)->toMediaCollection('voucher', 's3');
+        /* if ($request->hasFile('voucher') && $request->file('voucher')->isValid()) {
+        $filename = md5($request->file('voucher')->getClientOriginalName()).'.'.$request->file('voucher')->getClientOriginalExtension();
+        $payment->addMediaFromRequest('voucher')->usingFileName($filename)->toMediaCollection('voucher', 's3');
+        } */
+        if ($request->hasFile('voucher') && $request->file('voucher')[0]->isValid()) {
+            $payment->addMultipleMediaFromRequest(['voucher'])->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('voucher', 's3');
+            });
         }
 
         return response()->json(['success' => true, 'payment' => $payment]);

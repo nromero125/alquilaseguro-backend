@@ -26,7 +26,7 @@ return [
     'amount' => 'Monto',
     'payment' => 'Pago|Pagos',
     'paidAt' => 'Fecha de Pago',
-    'isLate' => 'Pago a tiempo',
+    'isLate' => 'Pago tardio?',
     'tenant' => 'Inquilino|Inquilinos',
     'paymentType' => 'Tipo de pago',
     'code' => 'Código',
