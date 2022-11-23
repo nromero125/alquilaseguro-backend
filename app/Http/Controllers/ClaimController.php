@@ -50,7 +50,7 @@ class ClaimController extends Controller
 
     public function index()
     {
-        return Claim::with('user', 'property')->where('insurance_id', auth()->user('api')->insurer->insurance_id)->get();
+        return Claim::with('user.tenant', 'user.owner', 'property')->where('insurance_id', auth()->user('api')->insurer->insurance_id)->get();
     }
 
     public function updateClaim(ClaimUpdateValidation $request, Claim $claim)
