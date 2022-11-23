@@ -93,12 +93,12 @@ class PropertyResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label(trans('messages.name'))
+                TextColumn::make('id')
+                    ->label("ID")
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('code')
-                    ->label(trans('messages.code'))
+                TextColumn::make('name')
+                    ->label(trans('messages.name'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('owner.firstname')
