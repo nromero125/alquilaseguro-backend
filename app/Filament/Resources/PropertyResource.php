@@ -58,6 +58,10 @@ class PropertyResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('realEstate', 'name'),
+                    TextInput::make('address')
+                    ->label(trans('messages.address'))
+                    ->required()
+                    ->maxLength(255),
                 Select::make('policy_id')
                     ->label('Poliza')
                     ->required()
