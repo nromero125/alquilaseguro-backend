@@ -13,12 +13,12 @@ class ClaimController extends Controller
 {
     public function getMyClaims()
     {
-        return Claim::with('user', 'property')->where('user_id', auth()->user('api')->id)->orderBy('id', 'desc')->get();
+        return Claim::with('user.tenant', 'user.owner', 'property')->where('user_id', auth()->user('api')->id)->orderBy('id', 'desc')->get();
     }
 
     public function brokerGetClaims()
     {
-        return Claim::with('user', 'property')->whereIn('property_id', auth()->user('api')->broker->properties->pluck('id'))->orderBy('id', 'desc')->get();
+        return Claim::with('user.tenant', 'user.owner', 'property')->whereIn('property_id', auth()->user('api')->broker->properties->pluck('id'))->orderBy('id', 'desc')->get();
     }
 
     public function store(ClaimValidation $request)
