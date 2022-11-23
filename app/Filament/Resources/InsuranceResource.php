@@ -50,6 +50,10 @@ class InsuranceResource extends Resource
                     ->label('RNC')
                     ->placeholder('RNC')
                     ->maxLength(15),
+                TextInput::make('address')
+                    ->label(trans('messages.address'))
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('contact_person')
                     ->placeholder('Contact person')
                     ->maxLength(255),

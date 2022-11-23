@@ -31,12 +31,11 @@ class CreateInsurer extends CreateRecord
             'user_id' => $user->id,
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
+            //'bank_name' => $data['bank_name'],
             'insurance_id' => $data['insurance_id'],
             'phone_number' => $data['phone_number'],
             'identification' => $data['identification'],
-            'address' => $data['address'],
-            'bank_name' => $data['bank_name'],
-            'bank_account' => $data['bank_account'],
+            //'address' => $data['address'],
             'status' => $data['status'],
         ]);
     }

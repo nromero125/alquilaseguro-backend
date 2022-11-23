@@ -60,8 +60,7 @@ class ClaimResource extends Resource
                     ->label(trans('messages.description'))
                     ->required(),
                 Textarea::make('feedback')
-                    ->label(trans('messages.feedback'))
-                    ->required(),
+                    ->label("Retroalimentación"),
                 SpatieMediaLibraryFileUpload::make('evidence')
                     ->label(trans('messages.evidence'))
                     ->multiple()

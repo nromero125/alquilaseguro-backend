@@ -71,7 +71,7 @@ class InsurerResource extends Resource
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 Select::make('insurance_id')
-                    ->label(trans_choice('messages.insurer', 1))
+                    ->label(trans_choice('messages.insurance', 1))
                     ->required()
                     ->searchable()
                     ->relationship('insurance', 'name'),
@@ -82,17 +82,14 @@ class InsurerResource extends Resource
                     ->label(trans('messages.identification'))
                     ->required()
                     ->maxLength(255),
-                TextInput::make('address')
-                    ->label(trans('messages.address'))
-                    ->required()
-                    ->maxLength(255),
-                Select::make('bank_name')
+                
+              /*   Select::make('bank_name')
                     ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
-                    ->maxLength(255),
+                    ->maxLength(255), */
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()

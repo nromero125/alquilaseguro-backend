@@ -105,7 +105,7 @@ class PaymentResource extends Resource
                     }),
                 SpatieMediaLibraryFileUpload::make('voucher')
                     ->collection('voucher')
-                    ->conversion('thumb'),
+                    ->conversionsDisk('s3'),
                 DatePicker::make('paid_at')
                     ->label(trans('messages.paidAt'))
                     ->required(),
