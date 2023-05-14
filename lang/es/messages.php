@@ -13,6 +13,7 @@ return [
     'bankAccount' => 'Número de Cuenta',
     'status' => 'Estado',
     'claim' => 'Reclamación',
+    'claims' => 'Reclamaciones',
     'amountToClaim' => 'Monto a Reclamar',
     'property' => 'Propiedad|Propiedades',
     'user' => 'Usuario',
@@ -31,5 +32,8 @@ return [
     'code' => 'Código',
     'monthlyPayment' => 'Pago Mensual',
     'paymentDueDate' => 'Fecha de vencimiento del pago',
-    'registeredItem' => ":item registrad@s",
+    'registeredProperties' => 'Propiedades Registradas',
+    'registeredItem' => ':item registrad@s',
+    'edit' => 'Editar :item',
+    'identiticationType' => 'Tipo de Identificación'
 ];

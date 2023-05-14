@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateClaim extends CreateRecord
 {
     protected static string $resource = ClaimResource::class;
+
+    protected function getHeading(): string
+    {
+        return trans('messages.create', ['item' => trans('messages.claim')]);
+    }
 }

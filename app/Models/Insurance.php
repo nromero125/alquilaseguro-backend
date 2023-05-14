@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Routing\Controllers\HasMiddleware;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -26,7 +25,7 @@ class Insurance extends Model implements HasMedia
         'contact_phone',
         'address',
         'bank_account',
-        'bank_name'
+        'bank_name',
     ];
 
     /**
@@ -38,7 +37,7 @@ class Insurance extends Model implements HasMedia
         'status' => 'boolean',
     ];
 
-     /**
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array

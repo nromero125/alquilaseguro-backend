@@ -10,6 +10,11 @@ class ListClaim extends ListRecords
 {
     protected static string $resource = ClaimResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.claims');
+    }
+
     protected function getActions(): array
     {
         return [

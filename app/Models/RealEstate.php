@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+
 class RealEstate extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
@@ -38,7 +39,7 @@ class RealEstate extends Model implements HasMedia
         'status' => 'boolean',
     ];
 
-     /**
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array

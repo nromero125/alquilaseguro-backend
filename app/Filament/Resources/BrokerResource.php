@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\IdentificationTypes;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
+use App\Util\Util;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -18,6 +20,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Closure;
 
 class BrokerResource extends Resource
 {
@@ -27,6 +30,11 @@ class BrokerResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $idTypes = array_map(
+            fn ($item) => trans("identificationTypes.$item"),
+            array_flip(IdentificationTypes::options())
+        );
+
         return $form
             ->schema([
                 TextInput::make('firstname')
@@ -50,14 +58,33 @@ class BrokerResource extends Resource
                     ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('realEstate', 'name'),
+                    ->relationship('realEstate', 'name')
+                    ->preload(),
                 TextInput::make('phone_number')
                     ->label(trans('messages.phoneNumber'))
-                    ->tel(),
+                    ->tel()
+                    ->numeric(),
+                Select::make('identification_type')
+                    ->label(trans('messages.identiticationType'))
+                    ->options($idTypes)
+                    ->required()
+                    ->reactive(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
                     ->required()
-                    ->maxLength(255),
+                    ->rules([
+                        function (Closure $get) {
+                            return function (string $attribute, $value, Closure $fail) use ($get) {
+                                if ($get('identification_type') === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($value)) {
+                                    $fail(trans('validation.regex', ['attribute' => trans('messages.identification')]));
+                                }
+                            };
+                        }
+                    ])
+                    ->numeric(fn (Closure $get): bool => $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value)
+                    ->maxLength(function (Closure $get): int {
+                        return $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
+                    }),
                 TextInput::make('address')
                     ->label(trans('messages.address'))
                     ->required()
@@ -72,7 +99,8 @@ class BrokerResource extends Resource
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()
-                    ->default(true),
+                    ->default(true)
+                    ->hidden(fn (string $context): bool => $context === "create"),
             ]);
     }
 

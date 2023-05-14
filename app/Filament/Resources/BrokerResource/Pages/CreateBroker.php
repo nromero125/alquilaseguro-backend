@@ -14,13 +14,16 @@ class CreateBroker extends CreateRecord
 
     protected function handleRecordCreation(array $data): Broker
     {
-        $user = User::create([
-            'name' => $data['firstname'].' '.$data['lastname'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'user_type' => UserTypes::BROKER,
-            'status' => $data['status'],
-        ]);
+        $status = empty($data['status']) ? true : $data['status'];
+
+        $user = User::query()
+            ->create([
+                'name' => $data['firstname'].' '.$data['lastname'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'user_type' => UserTypes::BROKER,
+                'status' => $status,
+            ]);
 
         return Broker::create([
             'user_id' => $user->id,
@@ -32,7 +35,7 @@ class CreateBroker extends CreateRecord
             'address' => $data['address'],
             'bank_name' => $data['bank_name'],
             'bank_account' => $data['bank_account'],
-            'status' => $data['status'],
+            'status' => $status,
         ]);
     }
 }

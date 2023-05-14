@@ -6,6 +6,7 @@ use App\Filament\Resources\InsuranceResource\Pages;
 use App\Models\Bank;
 use App\Models\Insurance;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -15,10 +16,9 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class InsuranceResource extends Resource
 {
@@ -40,7 +40,7 @@ class InsuranceResource extends Resource
                     ->placeholder('email')
                     ->email()
                     ->maxLength(255),
-                    TextInput::make('contact_person')
+                TextInput::make('contact_person')
                     ->placeholder('Contact person')
                     ->maxLength(255),
                 TextInput::make('contact_phone')
@@ -56,7 +56,7 @@ class InsuranceResource extends Resource
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->default(true),
-                    SpatieMediaLibraryFileUpload::make('logo')
+                SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
             ]);
@@ -73,9 +73,9 @@ class InsuranceResource extends Resource
                     ->label(trans('messages.name'))
                     ->sortable()
                     ->searchable(),
-                    TextColumn::make('rnc')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('rnc')
+                ->sortable()
+                ->searchable(),
                 IconColumn::make('status')
                     ->label(trans('messages.status'))
                     ->boolean()

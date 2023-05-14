@@ -6,6 +6,7 @@ use App\Filament\Resources\OwnerResource\Pages;
 use App\Models\Bank;
 use App\Models\Owner;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -17,8 +18,6 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Support\Facades\Hash;
 
 class OwnerResource extends Resource
@@ -70,10 +69,10 @@ class OwnerResource extends Resource
                     ->label(trans('messages.status'))
                     ->required()
                     ->default(true),
-                    SpatieMediaLibraryFileUpload::make('documents')
-                    ->collection('documents')
-                    ->multiple()
-                    ->conversionsDisk('s3'),
+                SpatieMediaLibraryFileUpload::make('documents')
+                ->collection('documents')
+                ->multiple()
+                ->conversionsDisk('s3'),
             ]);
     }
 

@@ -13,6 +13,7 @@ return [
     'bankAccount' => 'Bank Account',
     'status' => 'Status',
     'claim' => 'Claim',
+    'claims' => 'Claims',
     'amountToClaim' => 'Amount to claim',
     'property' => 'Property|Properties',
     'user' => 'User',
@@ -31,6 +32,8 @@ return [
     'code' => 'Code',
     'monthlyPayment' => 'Monthly Payment',
     'paymentDueDate' => 'Payment due date',
-    'registeredProperties' => "Registered properties",
-    'registeredItem' => "Registered :item",
+    'registeredProperties' => 'Registered properties',
+    'registeredItem' => 'Registered :item',
+    'edit' => 'Edit :item',
+    'identiticationType' => 'Identification Type'
 ];
