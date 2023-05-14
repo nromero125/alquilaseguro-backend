@@ -12,14 +12,21 @@ class CreateOwner extends CreateRecord
 {
     protected static string $resource = OwnerResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.create', ['item' => trans('messages.owner')]);
+    }
+
     protected function handleRecordCreation(array $data): Owner
     {
-        $user = User::create([
+        $status = empty($data['status']) ? false : $data['status'];
+
+        $user = User::query()->create([
             'name' => $data['firstname'].' '.$data['lastname'],
             'email' => $data['email'],
             'password' => $data['password'],
             'user_type' => UserTypes::OWNER,
-            'status' => $data['status'],
+            'status' => $status,
         ]);
 
         return Owner::create([
@@ -28,10 +35,11 @@ class CreateOwner extends CreateRecord
             'lastname' => $data['lastname'],
             'phone_number' => $data['phone_number'],
             'identification' => $data['identification'],
+            'identification_type' => $data['identification_type'],
             'address' => $data['address'],
             'bank_name' => $data['bank_name'],
             'bank_account' => $data['bank_account'],
-            'status' => $data['status'],
+            'status' => $status,
         ]);
     }
 }

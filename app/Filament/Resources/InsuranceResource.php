@@ -52,7 +52,7 @@ class InsuranceResource extends Resource
                 TextInput::make('contact_phone')
                     ->label(trans('messages.contactPhone'))
                     ->placeholder(trans('messages.contactPhone'))
-                    ->maxLength(255),
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 Select::make('bank_name')
                     ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))

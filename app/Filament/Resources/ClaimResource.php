@@ -45,12 +45,14 @@ class ClaimResource extends Resource
                     ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('property', 'name'),
+                    ->relationship('property', 'name')
+                    ->preload(),
                 Select::make('user_id')
                     ->label(trans('messages.user'))
                     ->required()
                     ->searchable()
-                    ->relationship('user', 'name'),
+                    ->relationship('user', 'name')
+                    ->preload(),
                 Textarea::make('description')
                     ->label(trans('messages.description'))
                     ->placeholder(trans('messages.description'))

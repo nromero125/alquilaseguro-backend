@@ -10,6 +10,11 @@ class ListOwners extends ListRecords
 {
     protected static string $resource = OwnerResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.owners');
+    }
+
     protected function getActions(): array
     {
         return [

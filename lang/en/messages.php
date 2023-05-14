@@ -23,6 +23,7 @@ return [
     'insurances' => 'Insurances',
     'name' => 'Name',
     'owner' => 'Owner',
+    'owners' => 'Owners',
     'password' => 'Password',
     'amount' => 'Amount',
     'payment' => 'Payment|Payments',
@@ -36,7 +37,8 @@ return [
     'registeredProperties' => 'Registered properties',
     'registeredItem' => 'Registered :item',
     'edit' => 'Edit :item',
-    'identiticationType' => 'Identification Type',
+    'identificationType' => 'Identification Type',
     'contactPerson' => 'Contact Person',
     'contactPhone' => 'Contact Phone',
+    'documents' => 'Documents'
 ];

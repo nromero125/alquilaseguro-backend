@@ -68,9 +68,9 @@ class BrokerResource extends Resource
                     ->placeholder(trans('messages.phoneNumber'))
                     ->label(trans('messages.phoneNumber'))
                     ->tel()
-                    ->numeric(),
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 Select::make('identification_type')
-                    ->label(trans('messages.identiticationType'))
+                    ->label(trans('messages.identificationType'))
                     ->options($idTypes)
                     ->required()
                     ->reactive(),
