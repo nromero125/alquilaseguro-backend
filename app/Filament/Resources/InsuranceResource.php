@@ -26,6 +26,11 @@ class InsuranceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 
+    protected static function getNavigationLabel(): string
+    {
+        return trans('messages.insurances');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -37,14 +42,16 @@ class InsuranceResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
-                    ->placeholder('email')
+                    ->placeholder('Email')
                     ->email()
                     ->maxLength(255),
                 TextInput::make('contact_person')
-                    ->placeholder('Contact person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
                     ->maxLength(255),
                 TextInput::make('contact_phone')
-                    ->placeholder('Contact phone')
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
                     ->maxLength(255),
                 Select::make('bank_name')
                     ->label(trans('messages.bankName'))
@@ -52,13 +59,15 @@ class InsuranceResource extends Resource
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
+                    ->placeholder(trans('messages.bankAccount'))
                     ->maxLength(255),
-                Toggle::make('status')
-                    ->label(trans('messages.status'))
-                    ->default(true),
                 SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->hiddenOn("create")
+                    ->default(true),
             ]);
     }
 

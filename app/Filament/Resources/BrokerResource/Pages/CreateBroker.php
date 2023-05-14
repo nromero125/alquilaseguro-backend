@@ -35,6 +35,7 @@ class CreateBroker extends CreateRecord
             'address' => $data['address'],
             'bank_name' => $data['bank_name'],
             'bank_account' => $data['bank_account'],
+            'identification_type' => $data['identification_type'],
             'status' => $status,
         ]);
     }

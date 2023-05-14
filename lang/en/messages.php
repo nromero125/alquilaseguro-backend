@@ -20,6 +20,7 @@ return [
     'description' => 'Description',
     'evidence' => 'Evidence',
     'insurance' => 'Insurance',
+    'insurances' => 'Insurances',
     'name' => 'Name',
     'owner' => 'Owner',
     'password' => 'Password',
@@ -35,5 +36,7 @@ return [
     'registeredProperties' => 'Registered properties',
     'registeredItem' => 'Registered :item',
     'edit' => 'Edit :item',
-    'identiticationType' => 'Identification Type'
+    'identiticationType' => 'Identification Type',
+    'contactPerson' => 'Contact Person',
+    'contactPhone' => 'Contact Phone',
 ];

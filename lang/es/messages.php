@@ -20,6 +20,7 @@ return [
     'description' => 'Descripción',
     'evidence' => 'Evidencia',
     'insurance' => 'Aseguradora',
+    'insurances' => 'Aseguradoras',
     'name' => 'Nombre',
     'owner' => 'Dueño',
     'password' => 'Contraseña',
@@ -35,5 +36,7 @@ return [
     'registeredProperties' => 'Propiedades Registradas',
     'registeredItem' => ':item registrad@s',
     'edit' => 'Editar :item',
-    'identiticationType' => 'Tipo de Identificación'
+    'identiticationType' => 'Tipo de Identificación',
+    'contactPerson' => 'Persona de Contacto',
+    'contactPhone' => 'Teléfono de Contacto',
 ];

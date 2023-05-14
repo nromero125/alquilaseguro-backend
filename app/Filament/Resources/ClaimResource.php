@@ -53,6 +53,7 @@ class ClaimResource extends Resource
                     ->relationship('user', 'name'),
                 Textarea::make('description')
                     ->label(trans('messages.description'))
+                    ->placeholder(trans('messages.description'))
                     ->required(),
                 SpatieMediaLibraryFileUpload::make('evidence')
                     ->label(trans('messages.evidence'))

@@ -40,16 +40,20 @@ class BrokerResource extends Resource
                 TextInput::make('firstname')
                     ->label(trans('messages.firstName'))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->placeholder(trans('messages.firstName')),
                 TextInput::make('lastname')
                     ->label(trans('messages.lastName'))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->placeholder(trans('messages.lastName')),
                 TextInput::make('email')
                     ->required()
-                    ->email(),
+                    ->email()
+                    ->placeholder('Email'),
                 TextInput::make('password')
                     ->label(trans('messages.password'))
+                    ->placeholder(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
@@ -61,6 +65,7 @@ class BrokerResource extends Resource
                     ->relationship('realEstate', 'name')
                     ->preload(),
                 TextInput::make('phone_number')
+                    ->placeholder(trans('messages.phoneNumber'))
                     ->label(trans('messages.phoneNumber'))
                     ->tel()
                     ->numeric(),
@@ -71,6 +76,7 @@ class BrokerResource extends Resource
                     ->reactive(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
+                    ->placeholder(trans('messages.identification'))
                     ->required()
                     ->rules([
                         function (Closure $get) {
@@ -86,6 +92,7 @@ class BrokerResource extends Resource
                         return $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
                     }),
                 TextInput::make('address')
+                    ->placeholder(trans('messages.address'))
                     ->label(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
@@ -94,13 +101,14 @@ class BrokerResource extends Resource
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->placeholder(trans('messages.bankAccount'))
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()
                     ->default(true)
-                    ->hidden(fn (string $context): bool => $context === "create"),
+                    ->hiddenOn('create'),
             ]);
     }
 
