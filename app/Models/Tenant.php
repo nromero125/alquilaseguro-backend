@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\IdentificationTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +27,11 @@ class Tenant extends Model implements HasMedia
         'user_id',
         'contract_start_date',
         'contract_end_date',
+        'identification_type'
+    ];
+
+    protected $casts = [
+        'identification_type' => IdentificationTypes::class
     ];
 
     public function property(): HasOne

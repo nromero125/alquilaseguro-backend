@@ -121,12 +121,8 @@ class OwnerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('firstname')
+                TextColumn::make('fullname')
                     ->label(trans('messages.firstName'))
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('lastname')
-                    ->label(trans('messages.lastName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')
