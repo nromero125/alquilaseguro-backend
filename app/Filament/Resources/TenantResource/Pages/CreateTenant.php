@@ -12,7 +12,7 @@ class CreateTenant extends CreateRecord
 {
     protected static string $resource = TenantResource::class;
 
-    protected function getTitle(): string
+    protected function getHeading(): string
     {
         return trans('messages.create', ['item' => trans_choice('messages.tenant', 1)]);
     }
@@ -40,5 +40,11 @@ class CreateTenant extends CreateRecord
             'contract_start_date' => $data['contract_start_date'],
             'contract_end_date' => $data['contract_end_date']
         ]);
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['status'] = empty($data['status']) ? false : $data['status'];
+        return $data;
     }
 }

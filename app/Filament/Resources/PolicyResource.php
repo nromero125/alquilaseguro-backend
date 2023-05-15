@@ -33,11 +33,13 @@ class PolicyResource extends Resource
                 TextInput::make('name')
                     ->label(trans('messages.name'))
                     ->placeholder(trans('messages.name'))
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
                 Textarea::make('description')
                     ->label(trans('messages.description'))
                     ->placeholder(trans('messages.description'))
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('validity')
                     ->label(trans('messages.validity'))
                     ->placeholder(trans('messages.validity'))
@@ -49,7 +51,8 @@ class PolicyResource extends Resource
                     ->label(trans_choice('messages.insurance', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('insurance', 'name'),
+                    ->relationship('insurance', 'name')
+                    ->preload(),
             ]);
     }
 

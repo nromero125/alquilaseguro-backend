@@ -29,7 +29,7 @@ class RealEstateResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return trans_choice('messages.realEstate', 2);
+        return trans_choice('messages.realEstate',2);
     }
 
     public static function form(Form $form): Form
@@ -38,16 +38,9 @@ class RealEstateResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label(trans('messages.name'))
+                    ->placeholder(trans('messages.name'))
                     ->required()
-                    ->placeholder(trans('messages.name').'...')
-                    ->maxLength(255),
-                TextInput::make('contact_person')
-                    ->label(trans('messages.contactPerson'))
-                    ->placeholder(trans('messages.contactPerson'))
-                    ->maxLength(255),
-                TextInput::make('contact_phone')
-                    ->label(trans('messages.contactPhone'))
-                    ->placeholder(trans('messages.contactPhone'))
+                    ->unique()
                     ->maxLength(255),
                 TextInput::make('rnc')
                     ->label('RNC')
@@ -57,8 +50,18 @@ class RealEstateResource extends Resource
                     ->label('Email')
                     ->email()
                     ->placeholder('Email'),
+                TextInput::make('contact_person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
+                    ->maxLength(255),
+                TextInput::make('contact_phone')
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
+                    ->tel()
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 Textarea::make('address')
                     ->label(trans('messages.address'))
+                    ->placeholder(trans('messages.address'))
                     ->columnSpan('full')
                     ->required(),
                 Select::make('bank_name')
@@ -67,13 +70,15 @@ class RealEstateResource extends Resource
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
-                    ->maxLength(20),
+                    ->placeholder(trans('messages.bankAccount'))
+                    ->maxLength(255),
                 SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
             ]);
     }
 
@@ -102,7 +107,8 @@ class RealEstateResource extends Resource
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
-            ])->defaultSort('created_at', 'desc')
+            ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

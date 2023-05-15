@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\IdentificationTypes;
 use App\Filament\Resources\BrokerResource\Pages;
 use App\Models\Bank;
 use App\Models\Broker;
-use App\Models\User;
-use Closure;
+use App\Util\Util;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,6 +20,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Closure;
 
 class BrokerResource extends Resource
 {
@@ -34,16 +35,23 @@ class BrokerResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $idTypes = array_map(
+            fn ($item) => trans("identificationTypes.$item"),
+            array_flip(IdentificationTypes::options())
+        );
+
         return $form
             ->schema([
                 TextInput::make('firstname')
                     ->label(trans('messages.firstName'))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->placeholder(trans('messages.firstName')),
                 TextInput::make('lastname')
                     ->label(trans('messages.lastName'))
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->placeholder(trans('messages.lastName')),
                 TextInput::make('email')
                     ->required()
                     ->rules([
@@ -66,6 +74,7 @@ class BrokerResource extends Resource
                     ->email(),
                 TextInput::make('password')
                     ->label(trans('messages.password'))
+                    ->placeholder(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
@@ -74,15 +83,37 @@ class BrokerResource extends Resource
                     ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('realEstate', 'name'),
+                    ->relationship('realEstate', 'name')
+                    ->preload(),
                 TextInput::make('phone_number')
+                    ->placeholder(trans('messages.phoneNumber'))
                     ->label(trans('messages.phoneNumber'))
-                    ->tel(),
+                    ->tel()
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
+                Select::make('identification_type')
+                    ->label(trans('messages.identificationType'))
+                    ->options($idTypes)
+                    ->required()
+                    ->reactive(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
+                    ->placeholder(trans('messages.identification'))
                     ->required()
-                    ->maxLength(255),
+                    ->rules([
+                        function (Closure $get) {
+                            return function (string $attribute, $value, Closure $fail) use ($get) {
+                                if ($get('identification_type') === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($value)) {
+                                    $fail(trans('validation.regex', ['attribute' => trans('messages.identification')]));
+                                }
+                            };
+                        }
+                    ])
+                    ->numeric(fn (Closure $get): bool => $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value)
+                    ->maxLength(function (Closure $get): int {
+                        return $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
+                    }),
                 TextInput::make('address')
+                    ->placeholder(trans('messages.address'))
                     ->label(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
@@ -91,11 +122,13 @@ class BrokerResource extends Resource
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->placeholder(trans('messages.bankAccount'))
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
                 Toggle::make('is_admin')
                     ->label(trans('messages.isAdmin'))
                     ->default(false),
@@ -106,12 +139,8 @@ class BrokerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('firstname')
+                TextColumn::make('fullname')
                     ->label(trans('messages.firstName'))
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('lastname')
-                    ->label(trans('messages.lastName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')

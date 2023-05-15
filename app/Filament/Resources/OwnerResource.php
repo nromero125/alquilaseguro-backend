@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\IdentificationTypes;
 use App\Filament\Resources\OwnerResource\Pages;
 use App\Models\Bank;
 use App\Models\Owner;
-use App\Models\User;
-use Closure;
+use App\Util\Util;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -21,6 +21,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Closure;
 
 class OwnerResource extends Resource
 {
@@ -30,22 +31,30 @@ class OwnerResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return trans_choice('messages.owner', 2);
+        return trans('messages.owners');
     }
 
     public static function form(Form $form): Form
     {
+        $idTypes = array_map(
+            fn ($item) => trans("identificationTypes.$item"),
+            array_flip(IdentificationTypes::options())
+        );
+
         return $form
             ->schema([
                 TextInput::make('firstname')
                     ->label(trans('messages.firstName'))
+                    ->placeholder(trans('messages.firstName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('lastname')
                     ->label(trans('messages.lastName'))
+                    ->placeholder(trans('messages.lastName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
+                    ->placeholder('Email')
                     ->required()
                     ->email()
                     ->rules([
@@ -66,20 +75,42 @@ class OwnerResource extends Resource
                         },
                     ]),
                 TextInput::make('password')
+                    ->placeholder(trans('messages.password'))
                     ->label(trans('messages.password'))
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
                 TextInput::make('phone_number')
+                    ->placeholder(trans('messages.phoneNumber'))
                     ->label(trans('messages.phoneNumber'))
-                    ->tel(),
+                    ->tel()
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
+                Select::make('identification_type')
+                    ->label(trans('messages.identificationType'))
+                    ->options($idTypes)
+                    ->required()
+                    ->reactive(),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
+                    ->placeholder(trans('messages.identification'))
                     ->required()
-                    ->maxLength(255),
+                    ->rules([
+                        function (Closure $get) {
+                            return function (string $attribute, $value, Closure $fail) use ($get) {
+                                if ($get('identification_type') === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($value)) {
+                                    $fail(trans('validation.regex', ['attribute' => trans('messages.identification')]));
+                                }
+                            };
+                        }
+                    ])
+                    ->numeric(fn (Closure $get): bool => $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value)
+                    ->maxLength(function (Closure $get): int {
+                        return $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
+                    }),
                 TextInput::make('address')
                     ->label(trans('messages.address'))
+                    ->placeholder(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
                 Select::make('bank_name')
@@ -87,17 +118,19 @@ class OwnerResource extends Resource
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
+                    ->placeholder(trans('messages.bankAccount'))
                     ->label(trans('messages.bankAccount'))
                     ->maxLength(255),
-                Toggle::make('status')
-                    ->label(trans('messages.status'))
-                    ->required()
-                    ->default(true),
                 SpatieMediaLibraryFileUpload::make('documents')
-                    ->label(trans_choice('messages.document', 2))
+                    ->label(trans('messages.documents'))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->required()
+                    ->default(true)
+                    ->hiddenOn('create'),
             ]);
     }
 
@@ -105,12 +138,8 @@ class OwnerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('firstname')
+                TextColumn::make('fullname')
                     ->label(trans('messages.firstName'))
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('lastname')
-                    ->label(trans('messages.lastName'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.email')

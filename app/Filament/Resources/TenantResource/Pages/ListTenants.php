@@ -10,6 +10,11 @@ class ListTenants extends ListRecords
 {
     protected static string $resource = TenantResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans_choice('messages.tenant', 2);
+    }
+
     protected function getActions(): array
     {
         return [

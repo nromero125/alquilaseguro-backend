@@ -19,24 +19,24 @@ class CreateInsurer extends CreateRecord
 
     protected function handleRecordCreation(array $data): Insurer
     {
+        $status = empty($data['status']) ? false : $data['status'];
+
         $user = User::create([
             'name' => $data['firstname'].' '.$data['lastname'],
             'email' => $data['email'],
             'password' => $data['password'],
             'user_type' => $data['is_admin'] ? UserTypes::INSURER_ADMIN : UserTypes::INSURER,
-            'status' => $data['status'],
+            'status' => $status,
         ]);
 
         return Insurer::create([
             'user_id' => $user->id,
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
-            //'bank_name' => $data['bank_name'],
             'insurance_id' => $data['insurance_id'],
             'phone_number' => $data['phone_number'],
             'identification' => $data['identification'],
-            //'address' => $data['address'],
-            'status' => $data['status'],
+            'status' => $status,
         ]);
     }
 }

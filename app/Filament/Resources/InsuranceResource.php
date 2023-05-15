@@ -26,9 +26,9 @@ class InsuranceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 
-    public static function getNavigationLabel(): string
+    protected static function getNavigationLabel(): string
     {
-        return trans_choice('messages.insurance', 2);
+        return trans('messages.insurances');
     }
 
     public static function form(Form $form): Form
@@ -52,27 +52,32 @@ class InsuranceResource extends Resource
                     ->maxLength(15),
                 TextInput::make('address')
                     ->label(trans('messages.address'))
+                    ->placeholder(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('contact_person')
-                    ->placeholder('Contact person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
                     ->maxLength(255),
                 TextInput::make('contact_phone')
-                    ->placeholder('Contact phone')
-                    ->maxLength(255),
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 Select::make('bank_name')
                     ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
+                    ->placeholder(trans('messages.bankAccount'))
                     ->maxLength(255),
-                Toggle::make('status')
-                    ->label(trans('messages.status'))
-                    ->default(true),
                 SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->hiddenOn("create")
+                    ->default(true),
             ]);
     }
 

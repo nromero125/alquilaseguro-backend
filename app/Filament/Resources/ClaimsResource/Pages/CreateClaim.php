@@ -9,8 +9,8 @@ class CreateClaim extends CreateRecord
 {
     protected static string $resource = ClaimResource::class;
 
-    protected function getTitle(): string
+    protected function getHeading(): string
     {
-        return trans('messages.create', ['item' => trans_choice('messages.claim', 1)]);
+        return trans('messages.create', ['item' => trans('messages.claim')]);
     }
 }

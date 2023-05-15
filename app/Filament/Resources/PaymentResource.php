@@ -44,6 +44,12 @@ class PaymentResource extends Resource
                     ->placeholder('0.00')
                     ->required()
                     ->numeric(),
+                Select::make('tenant_id')
+                    ->label(trans_choice('messages.tenant', 1))
+                    ->required()
+                    ->searchable()
+                    ->relationship('tenant', 'fullname')
+                    ->preload(),
                 Select::make('payment_type')
                     ->label(trans('messages.paymentType'))
                     ->options($paymentTypes)
@@ -55,6 +61,7 @@ class PaymentResource extends Resource
                     ->required()
                     ->searchable()
                     ->relationship('property', 'name')
+                    ->preload()
                     ->visible(function (Closure $get): bool {
                         $paymentType = (int) $get('payment_type');
 
@@ -67,7 +74,8 @@ class PaymentResource extends Resource
                     ->label(trans_choice('messages.tenant', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('tenant', 'firstname')
+                    ->preload()
+                    ->relationship('tenant', 'fullname')
                     ->visible(function (Closure $get): bool {
                         $paymentType = (int) $get('payment_type');
 
@@ -77,7 +85,8 @@ class PaymentResource extends Resource
                     ->label(trans_choice('messages.owner', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('owner', 'firstname')
+                    ->preload()
+                    ->relationship('owner', 'fullname')
                     ->visible(function (Closure $get): bool {
                         $paymentType = (int) $get('payment_type');
 
@@ -87,7 +96,8 @@ class PaymentResource extends Resource
                     ->label(trans_choice('messages.broker', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('broker', 'firstname')
+                    ->preload()
+                    ->relationship('broker', 'fullname')
                     ->visible(function (Closure $get): bool {
                         $paymentType = (int) $get('payment_type');
 
@@ -97,6 +107,7 @@ class PaymentResource extends Resource
                     ->label(trans_choice('messages.insurance', 1))
                     ->required()
                     ->searchable()
+                    ->preload()
                     ->relationship('insurance', 'name')
                     ->visible(function (Closure $get): bool {
                         $paymentType = (int) $get('payment_type');
@@ -107,6 +118,7 @@ class PaymentResource extends Resource
                     ->collection('voucher')
                     ->conversionsDisk('s3'),
                 DatePicker::make('paid_at')
+                    ->placeholder(trans('messages.paidAt'))
                     ->label(trans('messages.paidAt'))
                     ->required(),
                 Toggle::make('is_late')
@@ -114,9 +126,10 @@ class PaymentResource extends Resource
                     ->required()
                     ->default(false),
                 Toggle::make('status')
-                    ->label('Verificado')
+                    ->label(trans('messages.verified'))
                     ->required()
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
             ]);
     }
 

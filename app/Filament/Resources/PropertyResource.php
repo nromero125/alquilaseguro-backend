@@ -43,46 +43,59 @@ class PropertyResource extends Resource
                     ->label(trans_choice('messages.owner', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('owner', 'firstname'),
+                    ->relationship('owner', 'fullname')
+                    ->preload(),
                 Select::make('broker_id')
                     ->required()
                     ->searchable()
-                    ->relationship('broker', 'firstname'),
+                    ->relationship('broker', 'fullname')
+                    ->preload(),
                 Select::make('tenant_id')
                     ->label(trans_choice('messages.tenant', 1))
-                    ->required()
                     ->searchable()
-                    ->relationship('tenant', 'firstname'),
+                    ->relationship('tenant', 'fullname')
+                    ->preload(),
                 Select::make('real_estate_id')
                     ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('realEstate', 'name'),
-                    TextInput::make('address')
+                    ->relationship('realEstate', 'name')
+                    ->preload(),
+                TextInput::make('address')
                     ->label(trans('messages.address'))
+                    ->placeholder(trans('messages.address'))
                     ->required()
                     ->maxLength(255),
                 Select::make('policy_id')
-                    ->label('Poliza')
+                    ->label(trans_choice('messages.policy', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('policy', 'name'),
+                    ->relationship('policy', 'name')
+                    ->preload(),
                 DatePicker::make('payment_due_date')
                     ->label(trans('messages.paymentDueDate'))
+                    ->placeholder(trans('messages.paymentDueDate'))
                     ->required(),
                 TextInput::make('monthly_payment')
                     ->label(trans('messages.monthlyPayment'))
                     ->placeholder('0.00')
                     ->required()
                     ->numeric(),
+                TextInput::make('code')
+                    ->label(trans('messages.code'))
+                    ->placeholder(trans('messages.code'))
+                    ->required()
+                    ->maxLength(20),
                 Textarea::make('description')
+                    ->placeholder(trans('messages.description'))
                     ->label(trans('messages.description')),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
                 SpatieMediaLibraryFileUpload::make('documents')
-                    ->label(trans_choice('messages.document', 2))
+                    ->label(trans('messages.documents'))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),
@@ -121,7 +134,8 @@ class PropertyResource extends Resource
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
-            ])->defaultSort('created_at', 'desc')
+            ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

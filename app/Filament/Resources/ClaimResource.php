@@ -24,7 +24,7 @@ class ClaimResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return trans_choice('messages.claim', 2);
+        return trans('messages.claims');
     }
 
     public static function form(Form $form): Form
@@ -45,19 +45,23 @@ class ClaimResource extends Resource
                     ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('property', 'name'),
+                    ->relationship('property', 'name')
+                    ->preload(),
                 Select::make('insurance_id')
                     ->label(trans_choice('messages.insurance', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('insurance', 'name'),
+                    ->relationship('insurance', 'name')
+                    ->preload(),
                 Select::make('user_id')
                     ->label(trans_choice('messages.user', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('user', 'name'),
+                    ->relationship('user', 'name')
+                    ->preload(),
                 Textarea::make('description')
                     ->label(trans('messages.description'))
+                    ->placeholder(trans('messages.description'))
                     ->required(),
                 Textarea::make('feedback')
                     ->label("Retroalimentación"),
@@ -91,20 +95,21 @@ class ClaimResource extends Resource
                     ->sortable()
                     ->searchable(),
                 BadgeColumn::make('status')
-                ->enum([
-                    1 => 'Rechazada',
-                    2 => 'Nueva',
-                    3 => 'En progreso',
-                    4 => 'Completada',
-                ])
-                ->colors([
-                    'primary',
-                    'secondary' => 2,
-                    'warning' => 3,
-                    'success' => 4,
-                    'danger' => 1,
-                ]),
-            ])->defaultSort('created_at', 'desc')
+                    ->enum([
+                        1 => 'Rechazada',
+                        2 => 'Nueva',
+                        3 => 'En progreso',
+                        4 => 'Completada',
+                    ])
+                    ->colors([
+                        'primary',
+                        'secondary' => 2,
+                        'warning' => 3,
+                        'success' => 4,
+                        'danger' => 1,
+                    ]),
+            ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
             ])

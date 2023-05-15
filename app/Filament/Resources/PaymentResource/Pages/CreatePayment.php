@@ -10,12 +10,12 @@ class CreatePayment extends CreateRecord
 {
     protected static string $resource = PaymentResource::class;
 
-    protected function getTitle(): string
+    protected function getHeading(): string
     {
         return trans('messages.create', ['item' => trans_choice('messages.payment', 1)]);
     }
 
-    protected function mutateFormDataBeforeCreate(array $data): array
+    public function mutateFormDataBeforeCreate(array $data): array
     {
         switch ($data['payment_type']) {
             case PaymentTypes::PROPERTY_PAYMENT->value:
@@ -40,6 +40,8 @@ class CreatePayment extends CreateRecord
                 $data['broker_id'] = null;
                 break;
         }
+
+        $data['status'] = empty($data['status']) ? false : $data['status'];
 
         return $data;
     }

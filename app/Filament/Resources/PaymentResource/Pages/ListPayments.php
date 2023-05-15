@@ -10,6 +10,11 @@ class ListPayments extends ListRecords
 {
     protected static string $resource = PaymentResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans_choice('messages.payment', 2);
+    }
+
     protected function getActions(): array
     {
         return [

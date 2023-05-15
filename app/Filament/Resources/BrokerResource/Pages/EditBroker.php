@@ -16,7 +16,9 @@ class EditBroker extends EditRecord
     protected function getActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label(trans('messages.delete', ['item' => 'Broker']))
+                ->icon('heroicon-o-trash'),
         ];
     }
 
@@ -57,6 +59,7 @@ class EditBroker extends EditRecord
             'bank_name' => $data['bank_name'],
             'bank_account' => $data['bank_account'],
             'status' => $data['status'],
+            'identification_type' => $data['identification_type']
         ]);
 
         return $record;

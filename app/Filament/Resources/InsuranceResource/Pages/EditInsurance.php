@@ -10,10 +10,17 @@ class EditInsurance extends EditRecord
 {
     protected static string $resource = InsuranceResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.edit', ['item' => trans('messages.insurance')]);
+    }
+
     protected function getActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label(trans('messages.delete', ['item' => trans('messages.insurance')]))
+                ->icon('heroicon-o-trash'),
         ];
     }
 

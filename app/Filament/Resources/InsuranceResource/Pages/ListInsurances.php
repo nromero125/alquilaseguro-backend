@@ -10,6 +10,11 @@ class ListInsurances extends ListRecords
 {
     protected static string $resource = InsuranceResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.insurances');
+    }
+
     protected function getActions(): array
     {
         return [

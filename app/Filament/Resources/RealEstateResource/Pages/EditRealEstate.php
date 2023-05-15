@@ -10,10 +10,17 @@ class EditRealEstate extends EditRecord
 {
     protected static string $resource = RealEstateResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.edit', ['item' => trans_choice('messages.realEstate', 1)]);
+    }
+
     protected function getActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label(trans('messages.delete', ['item' => trans_choice('messages.realEstate', 1)]))
+                ->icon('heroicon-o-trash'),
         ];
     }
 

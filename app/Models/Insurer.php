@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Enums\IdentificationTypes;
 
 class Insurer extends Model
 {
@@ -22,6 +23,7 @@ class Insurer extends Model
         'address',
         'bank_name',
         'bank_account',
+        'identification_type'
     ];
 
     /**
@@ -31,6 +33,7 @@ class Insurer extends Model
      */
     protected $casts = [
         'status' => 'boolean',
+        'identification_type' => IdentificationTypes::class,
     ];
 
     public function insurance(): BelongsTo

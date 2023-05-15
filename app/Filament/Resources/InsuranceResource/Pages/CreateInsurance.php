@@ -9,8 +9,14 @@ class CreateInsurance extends CreateRecord
 {
     protected static string $resource = InsuranceResource::class;
 
-    protected function getTitle(): string
+    protected function getHeading(): string
     {
-        return trans('messages.create', ['item' => trans_choice('messages.insurance', 1)]);
+        return trans('messages.create', ['item' => trans('messages.insurance')]);
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['status'] = true;
+        return $data;
     }
 }
