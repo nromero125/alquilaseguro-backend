@@ -6,6 +6,7 @@ use App\Filament\Resources\InsuranceResource\Pages;
 use App\Models\Bank;
 use App\Models\Insurance;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -15,16 +16,20 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Collection;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class InsuranceResource extends Resource
 {
     protected static ?string $model = Insurance::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+
+    protected static function getNavigationLabel(): string
+    {
+        return trans('messages.insurances');
+    }
 
     public static function form(Form $form): Form
     {
@@ -37,28 +42,32 @@ class InsuranceResource extends Resource
                     ->maxLength(255),
                 TextInput::make('email')
                     ->required()
-                    ->placeholder('email')
+                    ->placeholder('Email')
                     ->email()
                     ->maxLength(255),
-                    TextInput::make('contact_person')
-                    ->placeholder('Contact person')
+                TextInput::make('contact_person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
                     ->maxLength(255),
                 TextInput::make('contact_phone')
-                    ->placeholder('Contact phone')
-                    ->maxLength(255),
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 Select::make('bank_name')
                     ->label(trans('messages.bankName'))
                     ->options(Bank::query()->pluck('name', 'name'))
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
+                    ->placeholder(trans('messages.bankAccount'))
                     ->maxLength(255),
-                Toggle::make('status')
-                    ->label(trans('messages.status'))
-                    ->default(true),
-                    SpatieMediaLibraryFileUpload::make('logo')
+                SpatieMediaLibraryFileUpload::make('logo')
                     ->collection('logo')
                     ->conversionsDisk('s3'),
+                Toggle::make('status')
+                    ->label(trans('messages.status'))
+                    ->hiddenOn("create")
+                    ->default(true),
             ]);
     }
 
@@ -73,9 +82,9 @@ class InsuranceResource extends Resource
                     ->label(trans('messages.name'))
                     ->sortable()
                     ->searchable(),
-                    TextColumn::make('rnc')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('rnc')
+                ->sortable()
+                ->searchable(),
                 IconColumn::make('status')
                     ->label(trans('messages.status'))
                     ->boolean()

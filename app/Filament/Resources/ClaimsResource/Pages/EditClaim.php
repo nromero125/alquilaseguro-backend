@@ -9,6 +9,11 @@ class EditClaim extends EditRecord
 {
     protected static string $resource = ClaimResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.edit', ['item' => trans('messages.claim')]);
+    }
+
     protected function getActions(): array
     {
         return [];

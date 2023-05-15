@@ -10,6 +10,11 @@ class ListRealEstates extends ListRecords
 {
     protected static string $resource = RealEstateResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans_choice('messages.realEstate', 2);
+    }
+
     protected function getActions(): array
     {
         return [

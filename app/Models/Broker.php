@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\IdentificationTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +30,7 @@ class Broker extends Model
         'address',
         'bank_name',
         'bank_account',
+        'identification_type'
     ];
 
     /**
@@ -38,6 +40,7 @@ class Broker extends Model
      */
     protected $casts = [
         'status' => 'boolean',
+        'identification_type' => IdentificationTypes::class
     ];
 
     /**
