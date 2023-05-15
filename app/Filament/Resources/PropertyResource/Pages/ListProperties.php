@@ -10,6 +10,11 @@ class ListProperties extends ListRecords
 {
     protected static string $resource = PropertyResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans_choice('messages.property',2);
+    }
+
     protected function getActions(): array
     {
         return [

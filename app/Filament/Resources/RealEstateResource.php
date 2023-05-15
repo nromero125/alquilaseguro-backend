@@ -27,24 +27,33 @@ class RealEstateResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.realEstate',2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
                     ->label(trans('messages.name'))
+                    ->placeholder(trans('messages.name'))
                     ->required()
-                    ->placeholder(trans('messages.name').'...')
                     ->unique()
                     ->maxLength(255),
                 TextInput::make('contact_person')
-                    ->placeholder('Contact person')
+                    ->label(trans('messages.contactPerson'))
+                    ->placeholder(trans('messages.contactPerson'))
                     ->maxLength(255),
                 TextInput::make('contact_phone')
-                    ->placeholder('Contact phone')
-                    ->maxLength(255),
+                    ->label(trans('messages.contactPhone'))
+                    ->placeholder(trans('messages.contactPhone'))
+                    ->tel()
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 Textarea::make('address')
                     ->label(trans('messages.address'))
+                    ->placeholder(trans('messages.address'))
                     ->columnSpan('full')
                     ->required(),
                 Select::make('bank_name')
@@ -53,13 +62,15 @@ class RealEstateResource extends Resource
                     ->searchable(),
                 TextInput::make('bank_account')
                     ->label(trans('messages.bankAccount'))
+                    ->placeholder(trans('messages.bankAccount'))
                     ->maxLength(255),
                 SpatieMediaLibraryFileUpload::make('logo')
-                ->collection('logo')
-                ->conversionsDisk('s3'),
+                    ->collection('logo')
+                    ->conversionsDisk('s3'),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
             ]);
     }
 
@@ -78,8 +89,8 @@ class RealEstateResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('rnc')
-                ->sortable()
-                ->searchable(),
+                    ->sortable()
+                    ->searchable(),
                 IconColumn::make('status')
                     ->label(trans('messages.status'))
                     ->boolean()

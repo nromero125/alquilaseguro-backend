@@ -12,16 +12,24 @@ class EditOwner extends EditRecord
 {
     protected static string $resource = OwnerResource::class;
 
+    protected function getHeading(): string
+    {
+        return trans('messages.edit', ['item' => trans('messages.owner')]);
+    }
+
     protected function getActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label(trans('messages.delete', ['item' => trans('messages.owner')]))
+                ->icon('heroicon-o-trash'),
         ];
     }
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $user = User::find($data['user_id']);
+        $user = User::query()
+            ->find($data['user_id']);
 
         $data['email'] = $user->email;
 
@@ -30,7 +38,7 @@ class EditOwner extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        $user = User::find($record->user_id);
+        $user = User::query()->find($record->user_id);
 
         $userData = [
             'name' => $data['firstname'].' '.$data['lastname'],
@@ -38,9 +46,7 @@ class EditOwner extends EditRecord
             'status' => $data['status'],
         ];
 
-        if (! empty($data['password'])) {
-            $userData['password'] = $data['password'];
-        }
+        if (!empty($data['password']))  $userData['password'] = $data['password'];
 
         $user->update($userData);
 
@@ -48,6 +54,7 @@ class EditOwner extends EditRecord
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'phone_number' => $data['phone_number'],
+            'identification_type' => $data['identification_type'],
             'identification' => $data['identification'],
             'address' => $data['address'],
             'bank_name' => $data['bank_name'],

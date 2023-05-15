@@ -24,6 +24,11 @@ class PaymentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.payment', 2);
+    }
+
     public static function form(Form $form): Form
     {
         $paymentTypes = array_map(
@@ -42,12 +47,14 @@ class PaymentResource extends Resource
                     ->label(trans_choice('messages.property', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('property', 'name'),
+                    ->relationship('property', 'name')
+                    ->preload(),
                 Select::make('tenant_id')
                     ->label(trans_choice('messages.tenant', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('tenant', 'firstname'),
+                    ->relationship('tenant', 'fullname')
+                    ->preload(),
                 Select::make('payment_type')
                     ->label(trans('messages.paymentType'))
                     ->options($paymentTypes)
@@ -57,6 +64,7 @@ class PaymentResource extends Resource
                     ->collection('voucher')
                     ->conversionsDisk('s3'),
                 DatePicker::make('paid_at')
+                    ->placeholder(trans('messages.paidAt'))
                     ->label(trans('messages.paidAt'))
                     ->required(),
                 Toggle::make('is_late')
@@ -66,7 +74,8 @@ class PaymentResource extends Resource
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
             ]);
     }
 

@@ -15,7 +15,9 @@ class EditBroker extends EditRecord
     protected function getActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label(trans('messages.delete', ['item' => 'Broker']))
+                ->icon('heroicon-o-trash'),
         ];
     }
 

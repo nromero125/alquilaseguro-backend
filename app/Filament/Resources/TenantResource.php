@@ -49,7 +49,8 @@ class TenantResource extends Resource
                     ->required(fn (string $context): bool => $context === 'create'),
                 TextInput::make('phone_number')
                     ->label(trans('messages.phoneNumber'))
-                    ->tel(),
+                    ->tel()
+                    ->mask(fn (TextInput\Mask $mask): TextInput\Mask => $mask->pattern('000-000-0000')),
                 TextInput::make('identification')
                     ->label(trans('messages.identification'))
                     ->required()

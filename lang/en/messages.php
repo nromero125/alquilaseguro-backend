@@ -40,5 +40,7 @@ return [
     'identificationType' => 'Identification Type',
     'contactPerson' => 'Contact Person',
     'contactPhone' => 'Contact Phone',
-    'documents' => 'Documents'
+    'documents' => 'Documents',
+    'delete' => 'Delete :item',
+    'realEstates' => 'Real Estates'
 ];

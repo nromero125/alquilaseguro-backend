@@ -26,6 +26,11 @@ class PropertyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans_choice('messages.property', 2);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -38,24 +43,28 @@ class PropertyResource extends Resource
                     ->label(trans('messages.owner'))
                     ->required()
                     ->searchable()
-                    ->relationship('owner', 'firstname'),
+                    ->relationship('owner', 'fullname')
+                    ->preload(),
                 Select::make('broker_id')
                     ->required()
                     ->searchable()
-                    ->relationship('broker', 'firstname'),
+                    ->relationship('broker', 'fullname')
+                    ->preload(),
                 Select::make('tenant_id')
                     ->label(trans_choice('messages.tenant', 1))
-                    ->required()
                     ->searchable()
-                    ->relationship('tenant', 'firstname'),
+                    ->relationship('tenant', 'fullname')
+                    ->preload(),
                 Select::make('real_estate_id')
                     ->label(trans_choice('messages.realEstate', 1))
                     ->required()
                     ->searchable()
-                    ->relationship('realState', 'name'),
+                    ->relationship('realState', 'name')
+                    ->preload(),
                 DatePicker::make('payment_due_date')
-                ->label(trans('messages.paymentDueDate'))
-                ->required(),
+                    ->label(trans('messages.paymentDueDate'))
+                    ->placeholder(trans('messages.paymentDueDate'))
+                    ->required(),
                 TextInput::make('monthly_payment')
                     ->label(trans('messages.monthlyPayment'))
                     ->placeholder('0.00')
@@ -63,15 +72,19 @@ class PropertyResource extends Resource
                     ->numeric(),
                 TextInput::make('code')
                     ->label(trans('messages.code'))
+                    ->placeholder(trans('messages.code'))
                     ->required()
                     ->maxLength(20),
                 Textarea::make('description')
+                    ->placeholder(trans('messages.description'))
                     ->label(trans('messages.description')),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
                     ->required()
-                    ->default(true),
+                    ->default(true)
+                    ->hiddenOn('create'),
                 SpatieMediaLibraryFileUpload::make('documents')
+                    ->label(trans('messages.documents'))
                     ->collection('documents')
                     ->multiple()
                     ->conversionsDisk('s3'),
