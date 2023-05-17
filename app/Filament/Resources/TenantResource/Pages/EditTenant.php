@@ -55,6 +55,7 @@ class EditTenant extends EditRecord
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'phone_number' => $data['phone_number'],
+            'identification_type' => $data['identification_type'],
             'identification' => $data['identification'],
             'address' => $data['address'],
             'bank_name' => $data['bank_name'],

@@ -35,6 +35,7 @@ class CreateInsurer extends CreateRecord
             'lastname' => $data['lastname'],
             'insurance_id' => $data['insurance_id'],
             'phone_number' => $data['phone_number'],
+            'identification_type' => $data['identification_type'],
             'identification' => $data['identification'],
             'status' => $status,
         ]);

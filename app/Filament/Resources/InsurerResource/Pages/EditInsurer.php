@@ -27,7 +27,7 @@ class EditInsurer extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $user = User::find($data['user_id']);
+        $user = User::query()->find($data['user_id']);
 
         $data['email'] = $user->email;
         $data['is_admin'] = $user->user_type === UserTypes::INSURER_ADMIN;
@@ -37,7 +37,7 @@ class EditInsurer extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        $user = User::find($record->user_id);
+        $user = User::query()->find($record->user_id);
 
         $userData = [
             'name' => $data['firstname'].' '.$data['lastname'],
@@ -57,10 +57,8 @@ class EditInsurer extends EditRecord
             'lastname' => $data['lastname'],
             'insurance_id' => $data['insurance_id'],
             'phone_number' => $data['phone_number'],
+            'identification_type' => $data['identification_type'],
             'identification' => $data['identification'],
-            'address' => $data['address'],
-            'bank_name' => $data['bank_name'],
-            'bank_account' => $data['bank_account'],
             'status' => $data['status'],
         ]);
 
