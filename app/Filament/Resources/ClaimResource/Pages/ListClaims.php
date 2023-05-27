@@ -6,7 +6,7 @@ use App\Filament\Resources\ClaimResource;
 use Filament\Pages\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListClaim extends ListRecords
+class ListClaims extends ListRecords
 {
     protected static string $resource = ClaimResource::class;
 
