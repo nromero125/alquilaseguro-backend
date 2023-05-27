@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources\BrokerResource\Pages;
 
+use App\Enums\IdentificationTypes;
 use App\Enums\UserTypes;
 use App\Filament\Resources\BrokerResource;
 use App\Models\User;
+use App\Util\Util;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Notifications\Notification;
 
 class EditBroker extends EditRecord
 {
@@ -34,6 +37,17 @@ class EditBroker extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        if ($data['identification_type'] === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($data['identification'])) {
+            Notification::make()
+                ->warning()
+                ->title(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->body(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->persistent()
+                ->send();
+
+            $this->halt();
+        }
+
         $user = User::find($record->user_id);
 
         $userData = [

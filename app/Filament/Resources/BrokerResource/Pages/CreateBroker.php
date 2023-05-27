@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\BrokerResource\Pages;
 
+use App\Enums\IdentificationTypes;
 use App\Enums\UserTypes;
 use App\Filament\Resources\BrokerResource;
 use App\Models\Broker;
 use App\Models\User;
+use App\Util\Util;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateBroker extends CreateRecord
@@ -14,6 +17,17 @@ class CreateBroker extends CreateRecord
 
     protected function handleRecordCreation(array $data): Broker
     {
+        if ($data['identification_type'] === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($data['identification'])) {
+            Notification::make()
+                ->warning()
+                ->title(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->body(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->persistent()
+                ->send();
+
+            $this->halt();
+        }
+
         $status = empty($data['status']) ? true : $data['status'];
 
         $user = User::create([

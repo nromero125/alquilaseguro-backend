@@ -2,8 +2,11 @@
 
 namespace App\Filament\Resources\OwnerResource\Pages;
 
+use App\Enums\IdentificationTypes;
 use App\Filament\Resources\OwnerResource;
 use App\Models\User;
+use App\Util\Util;
+use Filament\Notifications\Notification;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -43,6 +46,17 @@ class EditOwner extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        if ($data['identification_type'] === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($data['identification'])) {
+            Notification::make()
+                ->warning()
+                ->title(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->body(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->persistent()
+                ->send();
+
+            $this->halt();
+        }
+
         $user = User::query()->find($record->user_id);
 
         $userData = [

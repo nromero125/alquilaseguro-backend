@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\OwnerResource\Pages;
 
+use App\Enums\IdentificationTypes;
 use App\Enums\UserTypes;
 use App\Filament\Resources\OwnerResource;
 use App\Models\Owner;
 use App\Models\User;
+use App\Util\Util;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateOwner extends CreateRecord
@@ -19,6 +22,17 @@ class CreateOwner extends CreateRecord
 
     protected function handleRecordCreation(array $data): Owner
     {
+        if ($data['identification_type'] === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($data['identification'])) {
+            Notification::make()
+                ->warning()
+                ->title(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->body(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->persistent()
+                ->send();
+
+            $this->halt();
+        }
+
         $status = empty($data['status']) ? false : $data['status'];
 
         $user = User::query()->create([

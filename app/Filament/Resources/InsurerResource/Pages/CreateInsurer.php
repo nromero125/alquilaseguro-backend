@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\InsurerResource\Pages;
 
+use App\Enums\IdentificationTypes;
 use App\Enums\UserTypes;
 use App\Filament\Resources\InsurerResource;
 use App\Models\Insurer;
 use App\Models\User;
+use App\Util\Util;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateInsurer extends CreateRecord
@@ -19,6 +22,17 @@ class CreateInsurer extends CreateRecord
 
     protected function handleRecordCreation(array $data): Insurer
     {
+        if ($data['identification_type'] === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($data['identification'])) {
+            Notification::make()
+                ->warning()
+                ->title(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->body(trans('validation.identification', ['attribute' => trans('messages.identification')]))
+                ->persistent()
+                ->send();
+
+            $this->halt();
+        }
+
         $status = empty($data['status']) ? false : $data['status'];
 
         $user = User::create([
