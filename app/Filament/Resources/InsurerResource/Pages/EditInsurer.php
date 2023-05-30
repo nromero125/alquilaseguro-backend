@@ -40,7 +40,7 @@ class EditInsurer extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        if ($data['identification_type'] === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($data['identification'])) {
+        if ($data['identification_type'] == IdentificationTypes::DOMINICAN_ID->value && !Util::isValid((int)$data['identification'])) {
             Notification::make()
                 ->warning()
                 ->title(trans('validation.identification', ['attribute' => trans('messages.identification')]))

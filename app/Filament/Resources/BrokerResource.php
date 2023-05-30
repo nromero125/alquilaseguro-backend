@@ -54,6 +54,7 @@ class BrokerResource extends Resource
                     ->maxLength(255)
                     ->placeholder(trans('messages.lastName')),
                 TextInput::make('email')
+                    ->placeholder("Email")
                     ->required()
                     ->rules([
                         function (Closure $get) {
@@ -103,15 +104,15 @@ class BrokerResource extends Resource
                     ->rules([
                         function (Closure $get) {
                             return function (string $attribute, $value, Closure $fail) use ($get) {
-                                if ($get('identification_type') === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($value)) {
+                                if ($get('identification_type') == IdentificationTypes::DOMINICAN_ID->value && !Util::isValid((int)$value)) {
                                     $fail(trans('validation.regex', ['attribute' => trans('messages.identification')]));
                                 }
                             };
                         }
                     ])
-                    ->numeric(fn (Closure $get): bool => $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value)
+                    ->numeric(fn (Closure $get): bool => $get('identification_type') == IdentificationTypes::DOMINICAN_ID->value)
                     ->maxLength(function (Closure $get): int {
-                        return $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
+                        return $get('identification_type') == IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
                     }),
                 TextInput::make('address')
                     ->placeholder(trans('messages.address'))
@@ -163,7 +164,8 @@ class BrokerResource extends Resource
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->trueIcon('heroicon-o-check-circle'),
-            ])->defaultSort('created_at', 'desc')
+            ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

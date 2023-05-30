@@ -103,15 +103,15 @@ class InsurerResource extends Resource
                     ->rules([
                         function (Closure $get) {
                             return function (string $attribute, $value, Closure $fail) use ($get) {
-                                if ($get('identification_type') === IdentificationTypes::DOMINICAN_ID->value && !Util::isValid($value)) {
+                                if ($get('identification_type') == IdentificationTypes::DOMINICAN_ID->value && !Util::isValid((int)$value)) {
                                     $fail(trans('validation.regex', ['attribute' => trans('messages.identification')]));
                                 }
                             };
                         }
                     ])
-                    ->numeric(fn (Closure $get): bool => $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value)
+                    ->numeric(fn (Closure $get): bool => $get('identification_type') == IdentificationTypes::DOMINICAN_ID->value)
                     ->maxLength(function (Closure $get): int {
-                        return $get('identification_type') === IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
+                        return $get('identification_type') == IdentificationTypes::DOMINICAN_ID->value ? 11 : 255;
                     }),
                 Toggle::make('status')
                     ->label(trans('messages.status'))
